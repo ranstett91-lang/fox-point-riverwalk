@@ -6,7 +6,7 @@ const resources = [
     label: "Report",
     size: "60.1 MB",
     description: "A corridor-wide look at heat, heavy rain, wind, and sea-level rise. Wilmington is listed as a hot spot for sea-level risk.",
-    source: "Best for climate risk facts and corridor data"
+    source: "Primary evidence for Amtrak corridor risk"
   },
   {
     title: "Amtrak Climate Resilience Strategic Plan",
@@ -15,7 +15,7 @@ const resources = [
     label: "Report",
     size: "16.3 MB",
     description: "The main Amtrak strategy report. It explains why rail and nearby infrastructure need to adapt to stronger storms and higher water.",
-    source: "Best for high-level climate and resilience framing"
+    source: "Primary evidence for Amtrak resilience framing"
   },
   {
     title: "NEC Climate Change Pilot Adaptation Plan",
@@ -33,7 +33,7 @@ const resources = [
     label: "Slides",
     size: "69.7 MB",
     description: "An early narrative deck that sketches the project vision and possible funding pathways.",
-    source: "Best for early project vision and opportunity framing"
+    source: "Early project framing, not final commitment"
   },
   {
     title: "FY27 Expenditure Plan",
