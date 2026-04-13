@@ -811,25 +811,25 @@ input {
   position: relative;
   overflow: hidden;
   border-radius: 2rem;
-  min-height: 420px;
+  min-height: 520px;
   background: var(--brand);
 }
 
 .hero-photo {
   width: 100%;
   height: 100%;
-  min-height: 420px;
+  min-height: 520px;
   object-fit: cover;
-  object-position: center 40%;
+  object-position: center 18%;
   display: block;
 }
 
 .hero-photo-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(12,34,26,0.12) 0%, rgba(12,34,26,0.48) 100%);
+  background: linear-gradient(180deg, rgba(12,34,26,0.32) 0%, transparent 28%, rgba(12,34,26,0.1) 100%);
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   padding: 1.4rem;
 }
 
@@ -1134,8 +1134,9 @@ input {
 
 .site-photo {
   width: 100%;
-  height: 480px;
+  height: 520px;
   object-fit: cover;
+  object-position: center 22%;
   display: block;
 }
 
