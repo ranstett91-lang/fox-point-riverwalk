@@ -137,9 +137,17 @@ input {
   max-width: 560px;
 }
 
+/* strip card chrome when hero copy floats over photo */
+.hero-copy-light {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
 .hero-copy-light h1 {
   color: #fffaf1;
-  text-shadow: 0 2px 16px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4);
+  text-shadow: 0 2px 20px rgba(0,0,0,0.65), 0 1px 6px rgba(0,0,0,0.45);
 }
 
 .kicker-light {
