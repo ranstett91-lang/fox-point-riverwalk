@@ -259,6 +259,8 @@ input {
 .metric-grid,
 .chart-grid,
 .corridor-grid,
+.investment-grid,
+.pathway-grid,
 .funding-grid,
 .deliverables-grid,
 .resource-grid {
@@ -400,6 +402,15 @@ input {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.investment-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pathway-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 1.25rem;
+}
+
 .funding-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 1.25rem;
@@ -407,6 +418,15 @@ input {
 
 .section-source {
   margin-top: 1rem;
+}
+
+.thesis-section,
+.investment-section,
+.pathway-section,
+.signal-section {
+  background:
+    linear-gradient(135deg, rgba(255, 251, 245, 0.92), rgba(216, 231, 215, 0.5)),
+    var(--surface);
 }
 
 .deliverables-grid {
@@ -504,6 +524,8 @@ input {
   .metric-grid,
   .chart-grid,
   .corridor-grid,
+  .investment-grid,
+  .pathway-grid,
   .funding-grid,
   .deliverables-grid,
   .resource-grid,

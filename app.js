@@ -32,8 +32,8 @@ const resources = [
     type: "slides",
     label: "Slides",
     size: "69.7 MB",
-    description: "Presentation file with project framing and funding notes, including living shoreline and settlement-based opportunities.",
-    source: "Best for project narrative and funding leads"
+    description: "An early narrative deck that sketches the project vision and possible funding pathways.",
+    source: "Best for early project vision and opportunity framing"
   },
   {
     title: "FY27 Expenditure Plan",
