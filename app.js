@@ -54,15 +54,6 @@ const resources = [
     source: "Best for habitat and ecology context"
   },
   {
-    title: "Vacant Density 2017",
-    file: "VacantDensity_2017.pdf",
-    type: "pdf",
-    label: "Report",
-    size: "6.7 MB",
-    description: "Land-use context that can support the wider Claymont waterfront story.",
-    source: "Best for redevelopment context"
-  },
-  {
     title: "Wetland Delineation Reference",
     file: "WETLAND DELINEATION FIRST STATE CROSSING.pdf",
     type: "pdf",
