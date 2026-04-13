@@ -454,6 +454,10 @@ input {
   margin-top: 1.25rem;
 }
 
+.metric-grid-compact .metric-card {
+  gap: 0.35rem;
+}
+
 .metric-card,
 .chart-card,
 .funding-card,
@@ -468,6 +472,14 @@ input {
 .metric-value,
 .funding-value {
   color: var(--brand);
+}
+
+.chart-number {
+  margin: 0 0 0.35rem;
+  color: var(--brand);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .source-note {
@@ -539,6 +551,106 @@ input {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.place-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.place-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.place-scene {
+  min-height: 210px;
+  position: relative;
+}
+
+.place-scene::before,
+.place-scene::after {
+  content: "";
+  position: absolute;
+}
+
+.place-river .place-scene {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18), transparent 32%),
+    linear-gradient(180deg, #dbe7d8 0 46%, #76adc0 46% 100%);
+}
+
+.place-river .place-scene::before {
+  inset: auto 10% 18% 14%;
+  height: 8px;
+  border-radius: 999px;
+  background: #fffaf1;
+  box-shadow: 0 0 0 4px rgba(18,54,42,0.1);
+}
+
+.place-river .place-scene::after {
+  inset: auto 0 0 0;
+  height: 28%;
+  background: linear-gradient(180deg, rgba(74,143,166,0), rgba(74,143,166,0.22));
+}
+
+.place-edge .place-scene {
+  background:
+    linear-gradient(180deg, #edf2e6 0 42%, #8eb6a0 42% 58%, #6ca5b8 58% 100%);
+}
+
+.place-edge .place-scene::before {
+  left: 14%;
+  right: 12%;
+  top: 44%;
+  height: 16px;
+  border-radius: 999px;
+  background: #cc7740;
+  transform: rotate(-7deg);
+}
+
+.place-edge .place-scene::after {
+  left: 10%;
+  right: 10%;
+  bottom: 14%;
+  height: 42px;
+  border-radius: 999px;
+  background: rgba(216, 231, 215, 0.92);
+}
+
+.place-corridor .place-scene {
+  background:
+    linear-gradient(180deg, #eef2ea 0 42%, #d9dfd1 42% 100%);
+}
+
+.place-corridor .place-scene::before {
+  left: 8%;
+  right: 8%;
+  top: 50%;
+  height: 7px;
+  border-radius: 999px;
+  background: #12362a;
+  box-shadow: 0 -28px 0 0 rgba(18,54,42,0.18), 0 28px 0 0 rgba(18,54,42,0.12);
+}
+
+.place-corridor .place-scene::after {
+  width: 44%;
+  height: 28%;
+  right: 8%;
+  top: 20%;
+  border-radius: 1rem 1rem 0 0;
+  background: rgba(18,54,42,0.16);
+}
+
+.place-copy {
+  padding: 1rem 1rem 1.1rem;
+}
+
+.place-copy h3 {
+  margin: 0 0 0.35rem;
+}
+
 .investment-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -551,6 +663,45 @@ input {
 .funding-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 1.25rem;
+}
+
+.funding-grid-visual .funding-card {
+  gap: 0.5rem;
+}
+
+.funding-tag {
+  margin: -0.1rem 0 0.2rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.status-chip {
+  justify-self: start;
+  margin: 0.35rem 0 0;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.status-identified {
+  background: rgba(216, 231, 215, 0.95);
+  color: var(--brand);
+}
+
+.status-contingent {
+  background: rgba(240, 221, 207, 0.95);
+  color: #8a4e2b;
+}
+
+.status-future {
+  background: rgba(220, 226, 235, 0.95);
+  color: #39536a;
 }
 
 .section-source {
@@ -661,6 +812,7 @@ input {
   .metric-grid,
   .chart-grid,
   .corridor-grid,
+  .place-strip,
   .investment-grid,
   .pathway-grid,
   .funding-grid,
