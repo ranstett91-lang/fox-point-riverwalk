@@ -1006,6 +1006,18 @@ input {
   letter-spacing: 0.04em;
 }
 
+/* bridge sentence */
+.trio-bridge {
+  margin: 1rem 0 0;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--brand);
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 0 1rem 1rem 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
 /* trio grid */
 .trio-grid {
   display: grid;
@@ -1046,6 +1058,17 @@ input {
   font-size: 0.82rem;
   line-height: 1.5;
   color: var(--muted);
+  margin-top: auto;
+}
+
+.wc-connect {
+  margin: 0;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.75rem;
+  background: rgba(18, 49, 38, 0.05);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--ink);
   margin-top: auto;
 }
 
