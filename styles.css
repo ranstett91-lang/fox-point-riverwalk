@@ -932,12 +932,30 @@ input {
   position: absolute;
   left: 6%;
   right: 6%;
-  height: 5px;
-  background: #2a2a2a;
-  border-radius: 2px;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 1px;
+  z-index: 2;
 }
-.td-rail-a { top: 29%; }
-.td-rail-b { top: 36%; }
+.td-rail-a { top: 28%; }
+.td-rail-b { top: 38%; }
+
+/* cross-ties between the two rails */
+.td-ties {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 31%;
+  height: 10px;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    90deg,
+    #6b5444 0px,
+    #6b5444 16px,
+    transparent 16px,
+    transparent 26px
+  );
+}
 
 .td-track-label {
   position: absolute;
@@ -1260,43 +1278,70 @@ input {
   );
 }
 
-.cs-label-top {
-  position: relative;
-  font-size: 0.62rem;
+.cs-badge {
+  font-size: 0.75rem;
   font-weight: 800;
-  color: #1e4d6e;
-  background: rgba(255,251,245,0.82);
-  padding: 0.15rem 0.4rem;
+  padding: 0.25rem 0.6rem;
   border-radius: 999px;
   white-space: nowrap;
+  position: relative;
+  z-index: 2;
+  letter-spacing: 0.01em;
+}
+
+.cs-badge-top {
+  background: rgba(255, 251, 245, 0.92);
+  color: #1e4d6e;
+}
+
+.cs-badge-bot {
+  background: rgba(18, 49, 38, 0.75);
+  color: #fff;
 }
 
 .cs-track-zone {
   position: relative;
-  padding: 0.4rem 0.75rem;
-  background: #d8cfc4;
+  padding: 0.5rem 0.75rem 0.4rem;
+  background: #cdc3b8;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0;
 }
 
 .cs-rail {
-  height: 5px;
-  background: #2a2a2a;
-  border-radius: 2px;
+  height: 6px;
+  background: #1a1a1a;
+  border-radius: 1px;
+  position: relative;
+  z-index: 2;
+}
+
+.cs-ties {
+  height: 10px;
+  position: relative;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    90deg,
+    #6b5444 0px,
+    #6b5444 14px,
+    transparent 14px,
+    transparent 24px
+  );
 }
 
 .cs-track-label {
   position: absolute;
-  right: 0.6rem;
+  right: 0.65rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.58rem;
+  font-size: 0.68rem;
   font-weight: 800;
   color: var(--ink);
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.03em;
   white-space: nowrap;
+  background: rgba(255,251,245,0.88);
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
 }
 
 .cs-flood-zone {
@@ -1308,12 +1353,6 @@ input {
   border-top: 2.5px solid #3a6e96;
 }
 
-.cs-label-bot {
-  font-size: 0.62rem;
-  font-weight: 800;
-  color: rgba(255, 251, 245, 0.92);
-  white-space: nowrap;
-}
 
 /* raindrop intensity */
 .wc-intensity {
