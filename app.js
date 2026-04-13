@@ -1,11 +1,48 @@
 const resources = [
   {
+    title: "Amtrak Climate Vulnerability Assessment Summary",
+    file: "2022-Amtrak-Climate-Vulnerability-Assessment-Summary-Report-092222.pdf",
+    type: "pdf",
+    label: "Report",
+    size: "60.1 MB",
+    description: "A corridor-wide look at heat, heavy rain, wind, and sea-level rise. Wilmington is listed as a hot spot for sea-level risk.",
+    source: "Best for climate risk facts and corridor data"
+  },
+  {
+    title: "Amtrak Climate Resilience Strategic Plan",
+    file: "2022-Amtrak-Climate-Resilience-Strategic-Plan.pdf",
+    type: "pdf",
+    label: "Report",
+    size: "16.3 MB",
+    description: "The main Amtrak strategy report. It explains why rail and nearby infrastructure need to adapt to stronger storms and higher water.",
+    source: "Best for high-level climate and resilience framing"
+  },
+  {
+    title: "NEC Climate Change Pilot Adaptation Plan",
+    file: "phase-iii-amtrak-nec-climate-change-pilot-study-adaptation-plan-0417.pdf",
+    type: "pdf",
+    label: "Report",
+    size: "18.7 MB",
+    description: "An earlier planning study that helps show how resilience thinking has been building over time along the corridor.",
+    source: "Best for precedent and long-term planning context"
+  },
+  {
+    title: "Claymont to Fox Point Presentation",
+    file: "Claymont to Fox Point.pptx",
+    type: "slides",
+    label: "Slides",
+    size: "69.7 MB",
+    description: "Presentation file with project framing and funding notes, including living shoreline and settlement-based opportunities.",
+    source: "Best for project narrative and funding leads"
+  },
+  {
     title: "FY27 Expenditure Plan",
     file: "FY27 Expenditure Plan Final.pdf",
     type: "pdf",
     label: "Report",
     size: "244 KB",
-    description: "A compact planning reference that can support implementation timing and public funding conversations."
+    description: "A compact funding reference that may help with implementation timing and public-budget discussions.",
+    source: "Best for local funding context"
   },
   {
     title: "Submerged Aquatic Vegetation Priorities",
@@ -13,7 +50,8 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "1.1 MB",
-    description: "Ecological context that can help support habitat and water-quality positioning for the shoreline."
+    description: "Useful for explaining habitat value and why shoreline work can support river health.",
+    source: "Best for habitat and ecology context"
   },
   {
     title: "Vacant Density 2017",
@@ -21,7 +59,8 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "6.7 MB",
-    description: "Land-use context that can support broader planning and redevelopment storytelling."
+    description: "Land-use context that can support the wider Claymont waterfront story.",
+    source: "Best for redevelopment context"
   },
   {
     title: "Wetland Delineation Reference",
@@ -29,7 +68,8 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "20.0 MB",
-    description: "Wetland and permitting context that reinforces the shoreline restoration and resilience story."
+    description: "A wetland and permitting reference that supports shoreline restoration and environmental review discussions.",
+    source: "Best for wetland and permitting context"
   },
   {
     title: "DE Greenways Aerial Image",
@@ -37,7 +77,8 @@ const resources = [
     type: "image",
     label: "Image",
     size: "3.7 MB",
-    description: "Aerial image anchoring the visual identity of the site and future concept storytelling."
+    description: "An aerial view of the site and corridor. Useful for orientation, storytelling, and future diagram overlays.",
+    source: "Best for site orientation"
   }
 ];
 
@@ -46,16 +87,14 @@ const searchInput = document.querySelector("#resourceSearch");
 const filterRow = document.querySelector("#filterRow");
 const emptyState = document.querySelector("#emptyState");
 const template = document.querySelector("#resourceCardTemplate");
-const installButton = document.querySelector("#installButton");
 
 let activeFilter = "all";
-let deferredInstallPrompt;
 
 function renderResources() {
   const query = searchInput.value.trim().toLowerCase();
   const filteredResources = resources.filter((resource) => {
     const matchesFilter = activeFilter === "all" || resource.type === activeFilter;
-    const haystack = `${resource.title} ${resource.description} ${resource.label}`.toLowerCase();
+    const haystack = `${resource.title} ${resource.description} ${resource.label} ${resource.source}`.toLowerCase();
     return matchesFilter && haystack.includes(query);
   });
 
@@ -67,10 +106,11 @@ function renderResources() {
     fragment.querySelector(".resource-size").textContent = resource.size;
     fragment.querySelector(".resource-title").textContent = resource.title;
     fragment.querySelector(".resource-description").textContent = resource.description;
+    fragment.querySelector(".resource-source").textContent = resource.source;
 
     const link = fragment.querySelector(".resource-link");
     link.href = resource.file;
-    link.textContent = resource.type === "audio" ? "Play audio" : "Open file";
+    link.textContent = resource.type === "slides" ? "Open slides" : "Open file";
     link.setAttribute("aria-label", `${link.textContent}: ${resource.title}`);
 
     grid.appendChild(fragment);
@@ -93,23 +133,6 @@ filterRow.addEventListener("click", (event) => {
 });
 
 searchInput.addEventListener("input", renderResources);
-
-window.addEventListener("beforeinstallprompt", (event) => {
-  event.preventDefault();
-  deferredInstallPrompt = event;
-  installButton.hidden = false;
-});
-
-installButton.addEventListener("click", async () => {
-  if (!deferredInstallPrompt) {
-    return;
-  }
-
-  deferredInstallPrompt.prompt();
-  await deferredInstallPrompt.userChoice;
-  deferredInstallPrompt = null;
-  installButton.hidden = true;
-});
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {

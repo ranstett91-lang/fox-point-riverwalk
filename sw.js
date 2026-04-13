@@ -1,4 +1,4 @@
-const CACHE_NAME = "fox-point-riverwalk-v2";
+const CACHE_NAME = "fox-point-riverwalk-v3";
 const APP_SHELL = [
   "./",
   "index.html",

@@ -1,7 +1,7 @@
 {
   "name": "Fox Point Riverwalk",
   "short_name": "Fox Point",
-  "description": "Installable Fox Point Riverwalk website and project hub with funding narrative, reports, and source materials.",
+  "description": "Fox Point Riverwalk planning and advocacy site with source documents, climate summaries, and shoreline context.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#f4efe4",
