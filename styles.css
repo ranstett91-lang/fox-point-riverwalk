@@ -97,6 +97,91 @@ input {
   gap: 1.25rem;
 }
 
+/* ─── FULL-BLEED HERO ─── */
+
+.hero-fullbleed {
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
+  min-height: 560px;
+}
+
+.hero-fb-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  display: block;
+}
+
+.hero-fb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(10, 28, 20, 0.88) 0%,
+    rgba(10, 28, 20, 0.60) 42%,
+    rgba(10, 28, 20, 0.12) 100%
+  );
+}
+
+.hero-fb-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  min-height: 560px;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  max-width: 560px;
+}
+
+.hero-copy-light h1 {
+  color: #fffaf1;
+}
+
+.kicker-light {
+  color: var(--accent) !important;
+}
+
+.lede-light {
+  color: rgba(255, 250, 241, 0.82) !important;
+}
+
+.hero-points-light span {
+  background: rgba(255, 250, 241, 0.15) !important;
+  color: #fffaf1 !important;
+  border: 1px solid rgba(255, 250, 241, 0.25);
+}
+
+.button-secondary-light {
+  border-color: rgba(255, 250, 241, 0.45) !important;
+  color: #fffaf1 !important;
+}
+
+.hero-fb-chips {
+  position: absolute;
+  bottom: 1.4rem;
+  right: 1.4rem;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.hero-fb-chips span {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid rgba(255, 250, 241, 0.35);
+  border-radius: 999px;
+  background: rgba(10, 28, 20, 0.55);
+  color: #fffaf1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+
 .hero-copy,
 .hero-card,
 .panel {
@@ -2120,6 +2205,19 @@ input {
   .library-header {
     flex-direction: column;
     align-items: stretch;
+  }
+}
+
+@media (max-width: 980px) {
+  .hero-fullbleed {
+    min-height: 480px;
+  }
+  .hero-fb-content {
+    min-height: 480px;
+    max-width: 100%;
+  }
+  .hero-fb-chips {
+    display: none;
   }
 }
 
