@@ -1228,6 +1228,93 @@ input {
   margin-top: 2px;
 }
 
+/* compound flooding scene */
+.compound-scene {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+
+.cs-sky {
+  position: relative;
+  flex: 1;
+  background: linear-gradient(180deg, #c8dde8 0%, #ddeef5 100%);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  padding: 0.35rem 0.5rem;
+}
+
+.cs-rain {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -70deg,
+    transparent 0px,
+    transparent 7px,
+    rgba(58, 110, 150, 0.35) 7px,
+    rgba(58, 110, 150, 0.35) 8px
+  );
+}
+
+.cs-label-top {
+  position: relative;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #1e4d6e;
+  background: rgba(255,251,245,0.82);
+  padding: 0.15rem 0.4rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.cs-track-zone {
+  position: relative;
+  padding: 0.4rem 0.75rem;
+  background: #d8cfc4;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.cs-rail {
+  height: 5px;
+  background: #2a2a2a;
+  border-radius: 2px;
+}
+
+.cs-track-label {
+  position: absolute;
+  right: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cs-flood-zone {
+  flex: 1;
+  background: linear-gradient(180deg, rgba(58,110,150,0.75), rgba(30,80,112,0.9));
+  display: flex;
+  align-items: flex-end;
+  padding: 0.35rem 0.5rem;
+  border-top: 2.5px solid #3a6e96;
+}
+
+.cs-label-bot {
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: rgba(255, 251, 245, 0.92);
+  white-space: nowrap;
+}
+
 /* raindrop intensity */
 .wc-intensity {
   background: linear-gradient(145deg, rgba(216, 231, 245, 0.4), rgba(255, 251, 245, 0.85));
