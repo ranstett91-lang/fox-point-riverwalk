@@ -169,18 +169,32 @@
 
             <article class="weather-card wc-intensity">
               <p class="wc-title">Each storm dumps more water</p>
-              <div class="wc-drop-compare">
-                <div class="wc-drop-item">
-                  <div class="raindrop rd-sm"></div>
+              <div class="bucket-wrap">
+                <div class="bucket-item">
+                  <div class="bucket-outer">
+                    <div class="bucket">
+                      <div class="bucket-water bw-past"></div>
+                      <span class="bucket-pct">baseline</span>
+                    </div>
+                  </div>
                   <span class="wc-year">1960s</span>
                 </div>
                 <div class="wc-arrow">→</div>
-                <div class="wc-drop-item">
-                  <div class="raindrop rd-lg"></div>
+                <div class="bucket-item">
+                  <div class="bucket-outer">
+                    <div class="bucket-spill">
+                      <span class="spill-dot"></span>
+                      <span class="spill-dot"></span>
+                      <span class="spill-dot"></span>
+                    </div>
+                    <div class="bucket">
+                      <div class="bucket-water bw-now"></div>
+                      <span class="bucket-pct bucket-pct-now">+55%</span>
+                    </div>
+                  </div>
                   <span class="wc-year wc-year-now">Today</span>
                 </div>
               </div>
-              <p class="wc-stat-num">+55%</p>
               <p class="wc-note">more rain in each major storm — more flooding, more track damage</p>
             </article>
 
