@@ -2311,3 +2311,59 @@ input {
     bottom: 1rem;
   }
 }
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--brand);
+  padding: 2rem 1.5rem;
+  margin-top: 0;
+}
+
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: var(--brand-soft);
+}
+
+.footer-brand:hover {
+  opacity: 0.85;
+}
+
+.footer-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.footer-made-by {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  color: var(--brand-soft);
+}
+
+.footer-org {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+}
