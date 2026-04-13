@@ -214,12 +214,149 @@ input {
 .hero-card {
   overflow: hidden;
   border-radius: 2rem;
+  position: relative;
 }
 
 .hero-card img {
   height: 100%;
   min-height: 320px;
   object-fit: cover;
+}
+
+.hero-diagram {
+  min-height: 420px;
+  background:
+    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.55), transparent 18%),
+    linear-gradient(145deg, #dce8cf 0%, #edf2e6 28%, #f7f2ea 28%, #f7f2ea 100%);
+}
+
+.diagram-water,
+.diagram-land,
+.diagram-route,
+.diagram-node,
+.diagram-caption {
+  position: absolute;
+}
+
+.diagram-water {
+  inset: auto -6% -10% 32%;
+  height: 64%;
+  background: linear-gradient(180deg, #7db6c8 0%, #4a8fa6 100%);
+  border-top-left-radius: 68% 52%;
+  transform: rotate(-8deg);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+.diagram-land {
+  inset: 0 36% 0 0;
+  background:
+    linear-gradient(180deg, rgba(18, 54, 42, 0.05), rgba(18, 54, 42, 0)),
+    repeating-linear-gradient(
+      -24deg,
+      rgba(18, 54, 42, 0.05) 0,
+      rgba(18, 54, 42, 0.05) 8px,
+      transparent 8px,
+      transparent 22px
+    );
+  clip-path: polygon(0 0, 100% 0, 84% 26%, 89% 48%, 74% 64%, 81% 100%, 0 100%);
+}
+
+.diagram-route {
+  left: 12%;
+  top: 18%;
+  width: 68%;
+  height: 50%;
+  border: 6px solid var(--brand);
+  border-color: transparent transparent transparent var(--brand);
+  border-radius: 56% 0 0 56%;
+  transform: rotate(28deg);
+  opacity: 0.9;
+}
+
+.diagram-route::before,
+.diagram-route::after {
+  content: "";
+  position: absolute;
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.diagram-route::before {
+  right: -20%;
+  top: 47%;
+  width: 30%;
+  height: 6px;
+  transform: rotate(-26deg);
+}
+
+.diagram-route::after {
+  left: 42%;
+  bottom: -10%;
+  width: 18%;
+  height: 6px;
+  transform: rotate(44deg);
+}
+
+.diagram-node {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fffaf1;
+  box-shadow: 0 0 0 6px rgba(18, 54, 42, 0.14);
+}
+
+.node-label {
+  position: absolute;
+  top: 1.65rem;
+  left: 0.3rem;
+  min-width: max-content;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(18, 54, 42, 0.1);
+  border-radius: 999px;
+  background: rgba(255, 251, 245, 0.94);
+  color: var(--ink);
+  font-size: 0.83rem;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+}
+
+.diagram-claymont {
+  left: 24%;
+  bottom: 22%;
+}
+
+.diagram-fox-point {
+  left: 43%;
+  bottom: 34%;
+}
+
+.diagram-industry {
+  right: 17%;
+  top: 23%;
+}
+
+.diagram-caption {
+  left: 1.4rem;
+  right: 1.4rem;
+  bottom: 1.3rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(18, 54, 42, 0.1);
+  border-radius: 1.35rem;
+  background: rgba(255, 251, 245, 0.92);
+}
+
+.diagram-title {
+  margin: 0 0 0.35rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.35rem;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.diagram-caption p:last-child {
+  margin: 0;
 }
 
 .hero-card-copy {
@@ -571,5 +708,15 @@ input {
   .corridor-grid article,
   .resource-card {
     border-radius: 1.35rem;
+  }
+
+  .hero-diagram {
+    min-height: 360px;
+  }
+
+  .diagram-caption {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
   }
 }
