@@ -850,6 +850,282 @@ input {
   backdrop-filter: blur(6px);
 }
 
+/* ─── WEATHER VISUAL CARDS ─── */
+
+.weather-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.weather-card {
+  padding: 1.3rem 1.2rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.72);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wc-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.wc-note {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--muted);
+  margin-top: auto;
+}
+
+/* storm count rows */
+.wc-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.wc-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.wc-year {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+  min-width: 44px;
+  letter-spacing: 0.02em;
+}
+
+.wc-year-now {
+  color: var(--brand);
+}
+
+.wc-row-now .dot {
+  background: #3a7ab0;
+  width: 14px;
+  height: 14px;
+}
+
+.wc-count {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--muted);
+  min-width: 20px;
+}
+
+.wc-row-now .wc-count {
+  color: var(--brand);
+}
+
+.dot-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.dot {
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(74, 134, 168, 0.35);
+  flex-shrink: 0;
+}
+
+/* raindrop intensity */
+.wc-intensity {
+  background: linear-gradient(145deg, rgba(216, 231, 245, 0.4), rgba(255, 251, 245, 0.85));
+}
+
+.wc-drop-compare {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 1rem;
+  flex: 1;
+}
+
+.wc-drop-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.wc-arrow {
+  font-size: 1.4rem;
+  color: var(--muted);
+  padding-bottom: 1.6rem;
+}
+
+.raindrop {
+  position: relative;
+  background: #4a86a8;
+  border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+}
+
+.raindrop::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: solid transparent;
+  border-right: solid transparent;
+  border-bottom: solid #4a86a8;
+}
+
+.rd-sm {
+  width: 28px;
+  height: 34px;
+}
+.rd-sm::before {
+  top: -16px;
+  border-left-width: 14px;
+  border-right-width: 14px;
+  border-bottom-width: 18px;
+}
+
+.rd-lg {
+  width: 44px;
+  height: 54px;
+}
+.rd-lg::before {
+  top: -24px;
+  border-left-width: 22px;
+  border-right-width: 22px;
+  border-bottom-width: 26px;
+}
+
+/* thermometer */
+.wc-heat {
+  background: linear-gradient(145deg, rgba(240, 221, 207, 0.35), rgba(255, 251, 245, 0.88));
+}
+
+.wc-thermo-compare {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex: 1;
+  align-items: flex-end;
+}
+
+.wc-thermo-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.thermo-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thermo {
+  width: 18px;
+  height: 72px;
+  border: 2.5px solid rgba(18, 49, 38, 0.4);
+  border-radius: 8px 8px 0 0;
+  border-bottom: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.thermo-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.tf-now  { height: 50%; background: linear-gradient(0deg, #c87442, #da965b); }
+.tf-2050 { height: 80%; background: linear-gradient(0deg, #b03b3b, #d06060); }
+
+.thermo-bulb {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(18, 49, 38, 0.4);
+  margin-top: -3px;
+}
+
+.tb-now  { background: #c87442; }
+.tb-2050 { background: #b03b3b; }
+
+/* sea level */
+.wc-sea {
+  background: linear-gradient(145deg, rgba(200, 225, 240, 0.35), rgba(255, 251, 245, 0.88));
+}
+
+.sea-scene {
+  position: relative;
+  height: 80px;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  background: #e6eff4;
+  flex: 1;
+}
+
+/* land mass on right */
+.sea-land {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 38%;
+  height: 100%;
+  background: linear-gradient(160deg, #5a8a65, #3d6b4a);
+  clip-path: polygon(28% 0%, 100% 0%, 100% 100%, 0% 100%);
+}
+
+/* 1960s water level */
+.sea-past {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 45%;
+  height: 42%;
+  background: rgba(74, 134, 168, 0.45);
+  border-top: 2px dashed rgba(74, 134, 168, 0.7);
+  display: flex;
+  align-items: flex-start;
+}
+
+/* today's water level */
+.sea-now {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 38%;
+  height: 62%;
+  background: rgba(58, 110, 150, 0.68);
+  border-top: 2.5px solid #3a6e96;
+  display: flex;
+  align-items: flex-start;
+}
+
+.sea-lbl {
+  font-size: 0.64rem;
+  font-weight: 700;
+  color: rgba(18, 49, 38, 0.7);
+  padding: 2px 5px;
+  letter-spacing: 0.03em;
+}
+
+.sea-lbl-now {
+  color: #1e4d6e;
+}
+
 /* ─── CHANGE STAT CARDS ─── */
 
 .change-grid {
@@ -1416,6 +1692,7 @@ input {
   .resource-grid,
   .goals-band,
   .risk-big-row,
+  .weather-grid,
   .change-grid,
   .capital-row {
     grid-template-columns: 1fr;

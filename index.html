@@ -114,27 +114,89 @@
             </article>
           </div>
 
-          <div class="change-grid">
-            <article class="change-card">
-              <p class="change-up">↑</p>
-              <p class="change-num">92%</p>
-              <p class="change-desc">more heavy-rain events along the NEC since 1960</p>
+          <div class="weather-grid">
+
+            <!-- STORM COUNT -->
+            <article class="weather-card wc-rain">
+              <p class="wc-title">Twice as many big storms</p>
+              <div class="wc-rows">
+                <div class="wc-row">
+                  <span class="wc-year">1960s</span>
+                  <div class="dot-strip">
+                    <i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i>
+                  </div>
+                  <span class="wc-count">5</span>
+                </div>
+                <div class="wc-row wc-row-now">
+                  <span class="wc-year">Today</span>
+                  <div class="dot-strip">
+                    <i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i>
+                    <i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i><i class="dot"></i>
+                  </div>
+                  <span class="wc-count">10</span>
+                </div>
+              </div>
+              <p class="wc-note">+92% more heavy rainstorms — that's nearly double</p>
             </article>
-            <article class="change-card">
-              <p class="change-up">↑</p>
-              <p class="change-num">55%</p>
-              <p class="change-desc">more intense rainfall during the strongest storms</p>
+
+            <!-- STORM SIZE -->
+            <article class="weather-card wc-intensity">
+              <p class="wc-title">Each storm dumps more water</p>
+              <div class="wc-drop-compare">
+                <div class="wc-drop-item">
+                  <div class="raindrop rd-sm"></div>
+                  <span class="wc-year">1960s</span>
+                </div>
+                <div class="wc-arrow">→</div>
+                <div class="wc-drop-item">
+                  <div class="raindrop rd-lg"></div>
+                  <span class="wc-year wc-year-now">Today</span>
+                </div>
+              </div>
+              <p class="wc-note">+55% more rain falls in the strongest storms</p>
             </article>
-            <article class="change-card change-heat">
-              <p class="change-up">↑</p>
-              <p class="change-num">4–5°F</p>
-              <p class="change-desc">warmer by mid-century — added heat stress on rail, catenary, and signals</p>
+
+            <!-- HEAT -->
+            <article class="weather-card wc-heat">
+              <p class="wc-title">Getting hotter every decade</p>
+              <div class="wc-thermo-compare">
+                <div class="wc-thermo-item">
+                  <div class="thermo-wrap">
+                    <div class="thermo">
+                      <div class="thermo-fill tf-now"></div>
+                    </div>
+                    <div class="thermo-bulb tb-now"></div>
+                  </div>
+                  <span class="wc-year">Now</span>
+                </div>
+                <div class="wc-thermo-item">
+                  <div class="thermo-wrap">
+                    <div class="thermo">
+                      <div class="thermo-fill tf-2050"></div>
+                    </div>
+                    <div class="thermo-bulb tb-2050"></div>
+                  </div>
+                  <span class="wc-year wc-year-now">2050</span>
+                </div>
+              </div>
+              <p class="wc-note">+4–5°F — Delaware's climate shifting toward South Carolina</p>
             </article>
-            <article class="change-card change-water">
-              <p class="change-badge">Hot Spot</p>
-              <p class="change-num change-num-sm">Wilmington</p>
-              <p class="change-desc">highest sea-level risk classification on the entire NEC — Fox Point is on that shoreline</p>
+
+            <!-- SEA LEVEL -->
+            <article class="weather-card wc-sea">
+              <p class="wc-title">The shoreline is sinking</p>
+              <div class="sea-scene" aria-label="Cross-section showing sea level rising against Fox Point shoreline">
+                <div class="sea-land"></div>
+                <div class="sea-past">
+                  <span class="sea-lbl">1960s</span>
+                </div>
+                <div class="sea-now">
+                  <span class="sea-lbl sea-lbl-now">Today ↑</span>
+                </div>
+              </div>
+              <p class="wc-note">Wilmington is a national hot spot — sea level rising faster than almost anywhere on the East Coast</p>
             </article>
+
           </div>
 
           <p class="source-note section-source">Sources: Amtrak Climate Vulnerability Assessment (2022); Amtrak Climate Resilience Strategic Plan (2022); NEC Climate Pilot Adaptation Plan (2017)</p>
