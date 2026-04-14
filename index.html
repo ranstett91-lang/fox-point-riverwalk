@@ -20,6 +20,7 @@
           <div class="topbar-links">
             <a href="#amtrak">Amtrak Risk</a>
             <a href="#site">The Place</a>
+            <a href="#map">Site Map</a>
             <a href="#funding">Capital Stack</a>
             <a href="#library">Library</a>
           </div>
@@ -223,6 +224,196 @@
             <span>Living shoreline potential</span>
             <span>Named mitigation site — Port Edgemoor</span>
             <span>Wetland delineation complete</span>
+          </div>
+        </section>
+
+        <!-- ── SITE MAP ── -->
+        <section class="panel map-section" id="map">
+          <div class="section-header">
+            <div>
+              <p class="section-label">Bird's-Eye View</p>
+              <h2>The corridor, the cove, the opportunity.</h2>
+            </div>
+            <p class="section-copy">Fox Point sits where the Delaware River, a living shoreline cove, an established trail, and Amtrak's most climate-stressed segment all converge within walking distance of each other.</p>
+          </div>
+
+          <div class="map-frame">
+            <svg class="site-map-svg" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustrated bird's-eye view of Fox Point showing the Delaware River, Fox Point Cove restoration zone, Delaware Greenways Trail, and Amtrak NEC corridor">
+              <defs>
+                <linearGradient id="riverGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#1e4d72"/>
+                  <stop offset="100%" stop-color="#4a8fa6"/>
+                </linearGradient>
+                <linearGradient id="coveGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#7db6c8"/>
+                  <stop offset="100%" stop-color="#5a9ab5"/>
+                </linearGradient>
+                <linearGradient id="parkGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#c8ddc8"/>
+                  <stop offset="100%" stop-color="#e0ead8"/>
+                </linearGradient>
+                <linearGradient id="uplandGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#c8bda8"/>
+                  <stop offset="100%" stop-color="#d8cebc"/>
+                </linearGradient>
+                <linearGradient id="restoreGrad" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#4a7a5a" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#6a9a72" stop-opacity="0.35"/>
+                </linearGradient>
+                <pattern id="wetlandDots" width="14" height="14" patternUnits="userSpaceOnUse">
+                  <circle cx="7" cy="7" r="2" fill="#3d6b4a" fill-opacity="0.4"/>
+                </pattern>
+                <pattern id="railTies" width="20" height="52" patternUnits="userSpaceOnUse">
+                  <rect width="20" height="52" fill="#2e2820"/>
+                  <rect x="0" y="5"  width="20" height="8" fill="#6b5444" rx="1"/>
+                  <rect x="0" y="22" width="20" height="8" fill="#6b5444" rx="1"/>
+                  <rect x="0" y="39" width="20" height="8" fill="#6b5444" rx="1"/>
+                </pattern>
+                <clipPath id="mapClip">
+                  <rect width="900" height="520" rx="20"/>
+                </clipPath>
+              </defs>
+
+              <g clip-path="url(#mapClip)">
+
+                <!-- Background parchment -->
+                <rect width="900" height="520" fill="#f0ece3"/>
+
+                <!-- Delaware River (left band, wavy right edge) -->
+                <path d="M0,0 L205,0 C195,65 218,130 200,195 C182,260 204,325 192,390 C180,455 198,490 195,520 L0,520 Z"
+                      fill="url(#riverGrad)"/>
+
+                <!-- River surface shimmer lines -->
+                <path d="M30,70  C55,65  80,75  110,70"  fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.25"/>
+                <path d="M25,130 C50,125 78,135 108,130" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.25"/>
+                <path d="M35,190 C60,185 88,195 118,190" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.25"/>
+                <path d="M28,250 C55,245 82,255 112,250" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.25"/>
+                <path d="M38,310 C65,305 90,315 120,310" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.25"/>
+                <path d="M30,370 C57,365 84,375 114,370" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.25"/>
+                <path d="M40,430 C67,425 92,435 122,430" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.25"/>
+
+                <!-- Upland / highway strip (right) -->
+                <rect x="700" y="0" width="200" height="520" fill="url(#uplandGrad)"/>
+
+                <!-- Amtrak corridor background + ties -->
+                <rect x="638" y="0" width="62" height="520" fill="url(#railTies)"/>
+
+                <!-- Amtrak rail lines -->
+                <rect x="644" y="0" width="7" height="520" fill="#1a1a1a"/>
+                <rect x="683" y="0" width="7" height="520" fill="#1a1a1a"/>
+
+                <!-- Park / green land (middle) -->
+                <path d="M205,0 L638,0 L638,520 L195,520 C198,490 180,455 192,390 C204,325 182,260 200,195 C218,130 195,65 205,0 Z"
+                      fill="url(#parkGrad)"/>
+
+                <!-- Shoreline restoration strip (just inside river edge) -->
+                <path d="M205,0 C195,65 218,130 200,195 C182,260 204,325 192,390 C180,455 198,490 195,520 L260,520 C255,490 268,455 258,390 C248,325 268,260 252,195 C236,130 256,65 270,0 Z"
+                      fill="url(#restoreGrad)"/>
+                <path d="M205,0 C195,65 218,130 200,195 C182,260 204,325 192,390 C180,455 198,490 195,520 L260,520 C255,490 268,455 258,390 C248,325 268,260 252,195 C236,130 256,65 270,0 Z"
+                      fill="url(#wetlandDots)"/>
+
+                <!-- Fox Point Cove (inlet) — teal oval cut in -->
+                <ellipse cx="315" cy="295" rx="88" ry="62" fill="url(#coveGrad)"/>
+                <!-- Cove restoration ring -->
+                <ellipse cx="315" cy="295" rx="112" ry="82" fill="#4a7a5a" fill-opacity="0.22"/>
+                <ellipse cx="315" cy="295" rx="112" ry="82" fill="url(#wetlandDots)" fill-opacity="0.55"/>
+                <!-- Cove water -->
+                <ellipse cx="315" cy="295" rx="88" ry="62" fill="url(#coveGrad)"/>
+                <!-- Cove shimmer -->
+                <path d="M278,285 C292,281 306,289 320,285" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
+                <path d="M285,302 C298,298 312,306 326,302" fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.4"/>
+
+                <!-- Delaware Greenways Trail (dashed) -->
+                <path d="M195,445 C260,438 320,420 400,412 C480,404 555,400 638,397"
+                      fill="none" stroke="#c87442" stroke-width="5" stroke-dasharray="12,7" stroke-linecap="round" stroke-linejoin="round"/>
+                <!-- Trail waypoint dots -->
+                <circle cx="260" cy="441" r="7" fill="#c87442"/>
+                <circle cx="400" cy="412" r="7" fill="#c87442"/>
+                <circle cx="545" cy="401" r="7" fill="#c87442"/>
+
+                <!-- ── LABELS ── -->
+
+                <!-- Delaware River -->
+                <text x="104" y="245" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff" fill-opacity="0.88" font-family="Georgia, Times New Roman, serif" transform="rotate(-8 104 245)">Delaware</text>
+                <text x="104" y="264" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff" fill-opacity="0.88" font-family="Georgia, Times New Roman, serif" transform="rotate(-8 104 264)">River</text>
+
+                <!-- Fox Point Cove label pill -->
+                <rect x="256" y="276" width="118" height="38" rx="8" fill="#fffaf2" fill-opacity="0.92"/>
+                <text x="315" y="292" text-anchor="middle" font-size="10" font-weight="700" fill="#12362a" font-family="Avenir Next, Segoe UI, sans-serif">Fox Point Cove</text>
+                <text x="315" y="307" text-anchor="middle" font-size="9" fill="#607063" font-family="Avenir Next, Segoe UI, sans-serif">restoration site</text>
+
+                <!-- Living Shoreline label -->
+                <rect x="212" y="110" width="122" height="36" rx="8" fill="#3d6b4a" fill-opacity="0.88"/>
+                <text x="273" y="124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#ffffff" font-family="Avenir Next, Segoe UI, sans-serif">Living Shoreline</text>
+                <text x="273" y="139" text-anchor="middle" font-size="8.5" fill="#c8ddc8" font-family="Avenir Next, Segoe UI, sans-serif">restoration zone</text>
+
+                <!-- Fox Point State Park -->
+                <text x="465" y="175" text-anchor="middle" font-size="16" font-weight="700" fill="#12362a" fill-opacity="0.55" font-family="Georgia, Times New Roman, serif">Fox Point</text>
+                <text x="465" y="196" text-anchor="middle" font-size="12" fill="#607063" fill-opacity="0.7" font-family="Avenir Next, Segoe UI, sans-serif">State Park</text>
+
+                <!-- Trail label -->
+                <rect x="362" y="455" width="188" height="28" rx="14" fill="#c87442"/>
+                <text x="456" y="474" text-anchor="middle" font-size="10" font-weight="700" fill="#ffffff" font-family="Avenir Next, Segoe UI, sans-serif">Delaware Greenways Trail</text>
+
+                <!-- Amtrak NEC label (rotated) -->
+                <g transform="translate(669,265) rotate(-90)">
+                  <rect x="-72" y="-13" width="144" height="26" rx="6" fill="#1a1a1a" fill-opacity="0.85"/>
+                  <text x="0" y="5" text-anchor="middle" font-size="10" font-weight="800" fill="#ffffff" font-family="Avenir Next, Segoe UI, sans-serif" letter-spacing="0.06em">AMTRAK NEC</text>
+                </g>
+
+                <!-- Port Edgemoor reference -->
+                <text x="762" y="255" text-anchor="middle" font-size="12" font-weight="600" fill="#5a4a35" fill-opacity="0.8" font-family="Avenir Next, Segoe UI, sans-serif">Port</text>
+                <text x="762" y="272" text-anchor="middle" font-size="12" font-weight="600" fill="#5a4a35" fill-opacity="0.8" font-family="Avenir Next, Segoe UI, sans-serif">Edgemoor</text>
+                <text x="762" y="289" text-anchor="middle" font-size="10" fill="#7a6a55" fill-opacity="0.7" font-family="Avenir Next, Segoe UI, sans-serif">↑ north</text>
+
+                <!-- Compass rose -->
+                <g transform="translate(848,56)">
+                  <circle r="26" fill="#fffaf2" fill-opacity="0.92" stroke="#12362a" stroke-width="1.5" stroke-opacity="0.4"/>
+                  <polygon points="0,-19 4,0 0,5 -4,0" fill="#12362a"/>
+                  <polygon points="0,19 4,0 0,-5 -4,0" fill="#12362a" fill-opacity="0.2"/>
+                  <polygon points="-19,0 0,4 5,0 0,-4" fill="#12362a" fill-opacity="0.2"/>
+                  <polygon points="19,0 0,-4 -5,0 0,4" fill="#12362a" fill-opacity="0.2"/>
+                  <text x="0" y="-23" text-anchor="middle" font-size="10" font-weight="800" fill="#12362a" font-family="Avenir Next, Segoe UI, sans-serif">N</text>
+                </g>
+
+                <!-- Scale bar -->
+                <g transform="translate(52,490)">
+                  <line x1="0" y1="0" x2="88" y2="0" stroke="#12362a" stroke-width="2" stroke-opacity="0.45"/>
+                  <line x1="0" y1="-5" x2="0" y2="5" stroke="#12362a" stroke-width="2" stroke-opacity="0.45"/>
+                  <line x1="88" y1="-5" x2="88" y2="5" stroke="#12362a" stroke-width="2" stroke-opacity="0.45"/>
+                  <text x="44" y="-9" text-anchor="middle" font-size="9" fill="#607063" font-family="Avenir Next, Segoe UI, sans-serif">approx. 0.25 mi</text>
+                </g>
+
+              </g><!-- end clip -->
+            </svg>
+
+            <!-- Legend -->
+            <div class="map-legend">
+              <div class="map-legend-item">
+                <span class="map-swatch ms-river"></span>
+                <span>Delaware River</span>
+              </div>
+              <div class="map-legend-item">
+                <span class="map-swatch ms-restore"></span>
+                <span>Living shoreline / restoration</span>
+              </div>
+              <div class="map-legend-item">
+                <span class="map-swatch ms-cove"></span>
+                <span>Fox Point Cove (restoration site)</span>
+              </div>
+              <div class="map-legend-item">
+                <span class="map-swatch ms-park"></span>
+                <span>Fox Point State Park</span>
+              </div>
+              <div class="map-legend-item">
+                <span class="map-swatch ms-trail"></span>
+                <span>Delaware Greenways Trail</span>
+              </div>
+              <div class="map-legend-item">
+                <span class="map-swatch ms-rail"></span>
+                <span>Amtrak NEC corridor</span>
+              </div>
+            </div>
           </div>
         </section>
 

@@ -1984,6 +1984,61 @@ input {
   color: var(--ink);
 }
 
+/* ─── SITE MAP ─── */
+
+.map-section {
+  background:
+    linear-gradient(135deg, rgba(18, 49, 38, 0.04), transparent 60%),
+    var(--surface);
+}
+
+.map-frame {
+  margin-top: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 2rem;
+  overflow: hidden;
+  background: var(--surface-strong);
+  box-shadow: var(--shadow);
+}
+
+.site-map-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.map-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1.25rem;
+  padding: 1rem 1.5rem 1.2rem;
+  border-top: 1px solid var(--line);
+  background: rgba(255, 250, 242, 0.7);
+}
+
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.map-swatch {
+  display: inline-block;
+  width: 24px;
+  height: 14px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.ms-river   { background: linear-gradient(90deg, #1e4d72, #4a8fa6); }
+.ms-restore { background: #4a7a5a; opacity: 0.7; }
+.ms-cove    { background: linear-gradient(135deg, #7db6c8, #5a9ab5); }
+.ms-park    { background: linear-gradient(90deg, #c8ddc8, #e0ead8); border: 1px solid rgba(18,54,42,0.15); }
+.ms-trail   { background: #c87442; border-radius: 4px; }
+.ms-rail    { background: #2e2820; position: relative; }
+
 /* ─── CAPITAL STACK ─── */
 
 .capital-section {
@@ -2204,6 +2259,10 @@ input {
   .change-grid,
   .capital-row {
     grid-template-columns: 1fr;
+  }
+
+  .map-legend {
+    gap: 0.5rem 1rem;
   }
 
   .capital-total-num {
