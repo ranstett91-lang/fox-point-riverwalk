@@ -1,3 +1,32 @@
+// ── PASSWORD GATE ──
+// Change APP_PASSWORD here to set the site password.
+const APP_PASSWORD = 'foxpoint';
+
+const pwGate  = document.querySelector('#pwGate');
+const pwForm  = document.querySelector('#pwForm');
+const pwInput = document.querySelector('#pwInput');
+const pwError = document.querySelector('#pwError');
+
+if (sessionStorage.getItem('fp_auth') === '1') {
+  pwGate.hidden = true;
+} else {
+  document.body.classList.add('pw-active');
+}
+
+pwForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  if (pwInput.value === APP_PASSWORD) {
+    sessionStorage.setItem('fp_auth', '1');
+    pwGate.hidden = true;
+    document.body.classList.remove('pw-active');
+  } else {
+    pwError.hidden = false;
+    pwInput.value = '';
+    pwInput.focus();
+  }
+});
+
+// ── RESOURCE LIBRARY ──
 const resources = [
   {
     title: "Amtrak Climate Vulnerability Assessment Summary",
