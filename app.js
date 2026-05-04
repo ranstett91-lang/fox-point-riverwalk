@@ -1,4 +1,9 @@
 // ── PASSWORD GATE ──
+// NOTE: This is a COSMETIC gate, not real access control.
+//   - APP_PASSWORD is shipped in cleartext to every visitor.
+//   - The PDFs and images in /resources are served by the static host
+//     and can be downloaded directly without passing this gate.
+// For real privacy, use Vercel Password Protection or a server-side check.
 // Change APP_PASSWORD here to set the site password.
 const APP_PASSWORD = 'foxpoint';
 
@@ -7,24 +12,52 @@ const pwForm  = document.querySelector('#pwForm');
 const pwInput = document.querySelector('#pwInput');
 const pwError = document.querySelector('#pwError');
 
-if (sessionStorage.getItem('fp_auth') === '1') {
-  pwGate.hidden = true;
-} else {
-  document.body.classList.add('pw-active');
+// Fail-closed: <body> renders with `pw-active` already applied. We only
+// REMOVE it after a successful auth check or successful unlock, so a JS
+// failure leaves the gate covering the page rather than exposing it.
+function unlock() {
+  if (pwGate) pwGate.hidden = true;
+  document.body.classList.remove('pw-active');
 }
 
-pwForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  if (pwInput.value === APP_PASSWORD) {
-    sessionStorage.setItem('fp_auth', '1');
-    pwGate.hidden = true;
-    document.body.classList.remove('pw-active');
-  } else {
-    pwError.hidden = false;
-    pwInput.value = '';
-    pwInput.focus();
+// sessionStorage can throw (Safari private mode, blocked storage,
+// sandboxed iframes, quota). Wrap reads/writes so a throw doesn't halt
+// the rest of the script and break the resource library below.
+function safeGetAuth() {
+  try {
+    return sessionStorage.getItem('fp_auth') === '1';
+  } catch {
+    return false;
   }
-});
+}
+
+function safeSetAuth() {
+  try {
+    sessionStorage.setItem('fp_auth', '1');
+  } catch {
+    /* storage unavailable — auth simply won't persist this session */
+  }
+}
+
+if (safeGetAuth()) {
+  unlock();
+}
+
+if (pwForm) {
+  pwForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    // Trim to handle paste/autofill leading or trailing whitespace.
+    if (pwInput.value.trim() === APP_PASSWORD) {
+      safeSetAuth();
+      if (pwError) pwError.hidden = true;
+      unlock();
+    } else {
+      if (pwError) pwError.hidden = false;
+      pwInput.value = '';
+      pwInput.focus();
+    }
+  });
+}
 
 // ── RESOURCE LIBRARY ──
 const resources = [
