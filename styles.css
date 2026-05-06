@@ -173,6 +173,15 @@ input {
   color: #fffaf1 !important;
 }
 
+.hero-fb-eyebrow {
+  position: absolute;
+  top: clamp(1rem, 3vw, 2rem);
+  left: clamp(1.25rem, 4vw, 3rem);
+  z-index: 3;
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 1px 3px rgba(0, 0, 0, 0.45);
+}
+
 .hero-fb-chips {
   position: absolute;
   bottom: 1.4rem;
@@ -2378,6 +2387,13 @@ input {
       rgba(10, 28, 20, 0.82) 55%,
       rgba(10, 28, 20, 0.96) 100%
     );
+  }
+  .hero-fb-eyebrow {
+    top: 0.9rem;
+    left: 1.1rem;
+    font-size: 0.72rem;
+    max-width: 60%;
+    line-height: 1.25;
   }
   .hero-fb-content {
     position: relative;
