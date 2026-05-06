@@ -2,3 +2,9 @@
 .gitignore
 .vercel
 *.m4a
+assets/source/
+docs/working/
+docs/archive/
+!docs/reference/amtrak-climate-vulnerability-assessment-summary-2022.pdf
+!docs/reference/amtrak-climate-resilience-strategic-plan-2022.pdf
+!docs/reference/nec-climate-change-pilot-adaptation-plan-2017.pdf
