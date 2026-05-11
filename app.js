@@ -29,7 +29,14 @@
 
   const setActive = (id) => {
     navLinks.forEach((link) => {
-      link.classList.toggle('is-current', link.getAttribute('href') === `#${id}`);
+      const isCurrent = link.getAttribute('href') === `#${id}`;
+      link.classList.toggle('is-current', isCurrent);
+
+      if (isCurrent) {
+        link.setAttribute('aria-current', 'location');
+      } else {
+        link.removeAttribute('aria-current');
+      }
     });
   };
 
@@ -69,8 +76,8 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "60.1 MB",
-    description: "A corridor-wide look at heat, heavy rain, wind, and sea-level rise. Wilmington is listed as a hot spot for sea-level risk.",
-    source: "Core Amtrak evidence for corridor exposure"
+    description: "An Amtrak report on heat, storms, wind, and rising water across the corridor. It names Wilmington as a high-risk shoreline area.",
+    source: "Main Amtrak source on climate risk"
   },
   {
     title: "Amtrak Climate Resilience Strategic Plan",
@@ -78,8 +85,8 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "16.3 MB",
-    description: "The main Amtrak strategy report. It explains why rail and nearby infrastructure need to adapt to stronger storms and higher water.",
-    source: "Core Amtrak action framework"
+    description: "Amtrak's main plan for dealing with stronger storms, hotter weather, and rising water.",
+    source: "Main Amtrak plan for climate response"
   },
   {
     title: "Phase III NEC Climate Change Pilot Study Adaptation Plan",
@@ -87,8 +94,8 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "18.7 MB",
-    description: "Amtrak's Wilmington-area pilot adaptation plan. Useful for showing that Fox Point sits within a corridor segment already studied for climate adaptation in detail.",
-    source: "Best precedent for Wilmington-area adaptation"
+    description: "An earlier Amtrak plan focused on the Wilmington area. It shows this part of the corridor has already been studied in detail.",
+    source: "Amtrak example for the Wilmington area"
   },
   {
     title: "Final DARP Public Notice for Fox Point State Park",
@@ -96,8 +103,8 @@ const resources = [
     type: "web",
     label: "Web",
     size: "Jan 12, 2025 · DNREC",
-    description: "DNREC's public notice for the final Damage Assessment and Restoration Plan. It establishes the OU-2 geography, living shoreline restoration objectives, and where the official DARP record is published.",
-    source: "Best official DNREC entry point to the final DARP"
+    description: "DNREC's public notice for the final restoration plan. It shows the project area, the shoreline goals, and where the full record is posted.",
+    source: "Good DNREC starting point for the final plan"
   },
   {
     title: "DNREC Facility Detail: Fox Point Park Phase II",
@@ -105,8 +112,8 @@ const resources = [
     type: "web",
     label: "Web",
     size: "Live record",
-    description: "DNREC's facility-detail page for Fox Point Park Phase II. Useful for the official document trail, remediation status, inspections, and linked public records.",
-    source: "Best live DNREC record for ongoing site documentation"
+    description: "DNREC's live record for Fox Point Park Phase II. It links to site documents, inspections, and cleanup status.",
+    source: "Live DNREC record for the site"
   },
   {
     title: "Approved Federal Mitigation Plan for Edgemoor Expansion",
@@ -114,8 +121,8 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "Jul 2025 · Port of Delaware",
-    description: "The Diamond State Port mitigation plan that includes Fox Point wetland restoration among the compensatory mitigation commitments for Edgemoor expansion.",
-    source: "Official source for the port mitigation linkage"
+    description: "The Port of Delaware plan that links Fox Point wetland work to required offset work for the Edgemoor expansion.",
+    source: "Port of Delaware source on the link to Fox Point"
   },
   {
     title: "2025 Delaware Climate Action Plan",
@@ -123,8 +130,8 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "Dec 2025 · DNREC",
-    description: "Delaware's statewide climate plan. Useful for resilience, sea-level rise, and public-infrastructure framing beyond the rail corridor itself.",
-    source: "Best statewide resilience frame for partners and funders"
+    description: "Delaware's statewide climate plan. It gives broader context for sea-level rise, public safety, and public infrastructure.",
+    source: "Statewide climate source"
   },
   {
     title: "NOAA Settlement for Restoration at the DuPont Hay Road Site",
@@ -132,8 +139,8 @@ const resources = [
     type: "web",
     label: "Web",
     size: "Feb 2023",
-    description: "NOAA's official summary of the settlement that allocates $808,500 for restoration activities tied to the Edge Moor / Hay Road site.",
-    source: "Best direct official source for the Chemours / NOAA restoration amount"
+    description: "NOAA's summary of the settlement that sets aside $808,500 for restoration tied to the Edge Moor and Hay Road site.",
+    source: "Official source for the Chemours settlement amount"
   },
   {
     title: "Fox Point Riverview Trail Overview",
@@ -141,8 +148,8 @@ const resources = [
     type: "web",
     label: "Web",
     size: "Delaware Greenways",
-    description: "Public-facing trail context showing that the corridor already reads as waterfront, mobility, and habitat infrastructure at the same time.",
-    source: "Best quick public-value context"
+    description: "A public-facing trail page that helps show Fox Point as a place for shoreline access, habitat, and movement at the same time.",
+    source: "Quick source on public benefit"
   }
 ];
 
