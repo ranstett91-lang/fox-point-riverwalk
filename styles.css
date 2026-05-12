@@ -1990,6 +1990,90 @@ input {
   display: block;
 }
 
+/* Inline SVG schematic of the project corridor. Replaces the prior
+   site photo which contained personal browser chrome. Two orientation
+   variants — landscape for desktop, portrait for narrow viewports —
+   swap via the media query at the bottom of this block. */
+.site-schematic {
+  width: 100%;
+  height: auto;
+  display: block;
+  background: #e8f1ea;
+}
+
+.site-schematic--landscape {
+  aspect-ratio: 1200 / 520;
+  max-height: 520px;
+}
+
+.site-schematic--portrait {
+  display: none;
+  aspect-ratio: 2 / 3;
+  max-height: 600px;
+}
+
+@media (max-width: 720px) {
+  .site-schematic--landscape {
+    display: none;
+  }
+  .site-schematic--portrait {
+    display: block;
+  }
+}
+
+.site-schematic-label {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  font-weight: 700;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: rgba(255, 251, 245, 0.85);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.site-schematic-label--water {
+  fill: #2c5876;
+  stroke: rgba(255, 251, 245, 0.9);
+}
+
+.site-schematic-label--accent {
+  fill: #8a4626;
+  stroke: rgba(255, 251, 245, 0.95);
+}
+
+.site-schematic-label--rail {
+  fill: #1a1a1a;
+}
+
+.site-schematic-rail {
+  stroke: #1a1a1a;
+  stroke-width: 3;
+  fill: none;
+  stroke-dasharray: 12 8;
+}
+
+.site-schematic-trail {
+  stroke: #3a6e44;
+  stroke-width: 2.5;
+  fill: none;
+  stroke-dasharray: 2 5;
+  stroke-linecap: round;
+}
+
+.site-schematic-highway {
+  stroke: #8a8475;
+  stroke-width: 7;
+  fill: none;
+  stroke-linecap: round;
+}
+
+.site-schematic-cove {
+  fill: rgba(200, 116, 66, 0.18);
+  stroke: #c87442;
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+
 .photo-overlay {
   position: absolute;
   inset: 0;
@@ -1997,6 +2081,17 @@ input {
   display: flex;
   align-items: flex-end;
   padding: 2rem;
+}
+
+@media (max-width: 720px) {
+  /* On mobile we swap to the portrait schematic and let the badge sit
+     below the diagram (rather than overlaying it) so the EDGEMOOR and
+     Port labels at the bottom of the schematic stay visible. */
+  .photo-overlay {
+    position: static;
+    background: rgba(12, 34, 26, 0.92);
+    padding: 1.4rem 1.25rem;
+  }
 }
 
 .photo-badge {
