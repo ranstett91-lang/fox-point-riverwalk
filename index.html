@@ -40,7 +40,10 @@
               </p>
               <div class="hero-actions">
                 <a class="button button-primary" href="#funding">See the funding</a>
-                <a class="button button-secondary button-secondary-light" href="#amtrak">See the risk</a>
+                <a class="hero-link" href="#amtrak">
+                  See the risk evidence
+                  <span class="hero-link-arrow" aria-hidden="true">→</span>
+                </a>
               </div>
               <div class="hero-points hero-points-light">
                 <span>$5.03M already tied to the site</span>
@@ -60,22 +63,18 @@
 
         <section class="skim-band" aria-label="Executive skim">
           <article class="skim-card">
-            <p class="section-label">Risk</p>
             <p class="skim-title">Amtrak already documents the risk.</p>
             <p class="skim-copy">Fox Point sits beside a part of the Northeast Corridor where flooding risk and delay costs are already well documented.</p>
           </article>
           <article class="skim-card">
-            <p class="section-label">Site Readiness</p>
             <p class="skim-title">The site and the plan are already clear.</p>
             <p class="skim-copy">The site boundary, the state plan, and DNREC oversight make this easier to move than a project starting from scratch.</p>
           </article>
           <article class="skim-card">
-            <p class="section-label">What The Money Does</p>
             <p class="skim-title">Pay for the work that gets the project ready.</p>
             <p class="skim-copy">The gap is design, permits, planning, and people working together to turn a strong idea into a real project.</p>
           </article>
           <article class="skim-card">
-            <p class="section-label">Unlock</p>
             <p class="skim-title">$5.03M can move faster with the right early work.</p>
             <p class="skim-copy">This would not create demand from scratch. It would help existing dollars move toward a project people can actually build.</p>
           </article>
@@ -229,16 +228,307 @@
             <h2>Fox Point is easy to see, explain, and support.</h2>
           </div>
           <div class="photo-card">
-            <img
-              src="assets/fox-point-greenways-aerial.png"
-              alt="Aerial view of the Delaware Greenways waterfront trail beside the rail corridor and Delaware River at Fox Point"
-              class="site-photo"
-              loading="lazy"
+            <svg
+              class="site-schematic site-schematic--landscape"
+              viewBox="0 0 1200 520"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              aria-labelledby="schematic-title schematic-desc"
+              xmlns="http://www.w3.org/2000/svg"
             >
+              <title id="schematic-title">Schematic of the Claymont-to-Fox-Point project corridor</title>
+              <desc id="schematic-desc">A north-south schematic of the Delaware shoreline between Claymont and the Edgemoor port, showing the Delaware River on the east, the Amtrak Northeast Corridor rail line and I-495 inland, the Delaware Greenways trail along the shore, and the Fox Point Cove restoration area highlighted in orange.</desc>
+
+              <!-- Land base -->
+              <rect x="0" y="0" width="1200" height="520" fill="#e8f1ea"/>
+
+              <!-- Subtle land texture: faint sage diagonals -->
+              <defs>
+                <pattern id="landTexture" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+                  <line x1="0" y1="0" x2="0" y2="14" stroke="#d6e1d4" stroke-width="1" opacity="0.7"/>
+                </pattern>
+                <pattern id="waterTexture" width="60" height="22" patternUnits="userSpaceOnUse">
+                  <path d="M 0 11 Q 15 4 30 11 T 60 11" fill="none" stroke="#a8c5d8" stroke-width="1" opacity="0.55"/>
+                </pattern>
+                <pattern id="portHatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                  <line x1="0" y1="0" x2="0" y2="10" stroke="#9a8a78" stroke-width="2" opacity="0.5"/>
+                </pattern>
+              </defs>
+              <rect x="0" y="0" width="1200" height="520" fill="url(#landTexture)"/>
+
+              <!-- Delaware River — east side, curving shoreline -->
+              <path
+                d="M 720 0
+                   C 740 60 770 120 760 180
+                   C 750 220 700 240 690 270
+                   C 685 295 720 310 740 340
+                   C 760 370 750 410 780 450
+                   C 800 480 830 500 870 520
+                   L 1200 520 L 1200 0 Z"
+                fill="#cbdfe8"
+              />
+              <path
+                d="M 720 0
+                   C 740 60 770 120 760 180
+                   C 750 220 700 240 690 270
+                   C 685 295 720 310 740 340
+                   C 760 370 750 410 780 450
+                   C 800 480 830 500 870 520
+                   L 1200 520 L 1200 0 Z"
+                fill="url(#waterTexture)"
+              />
+
+              <!-- Shoreline emphasis line -->
+              <path
+                d="M 720 0
+                   C 740 60 770 120 760 180
+                   C 750 220 700 240 690 270
+                   C 685 295 720 310 740 340
+                   C 760 370 750 410 780 450
+                   C 800 480 830 500 870 520"
+                fill="none"
+                stroke="#12362a"
+                stroke-width="2"
+                opacity="0.65"
+              />
+
+              <!-- Fox Point Cove — highlighted inlet near middle of shoreline -->
+              <path
+                class="site-schematic-cove"
+                d="M 690 240
+                   C 660 250 630 258 615 275
+                   C 605 290 615 305 635 312
+                   C 660 320 690 318 710 308
+                   C 712 290 705 270 690 240 Z"
+              />
+
+              <!-- Project area extent (1.4 mi corridor) — subtle dashed outline along the shore -->
+              <path
+                d="M 595 110
+                   C 620 160 615 215 615 275
+                   C 615 320 640 365 670 410
+                   C 700 450 740 480 790 500"
+                fill="none"
+                stroke="#c87442"
+                stroke-width="1.5"
+                stroke-dasharray="3 5"
+                opacity="0.55"
+              />
+
+              <!-- Amtrak rail corridor — dashed line, inland-side, paralleling shore -->
+              <path
+                class="site-schematic-rail"
+                d="M 530 0
+                   C 540 90 555 175 555 250
+                   C 555 320 580 390 610 460
+                   C 625 490 645 510 670 520"
+              />
+
+              <!-- I-495 — thicker line, further inland -->
+              <path
+                class="site-schematic-highway"
+                d="M 380 0
+                   C 395 110 420 220 440 320
+                   C 460 420 490 480 520 520"
+              />
+
+              <!-- Delaware Greenways trail — green dotted along shore -->
+              <path
+                class="site-schematic-trail"
+                d="M 680 30
+                   C 705 100 710 170 700 230
+                   C 695 270 720 305 735 345
+                   C 750 390 745 440 770 485"
+              />
+
+              <!-- Port of Edgemoor industrial area at the south -->
+              <rect x="640" y="450" width="200" height="70" fill="#d8d4c8" opacity="0.85"/>
+              <rect x="640" y="450" width="200" height="70" fill="url(#portHatch)"/>
+              <rect x="640" y="450" width="200" height="70" fill="none" stroke="#9a8a78" stroke-width="1.5" opacity="0.7"/>
+
+              <!-- Compass rose -->
+              <g transform="translate(1130, 60)">
+                <circle r="24" fill="#fffaf2" stroke="#12362a" stroke-width="1.5"/>
+                <path d="M 0 -16 L 5 2 L 0 -3 L -5 2 Z" fill="#12362a"/>
+                <text y="-2" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#12362a">N</text>
+                <text y="20" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="8" font-weight="700" fill="#607063" letter-spacing="1">S</text>
+              </g>
+
+              <!-- Scale bar -->
+              <g transform="translate(60, 480)">
+                <rect x="0" y="0" width="80" height="4" fill="#12362a"/>
+                <rect x="40" y="0" width="40" height="4" fill="#fffaf2" stroke="#12362a" stroke-width="0.75"/>
+                <text x="0" y="22" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="700" fill="#12362a" letter-spacing="0.5">~ 1 mile</text>
+              </g>
+
+              <!-- Labels. Major place names use a larger font-size so they
+                   remain legible when the schematic scales down on phones. -->
+              <g font-family="Avenir Next, Segoe UI, sans-serif" font-size="18">
+                <text x="60" y="40" class="site-schematic-label" letter-spacing="1.5">CLAYMONT ↑</text>
+                <text x="60" y="60" font-size="11" font-weight="600" fill="#607063" letter-spacing="1">North end of corridor</text>
+
+                <text x="720" y="508" class="site-schematic-label" letter-spacing="1.5">EDGEMOOR ↓</text>
+
+                <text x="950" y="280" class="site-schematic-label site-schematic-label--water" letter-spacing="2">DELAWARE RIVER</text>
+
+                <text x="510" y="280" class="site-schematic-label site-schematic-label--accent" font-weight="800">Fox Point Cove</text>
+                <text x="510" y="300" font-size="12" font-weight="600" fill="#8a4626">restoration area · ~2.7 acres wetland</text>
+
+                <text x="260" y="170" class="site-schematic-label site-schematic-label--rail" font-size="14">Amtrak NEC rail</text>
+                <text x="200" y="320" class="site-schematic-label" font-size="14" fill="#5b574e">I-495</text>
+
+                <text x="755" y="115" class="site-schematic-label" font-size="13" fill="#3a6e44">Delaware Greenways trail</text>
+
+                <text x="660" y="495" class="site-schematic-label" font-size="13" fill="#5b574e" letter-spacing="0.5">Port of Edgemoor</text>
+
+                <text x="890" y="150" class="site-schematic-label site-schematic-label--accent" font-size="13" font-weight="700">~ 203 river acres in scope</text>
+              </g>
+            </svg>
+            <!-- Portrait variant for narrow screens. Same content as the
+                 landscape SVG above, re-oriented north-to-south so labels
+                 stay legible at phone widths. CSS media queries decide
+                 which variant is visible. aria-hidden because the
+                 landscape version above already carries the accessible
+                 title/description for assistive tech. -->
+            <svg
+              class="site-schematic site-schematic--portrait"
+              viewBox="0 0 400 600"
+              preserveAspectRatio="xMidYMid meet"
+              aria-hidden="true"
+              focusable="false"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <!-- Land base -->
+              <rect x="0" y="0" width="400" height="600" fill="#e8f1ea"/>
+              <defs>
+                <pattern id="landTextureP" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(35)">
+                  <line x1="0" y1="0" x2="0" y2="14" stroke="#d6e1d4" stroke-width="1" opacity="0.7"/>
+                </pattern>
+                <pattern id="waterTextureP" width="40" height="22" patternUnits="userSpaceOnUse">
+                  <path d="M 0 11 Q 10 4 20 11 T 40 11" fill="none" stroke="#a8c5d8" stroke-width="1" opacity="0.55"/>
+                </pattern>
+                <pattern id="portHatchP" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                  <line x1="0" y1="0" x2="0" y2="10" stroke="#9a8a78" stroke-width="2" opacity="0.5"/>
+                </pattern>
+              </defs>
+              <rect x="0" y="0" width="400" height="600" fill="url(#landTextureP)"/>
+
+              <!-- Delaware River — right side, vertical strip with curve -->
+              <path
+                d="M 260 0
+                   C 270 80 290 160 285 240
+                   C 280 290 250 310 240 360
+                   C 235 400 270 440 285 500
+                   C 295 540 310 570 320 600
+                   L 400 600 L 400 0 Z"
+                fill="#cbdfe8"
+              />
+              <path
+                d="M 260 0
+                   C 270 80 290 160 285 240
+                   C 280 290 250 310 240 360
+                   C 235 400 270 440 285 500
+                   C 295 540 310 570 320 600
+                   L 400 600 L 400 0 Z"
+                fill="url(#waterTextureP)"
+              />
+
+              <!-- Shoreline -->
+              <path
+                d="M 260 0
+                   C 270 80 290 160 285 240
+                   C 280 290 250 310 240 360
+                   C 235 400 270 440 285 500
+                   C 295 540 310 570 320 600"
+                fill="none"
+                stroke="#12362a"
+                stroke-width="2"
+                opacity="0.65"
+              />
+
+              <!-- Fox Point Cove — highlighted inlet -->
+              <path
+                class="site-schematic-cove"
+                d="M 245 300
+                   C 215 305 195 320 195 340
+                   C 195 360 215 372 240 372
+                   C 260 372 270 358 268 335
+                   C 265 318 260 305 245 300 Z"
+              />
+
+              <!-- Amtrak rail — dashed, parallels shoreline on land side -->
+              <path
+                class="site-schematic-rail"
+                d="M 165 0
+                   C 175 80 195 160 195 240
+                   C 195 300 175 360 175 420
+                   C 175 480 195 540 215 600"
+              />
+
+              <!-- I-495 — thicker line further inland -->
+              <path
+                class="site-schematic-highway"
+                d="M 80 0
+                   C 90 100 105 200 110 300
+                   C 115 400 135 500 155 600"
+              />
+
+              <!-- Trail — green dotted along shore -->
+              <path
+                class="site-schematic-trail"
+                d="M 270 40
+                   C 280 130 285 220 275 295
+                   C 270 340 240 380 250 440
+                   C 260 490 285 545 305 590"
+              />
+
+              <!-- Port of Edgemoor industrial zone at the south -->
+              <rect x="180" y="520" width="180" height="80" fill="#d8d4c8" opacity="0.85"/>
+              <rect x="180" y="520" width="180" height="80" fill="url(#portHatchP)"/>
+              <rect x="180" y="520" width="180" height="80" fill="none" stroke="#9a8a78" stroke-width="1.5" opacity="0.7"/>
+
+              <!-- Compass -->
+              <g transform="translate(360, 36)">
+                <circle r="22" fill="#fffaf2" stroke="#12362a" stroke-width="1.5"/>
+                <path d="M 0 -14 L 4 2 L 0 -2 L -4 2 Z" fill="#12362a"/>
+                <text y="-1" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#12362a">N</text>
+              </g>
+
+              <!-- Scale bar -->
+              <g transform="translate(30, 558)">
+                <rect x="0" y="0" width="60" height="3" fill="#12362a"/>
+                <rect x="30" y="0" width="30" height="3" fill="#fffaf2" stroke="#12362a" stroke-width="0.5"/>
+                <text x="0" y="18" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="700" fill="#12362a">~ 1 mile</text>
+              </g>
+
+              <!-- Labels — large enough to stay legible at phone widths -->
+              <g font-family="Avenir Next, Segoe UI, sans-serif" font-size="18">
+                <text x="20" y="32" class="site-schematic-label" letter-spacing="1.5">CLAYMONT ↑</text>
+                <text x="20" y="50" font-size="11" font-weight="600" fill="#607063" letter-spacing="1">North end of corridor</text>
+
+                <text x="22" y="592" class="site-schematic-label" letter-spacing="1.5">EDGEMOOR ↓</text>
+
+                <text x="305" y="120" class="site-schematic-label site-schematic-label--water" letter-spacing="2" text-anchor="middle">DELAWARE</text>
+                <text x="305" y="140" class="site-schematic-label site-schematic-label--water" letter-spacing="2" text-anchor="middle">RIVER</text>
+
+                <text x="20" y="345" class="site-schematic-label site-schematic-label--accent" font-weight="800">Fox Point Cove</text>
+                <text x="20" y="362" font-size="12" font-weight="600" fill="#8a4626">~ 2.7 acres restoration</text>
+
+                <text x="120" y="220" class="site-schematic-label site-schematic-label--rail" font-size="14">Amtrak NEC rail</text>
+                <text x="30" y="280" class="site-schematic-label" font-size="14" fill="#5b574e">I-495</text>
+
+                <text x="305" y="440" class="site-schematic-label" font-size="13" fill="#3a6e44" text-anchor="middle">Greenways trail</text>
+
+                <text x="200" y="565" class="site-schematic-label" font-size="13" fill="#5b574e" letter-spacing="0.5">Port of Edgemoor</text>
+
+                <text x="280" y="232" class="site-schematic-label site-schematic-label--accent" font-size="12" font-weight="700">~ 203 river acres</text>
+                <text x="280" y="248" class="site-schematic-label site-schematic-label--accent" font-size="12" font-weight="700">in scope</text>
+              </g>
+            </svg>
             <div class="photo-overlay">
               <div class="photo-badge">
                 <p class="photo-badge-title">Claymont riverfront at Fox Point</p>
-                <p>In one view, you can see the shoreline, trail, river, industry, and rail line. That makes it easier to explain both the risk and the public benefit of this work.</p>
+                <p>One corridor, four overlapping systems — shoreline, rail line, river, and trail. That overlap is what makes the risk visible and the public benefit easy to explain.</p>
                 <a class="photo-trail-link" href="https://delawaregreenways.org/trail/fox-point-riverview-trail/" target="_blank" rel="noopener">Fox Point Riverview Trail →</a>
               </div>
             </div>
@@ -418,7 +708,13 @@
             </div>
             <label class="search-field" for="resourceSearch">
               <span>Search sources</span>
-              <input id="resourceSearch" type="search" placeholder="Try Amtrak, marsh, permits, NOAA...">
+              <span class="search-field-input-wrap">
+                <svg class="search-field-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="9" r="6"/>
+                  <line x1="13.5" y1="13.5" x2="17.5" y2="17.5"/>
+                </svg>
+                <input id="resourceSearch" type="search" placeholder="Try Amtrak, marsh, permits, NOAA...">
+              </span>
             </label>
           </div>
 
@@ -448,6 +744,7 @@
         <h3 class="resource-title"></h3>
         <p class="resource-description"></p>
         <p class="resource-source"></p>
+        <p class="resource-largefile-hint" hidden>Large file — opens in new tab</p>
         <a class="resource-link" target="_blank" rel="noopener">Open file</a>
       </article>
     </template>

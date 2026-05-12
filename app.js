@@ -172,6 +172,16 @@ if (grid && searchInput && filterRow && emptyState && template) {
 
     grid.replaceChildren();
 
+    // PDFs larger than this trigger a visible "large file" hint and an
+    // expanded aria-label, so funders on mobile know what they're opening.
+    const LARGE_FILE_THRESHOLD_MB = 10;
+
+    const parseSizeMb = (size) => {
+      if (!size || typeof size !== "string") return null;
+      const match = size.match(/([\d.]+)\s*MB/i);
+      return match ? parseFloat(match[1]) : null;
+    };
+
     filteredResources.forEach((resource) => {
       const fragment = template.content.cloneNode(true);
       fragment.querySelector(".resource-type").textContent = resource.label;
@@ -189,9 +199,27 @@ if (grid && searchInput && filterRow && emptyState && template) {
         "Open file";
       link.textContent = actionLabel;
 
+      const sizeMb = parseSizeMb(resource.size);
+      const hasFileSize = sizeMb !== null;
+      const isLargeFile = resource.type === "pdf" && hasFileSize && sizeMb >= LARGE_FILE_THRESHOLD_MB;
+
+      const hint = fragment.querySelector(".resource-largefile-hint");
+      if (isLargeFile) {
+        hint.hidden = false;
+        hint.textContent = `Large file · ${resource.size} · opens in new tab`;
+      }
+
+      // aria-label only mentions size when the size field is an actual
+      // file size, not a date string like "Jul 2025 · Port of Delaware".
+      const ariaSuffix =
+        isLargeFile ? `(opens ${resource.size} PDF in new tab)` :
+        resource.type === "pdf" && hasFileSize ? `(opens ${resource.size} PDF in new tab)` :
+        resource.type === "pdf" ? "(opens PDF in new tab)" :
+        "(opens in new tab)";
+
       link.setAttribute(
         "aria-label",
-        `${actionLabel}: ${resource.title} (opens in new tab)`
+        `${actionLabel}: ${resource.title} ${ariaSuffix}`
       );
 
       grid.appendChild(fragment);
