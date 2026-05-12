@@ -40,7 +40,10 @@
               </p>
               <div class="hero-actions">
                 <a class="button button-primary" href="#funding">See the funding</a>
-                <a class="button button-secondary button-secondary-light" href="#amtrak">See the risk</a>
+                <a class="hero-link" href="#amtrak">
+                  See the risk evidence
+                  <span class="hero-link-arrow" aria-hidden="true">→</span>
+                </a>
               </div>
               <div class="hero-points hero-points-light">
                 <span>$5.03M already tied to the site</span>
@@ -60,22 +63,18 @@
 
         <section class="skim-band" aria-label="Executive skim">
           <article class="skim-card">
-            <p class="section-label">Risk</p>
             <p class="skim-title">Amtrak already documents the risk.</p>
             <p class="skim-copy">Fox Point sits beside a part of the Northeast Corridor where flooding risk and delay costs are already well documented.</p>
           </article>
           <article class="skim-card">
-            <p class="section-label">Site Readiness</p>
             <p class="skim-title">The site and the plan are already clear.</p>
             <p class="skim-copy">The site boundary, the state plan, and DNREC oversight make this easier to move than a project starting from scratch.</p>
           </article>
           <article class="skim-card">
-            <p class="section-label">What The Money Does</p>
             <p class="skim-title">Pay for the work that gets the project ready.</p>
             <p class="skim-copy">The gap is design, permits, planning, and people working together to turn a strong idea into a real project.</p>
           </article>
           <article class="skim-card">
-            <p class="section-label">Unlock</p>
             <p class="skim-title">$5.03M can move faster with the right early work.</p>
             <p class="skim-copy">This would not create demand from scratch. It would help existing dollars move toward a project people can actually build.</p>
           </article>
@@ -709,7 +708,13 @@
             </div>
             <label class="search-field" for="resourceSearch">
               <span>Search sources</span>
-              <input id="resourceSearch" type="search" placeholder="Try Amtrak, marsh, permits, NOAA...">
+              <span class="search-field-input-wrap">
+                <svg class="search-field-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+                  <circle cx="9" cy="9" r="6"/>
+                  <line x1="13.5" y1="13.5" x2="17.5" y2="17.5"/>
+                </svg>
+                <input id="resourceSearch" type="search" placeholder="Try Amtrak, marsh, permits, NOAA...">
+              </span>
             </label>
           </div>
 
@@ -739,6 +744,7 @@
         <h3 class="resource-title"></h3>
         <p class="resource-description"></p>
         <p class="resource-source"></p>
+        <p class="resource-largefile-hint" hidden>Large file — opens in new tab</p>
         <a class="resource-link" target="_blank" rel="noopener">Open file</a>
       </article>
     </template>

@@ -48,6 +48,22 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Respect the operating-system motion preference: kill smooth scroll,
+   animations, and transitions for users who request reduced motion.
+   Applied as a near-instant duration so visual state still updates. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
   margin: 0;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
@@ -113,9 +129,22 @@ input {
 }
 
 .topbar-links a {
-  color: var(--muted);
+  /* Brand-green ink — passes WCAG AA on the translucent-cream topbar.
+     Previously var(--muted) which fell to ~4.1:1 on the blurred bg. */
+  display: inline-flex;
+  align-items: center;
+  /* 44x44 minimum tap target on touch devices */
+  min-height: 44px;
+  padding: 0.55rem 0.75rem;
+  margin: -0.4rem -0.25rem; /* keeps optical alignment in the topbar row */
+  border-radius: 999px;
+  color: var(--brand);
   font-weight: 600;
-  transition: color 180ms ease;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+
+.topbar-links a:hover {
+  background: rgba(18, 49, 38, 0.06);
 }
 
 .topbar-links a.is-current,
@@ -193,9 +222,33 @@ input {
   border: 1px solid rgba(255, 250, 241, 0.25);
 }
 
-.button-secondary-light {
-  border-color: rgba(255, 250, 241, 0.45) !important;
-  color: #fffaf1 !important;
+/* Hero secondary CTA: rendered as a text link with arrow rather than a
+   pill button, so the primary "See the funding" wins the eye. Tap target
+   stays >= 44px via min-height + padding. */
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: 0.6rem 0.25rem;
+  color: #fffaf1;
+  font-weight: 700;
+  border-bottom: 1.5px solid rgba(255, 250, 241, 0.55);
+  border-radius: 0;
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.hero-link:hover {
+  border-bottom-color: #fffaf1;
+  transform: translateX(2px);
+}
+
+.hero-link .hero-link-arrow {
+  transition: transform 180ms ease;
+}
+
+.hero-link:hover .hero-link-arrow {
+  transform: translateX(3px);
 }
 
 .hero-fb-chips {
@@ -230,18 +283,23 @@ input {
 }
 
 .skim-card {
-  padding: 1rem 1.1rem 1.1rem;
+  /* Lighter chrome than before — the section-label kickers were removed
+     from these cards to avoid duplicating the section anchors below.
+     Card chrome is kept but shadow is softened so the band reads as a
+     summary band, not four full mini-cards competing with the hero. */
+  padding: 0.95rem 1.05rem 1rem;
   border: 1px solid var(--line);
-  border-radius: 1.5rem;
+  border-radius: 1.25rem;
   background: rgba(255, 250, 242, 0.92);
-  box-shadow: var(--shadow);
+  box-shadow: 0 8px 24px rgba(18, 54, 42, 0.06);
   backdrop-filter: blur(16px);
 }
 
 .skim-title {
-  margin: 0.35rem 0 0.45rem;
+  /* Title is now the lead element in the card; tighter top margin */
+  margin: 0 0 0.4rem;
   color: var(--brand);
-  font-size: 1.02rem;
+  font-size: 1rem;
   font-weight: 800;
   line-height: 1.25;
 }
@@ -620,10 +678,23 @@ input {
 .funding-card,
 .deliverables-grid article,
 .corridor-grid article {
+  /* Flex column so siblings in a grid row stay visually rhythmic
+     even when copy lengths differ. h3 anchors top, p flows below. */
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
   padding: 1.15rem;
   border: 1px solid var(--line);
   border-radius: 1.5rem;
   background: rgba(255, 255, 255, 0.68);
+}
+
+.deliverables-grid article h3 {
+  margin: 0;
+}
+
+.deliverables-grid article p {
+  margin: 0;
 }
 
 .metric-value,
@@ -852,13 +923,17 @@ input {
 }
 
 .status-contingent {
+  /* Darker terracotta — bumps contrast from ~4.7:1 to ~6.6:1 on the peach
+     chip background. Comfortable AA, approaches AAA for short text. */
   background: rgba(240, 221, 207, 0.95);
-  color: #8a4e2b;
+  color: #6e3e1e;
 }
 
 .status-future {
+  /* Darker slate — bumps contrast from ~5.6:1 to ~8:1 for parity with
+     the other two chips. */
   background: rgba(220, 226, 235, 0.95);
-  color: #39536a;
+  color: #2b3f56;
 }
 
 .section-source {
@@ -896,6 +971,7 @@ input {
 }
 
 .search-field {
+  position: relative;
   min-width: min(100%, 340px);
 }
 
@@ -905,14 +981,34 @@ input {
   font-size: 0.92rem;
 }
 
+.search-field-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-field-icon {
+  position: absolute;
+  left: 0.95rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  color: var(--muted);
+  pointer-events: none;
+}
+
 .search-field input {
   width: 100%;
   min-height: 3rem;
-  padding: 0.85rem 1rem;
+  /* extra left padding makes room for the magnifier icon */
+  padding: 0.85rem 1rem 0.85rem 2.6rem;
   border: 1px solid var(--line);
   border-radius: 1rem;
   background: rgba(255, 255, 255, 0.8);
   color: var(--ink);
+}
+
+.search-field input:focus-visible {
+  outline-offset: 1px;
 }
 
 .filter-row {
@@ -938,12 +1034,19 @@ input {
 }
 
 .resource-card {
-  display: grid;
+  /* Flex column so the "Open report" button anchors to the card bottom
+     even when description lengths differ across the grid. */
+  display: flex;
+  flex-direction: column;
   gap: 0.85rem;
   padding: 1.2rem;
   border: 1px solid var(--line);
   border-radius: 1.5rem;
   background: rgba(255, 255, 255, 0.72);
+}
+
+.resource-card .resource-link {
+  margin-top: auto;
 }
 
 .resource-meta {
@@ -956,6 +1059,30 @@ input {
 .resource-size {
   color: var(--muted);
   font-size: 0.72rem;
+}
+
+/* Inline "large file" hint shown for big PDFs — alerts the user that
+   "Open report" will pull a heavy download. Sits between description
+   and button so it can't be missed. */
+.resource-largefile-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0.4rem 0.65rem;
+  align-self: flex-start;
+  border-radius: 999px;
+  background: rgba(240, 221, 207, 0.65);
+  color: #6e3e1e;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.resource-largefile-hint::before {
+  content: "↓";
+  font-weight: 800;
 }
 
 .resource-source {
@@ -2074,6 +2201,9 @@ input {
   stroke-dasharray: 6 4;
 }
 
+/* aspect-ratio handles sizing across breakpoints; explicit overrides
+   removed to keep the corridor schematic legible on small screens. */
+
 .photo-overlay {
   position: absolute;
   inset: 0;
@@ -2161,6 +2291,11 @@ input {
 }
 
 .corridor-brief-card {
+  /* Flex column equalizes internal rhythm across the 3-up grid;
+     CSS Grid stretches the cards, this aligns their content. */
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
   padding: 1.35rem 1.25rem;
   border: 1px solid var(--line);
   border-radius: 1.5rem;
@@ -2504,6 +2639,13 @@ input {
   }
   .hero-copy-light h1 {
     font-size: clamp(1.35rem, 5.5vw, 1.75rem);
+    /* Negative-leading at small sizes would collide ascenders/descenders
+       across 3–4 wrapped lines. Step the heading leading up under 600px. */
+    line-height: 1.08;
+  }
+  .panel h2,
+  .photo-header h2 {
+    line-height: 1.08;
   }
   .lede-light {
     font-size: 0.92rem !important;
