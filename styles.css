@@ -179,9 +179,9 @@ input {
   inset: 0;
   background: linear-gradient(
     100deg,
-    rgba(10, 28, 20, 0.94) 0%,
-    rgba(10, 28, 20, 0.76) 48%,
-    rgba(10, 28, 20, 0.18) 100%
+    rgba(10, 28, 20, 0.88) 0%,
+    rgba(10, 28, 20, 0.62) 52%,
+    rgba(10, 28, 20, 0.08) 100%
   );
 }
 
@@ -217,9 +217,11 @@ input {
 }
 
 .hero-points-light span {
-  background: rgba(255, 250, 241, 0.15) !important;
+  background: rgba(255, 250, 241, 0.12) !important;
   color: #fffaf1 !important;
-  border: 1px solid rgba(255, 250, 241, 0.25);
+  border: 1px solid rgba(255, 250, 241, 0.32);
+  backdrop-filter: blur(6px);
+  font-weight: 600;
 }
 
 /* Hero secondary CTA: rendered as a text link with arrow rather than a
@@ -2153,23 +2155,31 @@ input {
   font-weight: 700;
   fill: var(--ink);
   paint-order: stroke;
-  stroke: rgba(255, 251, 245, 0.85);
-  stroke-width: 3px;
+  stroke: rgba(255, 251, 245, 0.95);
+  stroke-width: 4px;
   stroke-linejoin: round;
 }
 
 .site-schematic-label--water {
   fill: #2c5876;
-  stroke: rgba(255, 251, 245, 0.9);
+  stroke: rgba(232, 241, 234, 0.95);
 }
 
 .site-schematic-label--accent {
-  fill: #8a4626;
-  stroke: rgba(255, 251, 245, 0.95);
+  fill: #7a3e22;
+  stroke: rgba(255, 251, 245, 0.98);
 }
 
 .site-schematic-label--rail {
   fill: #1a1a1a;
+}
+
+.site-schematic-sublabel {
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  paint-order: stroke;
+  stroke: rgba(255, 251, 245, 0.92);
+  stroke-width: 3px;
+  stroke-linejoin: round;
 }
 
 .site-schematic-rail {
@@ -2230,12 +2240,13 @@ input {
 }
 
 .photo-badge-title {
-  margin: 0 0 0.4rem;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  margin: 0 0 0.55rem;
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  opacity: 0.75;
+  opacity: 1;
 }
 
 .photo-badge p:not(.photo-badge-title) {
@@ -2618,14 +2629,15 @@ input {
   }
   .hero-fb-photo {
     position: relative;
-    height: 220px;
-    object-position: center 30%;
+    height: 240px;
+    object-position: center 32%;
   }
   .hero-fb-overlay {
     background: linear-gradient(
       180deg,
-      rgba(10, 28, 20, 0.35) 0%,
-      rgba(10, 28, 20, 0.82) 55%,
+      rgba(10, 28, 20, 0.12) 0%,
+      rgba(10, 28, 20, 0.32) 28%,
+      rgba(10, 28, 20, 0.86) 58%,
       rgba(10, 28, 20, 0.96) 100%
     );
   }
@@ -2638,17 +2650,19 @@ input {
     margin-top: -80px;
   }
   .hero-copy-light h1 {
-    font-size: clamp(1.35rem, 5.5vw, 1.75rem);
+    font-size: clamp(1.55rem, 6.2vw, 2rem);
     /* Negative-leading at small sizes would collide ascenders/descenders
        across 3–4 wrapped lines. Step the heading leading up under 600px. */
     line-height: 1.08;
+    letter-spacing: -0.01em;
   }
   .panel h2,
   .photo-header h2 {
     line-height: 1.08;
   }
   .lede-light {
-    font-size: 0.92rem !important;
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
   }
   .hero-points {
     flex-wrap: wrap;
