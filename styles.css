@@ -2330,6 +2330,47 @@ input {
   line-height: 1.65;
 }
 
+/* ─── PRECEDENT ─── */
+
+.precedent-section {
+  background:
+    linear-gradient(135deg, rgba(18, 49, 38, 0.04), rgba(255, 251, 245, 0.92)),
+    var(--surface);
+}
+
+.precedent-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.precedent-card-here {
+  border-color: rgba(200, 116, 66, 0.35);
+  background: rgba(240, 221, 207, 0.32);
+}
+
+.precedent-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.precedent-list li + li {
+  margin-top: 0.25rem;
+}
+
+.precedent-link {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.precedent-link:hover {
+  color: var(--accent);
+}
+
 /* ─── PAGE FOOTER / BACK TO TOP ─── */
 
 .page-foot {
@@ -2585,7 +2626,8 @@ input {
     grid-template-columns: 1fr;
   }
 
-  .corridor-brief-grid {
+  .corridor-brief-grid,
+  .precedent-grid {
     grid-template-columns: 1fr;
   }
 
