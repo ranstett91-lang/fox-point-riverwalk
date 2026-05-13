@@ -85,7 +85,7 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "16.3 MB",
-    description: "Amtrak's main plan for dealing with stronger storms, hotter weather, and rising water.",
+    description: "Amtrak’s main plan for dealing with stronger storms, hotter weather, and rising water.",
     source: "Main Amtrak plan for climate response"
   },
   {
@@ -103,7 +103,7 @@ const resources = [
     type: "web",
     label: "Web",
     size: "Jan 12, 2025 · DNREC",
-    description: "DNREC's public notice for the final restoration plan. It shows the project area, the shoreline goals, and where the full record is posted.",
+    description: "DNREC’s public notice for the final restoration plan. It shows the project area, the shoreline goals, and where the full record is posted.",
     source: "Good DNREC starting point for the final plan"
   },
   {
@@ -112,7 +112,7 @@ const resources = [
     type: "web",
     label: "Web",
     size: "Live record",
-    description: "DNREC's live record for Fox Point Park Phase II. It links to site documents, inspections, and cleanup status.",
+    description: "DNREC’s live record for Fox Point Park Phase II. It links to site documents, inspections, and cleanup status.",
     source: "Live DNREC record for the site"
   },
   {
@@ -130,7 +130,7 @@ const resources = [
     type: "pdf",
     label: "Report",
     size: "Dec 2025 · DNREC",
-    description: "Delaware's statewide climate plan. It gives broader context for sea-level rise, public safety, and public infrastructure.",
+    description: "Delaware’s statewide climate plan. It gives broader context for sea-level rise, public safety, and public infrastructure.",
     source: "Statewide climate source"
   },
   {
@@ -139,7 +139,7 @@ const resources = [
     type: "web",
     label: "Web",
     size: "Feb 2023",
-    description: "NOAA's summary of the settlement that sets aside $808,500 for restoration tied to the Edge Moor and Hay Road site.",
+    description: "NOAA’s summary of the settlement that sets aside $808,500 for restoration tied to the Edge Moor and Hay Road site.",
     source: "Official source for the Chemours settlement amount"
   },
   {
