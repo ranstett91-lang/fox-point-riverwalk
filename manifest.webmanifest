@@ -1,11 +1,11 @@
 {
   "name": "Claymont to Fox Point",
   "short_name": "Fox Point Brief",
-  "description": "Partner and funder brief for Fox Point Cove: documented Amtrak rail exposure, defined restoration scope, and a predevelopment ask to unlock $5.03M already identified.",
+  "description": "Project brief for Fox Point Cove: climate risk along the rail line, a clear shoreline restoration plan, and the early work needed to unlock about $5.03M already tied to the site.",
   "start_url": "./",
   "display": "browser",
   "background_color": "#f4efe4",
-  "theme_color": "#133b2c",
+  "theme_color": "#12362a",
   "icons": [
     {
       "src": "assets/icons/icon-180.png",
