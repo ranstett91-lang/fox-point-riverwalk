@@ -1164,20 +1164,12 @@ input {
 }
 
 .sea-hero-eyebrow {
-  margin: 0 0 0.35rem;
+  margin: 0 0 0.75rem;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.09em;
   text-transform: uppercase;
   color: #3a6e96;
-}
-
-.sea-hero-title {
-  margin: 0 0 0.75rem;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.5rem, 2.8vw, 2.2rem);
-  line-height: 1.1;
-  color: var(--ink);
 }
 
 .sea-hero-body {
@@ -2324,19 +2316,12 @@ input {
 }
 
 .corridor-brief-eyebrow {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.75rem;
   color: var(--accent);
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-}
-
-.corridor-brief-card h3 {
-  margin: 0 0 0.55rem;
-  font-size: 1.08rem;
-  line-height: 1.2;
-  color: var(--ink);
 }
 
 .corridor-brief-card p:last-child {
