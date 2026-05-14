@@ -1992,27 +1992,35 @@ input {
 
 .photo-overlay {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 35%, rgba(12, 34, 26, 0.78) 100%);
-  display: flex;
-  align-items: flex-end;
-  padding: 2rem;
+  top: 1.5rem;
+  right: 1.5rem;
+  max-width: 360px;
 }
 
 @media (max-width: 720px) {
-  /* On mobile we swap to the portrait schematic and let the badge sit
-     below the diagram (rather than overlaying it) so the EDGEMOOR and
-     Port labels at the bottom of the schematic stay visible. */
+  /* On mobile the badge sits below the portrait schematic so labels at the
+     bottom (Edgemoor, cove details) stay visible. */
   .photo-overlay {
     position: static;
-    background: rgba(12, 34, 26, 0.92);
-    padding: 1.4rem 1.25rem;
+    max-width: 100%;
+    padding: 0;
   }
 }
 
 .photo-badge {
-  max-width: 580px;
+  background: rgba(12, 34, 26, 0.92);
+  padding: 1.4rem 1.5rem;
+  border-radius: 1.25rem;
   color: #fffaf1;
+  box-shadow: 0 18px 40px rgba(12, 34, 26, 0.2);
+}
+
+@media (max-width: 720px) {
+  .photo-badge {
+    border-radius: 0;
+    box-shadow: none;
+    padding: 1.4rem 1.25rem;
+  }
 }
 
 .photo-badge-title {
