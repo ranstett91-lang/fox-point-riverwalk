@@ -46,7 +46,7 @@
     frameId = 0;
 
     const activationOffset = 140;
-    let activeSection = sections[0];
+    let activeSection = null;
 
     sections.forEach((section) => {
       if (section.getBoundingClientRect().top <= activationOffset) {
@@ -54,7 +54,14 @@
       }
     });
 
-    setActive(activeSection.id);
+    if (activeSection) {
+      setActive(activeSection.id);
+    } else {
+      navLinks.forEach((link) => {
+        link.classList.remove('is-current');
+        link.removeAttribute('aria-current');
+      });
+    }
   };
 
   const scheduleUpdate = () => {
@@ -178,7 +185,7 @@ if (grid && searchInput && filterRow && emptyState && template) {
 
     const parseSizeMb = (size) => {
       if (!size || typeof size !== "string") return null;
-      const match = size.match(/([\d.]+)\s*MB/i);
+      const match = size.match(/^\s*([\d.]+)\s*MB\s*$/i);
       return match ? parseFloat(match[1]) : null;
     };
 
@@ -212,7 +219,6 @@ if (grid && searchInput && filterRow && emptyState && template) {
       // aria-label only mentions size when the size field is an actual
       // file size, not a date string like "Jul 2025 · Port of Delaware".
       const ariaSuffix =
-        isLargeFile ? `(opens ${resource.size} PDF in new tab)` :
         resource.type === "pdf" && hasFileSize ? `(opens ${resource.size} PDF in new tab)` :
         resource.type === "pdf" ? "(opens PDF in new tab)" :
         "(opens in new tab)";
@@ -234,7 +240,7 @@ if (grid && searchInput && filterRow && emptyState && template) {
 
     activeFilter = button.dataset.filter;
 
-    document.querySelectorAll(".filter-chip").forEach((chip) => {
+    filterRow.querySelectorAll(".filter-chip").forEach((chip) => {
       const isActive = chip === button;
       chip.classList.toggle("is-active", isActive);
       chip.setAttribute("aria-pressed", String(isActive));
