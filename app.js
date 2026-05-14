@@ -65,7 +65,7 @@
 
   scheduleUpdate();
   window.addEventListener('scroll', scheduleUpdate, { passive: true });
-  window.addEventListener('resize', scheduleUpdate);
+  window.addEventListener('resize', scheduleUpdate, { passive: true });
   navLinks.forEach((link) => link.addEventListener('click', scheduleUpdate));
 })();
 // ── RESOURCE LIBRARY ──
@@ -162,6 +162,16 @@ const template    = document.querySelector("#resourceCardTemplate");
 if (grid && searchInput && filterRow && emptyState && template) {
   let activeFilter = "all";
 
+  // PDFs larger than this trigger a visible "large file" hint and an
+  // expanded aria-label, so funders on mobile know what they're opening.
+  const LARGE_FILE_THRESHOLD_MB = 10;
+
+  const parseSizeMb = (size) => {
+    if (!size || typeof size !== "string") return null;
+    const match = size.match(/([\d.]+)\s*MB/i);
+    return match ? parseFloat(match[1]) : null;
+  };
+
   function renderResources() {
     const query = searchInput.value.trim().toLowerCase();
     const filteredResources = resources.filter((resource) => {
@@ -171,16 +181,6 @@ if (grid && searchInput && filterRow && emptyState && template) {
     });
 
     grid.replaceChildren();
-
-    // PDFs larger than this trigger a visible "large file" hint and an
-    // expanded aria-label, so funders on mobile know what they're opening.
-    const LARGE_FILE_THRESHOLD_MB = 10;
-
-    const parseSizeMb = (size) => {
-      if (!size || typeof size !== "string") return null;
-      const match = size.match(/([\d.]+)\s*MB/i);
-      return match ? parseFloat(match[1]) : null;
-    };
 
     filteredResources.forEach((resource) => {
       const fragment = template.content.cloneNode(true);
@@ -212,7 +212,6 @@ if (grid && searchInput && filterRow && emptyState && template) {
       // aria-label only mentions size when the size field is an actual
       // file size, not a date string like "Jul 2025 · Port of Delaware".
       const ariaSuffix =
-        isLargeFile ? `(opens ${resource.size} PDF in new tab)` :
         resource.type === "pdf" && hasFileSize ? `(opens ${resource.size} PDF in new tab)` :
         resource.type === "pdf" ? "(opens PDF in new tab)" :
         "(opens in new tab)";
