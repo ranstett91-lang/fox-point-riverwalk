@@ -1204,11 +1204,40 @@ input {
     var(--surface);
 }
 
+.precedent-figure {
+  position: relative;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.75rem;
+  background: var(--brand-soft);
+  box-shadow: 0 18px 40px -28px rgba(18, 49, 38, 0.35);
+}
+
+.precedent-figure-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 768 / 501;
+  object-fit: cover;
+}
+
+.precedent-figure-caption {
+  margin: 0;
+  padding: 0.95rem 1.25rem 1rem;
+  border-top: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
 .precedent-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .precedent-card-here {
