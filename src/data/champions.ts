@@ -31,7 +31,7 @@ export const champions: Record<string, Champion> = {
     name: 'Sarah McBride',
     role: 'U.S. Representative, Delaware at-large',
     blurb:
-      'McBride represents Delaware in the U.S. House since January 2025. Before that, she served Claymont in the Delaware State Senate (District 1, 2021–2025). In March 2026 she co-led a bipartisan letter with Rep. Seth Moulton urging full FY27 funding for Amtrak and the Northeast Corridor, and she has introduced the Highway Fair Share Act to make federal highway formula funding more equitable.',
+      'McBride has represented Delaware in the U.S. House since January 2025. Before that, she served Claymont in the Delaware State Senate (District 1, 2021–2025). In March 2026 she co-led a bipartisan letter with Rep. Seth Moulton urging full FY27 funding for Amtrak and the Northeast Corridor, and she has introduced the Highway Fair Share Act to make federal highway formula funding more equitable.',
     scope: 'federal',
   },
   cruce: {

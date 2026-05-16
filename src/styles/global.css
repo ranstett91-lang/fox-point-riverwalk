@@ -11,7 +11,11 @@
   --accent: #c87442;
   --accent-soft: #f0ddcf;
   --shadow: 0 24px 60px rgba(18, 54, 42, 0.12);
-  --subnav-height: 3rem;
+  /* Approximate fallback for scroll-padding before SubNav's <script>
+     publishes the real measured height. ≈ 0.55rem pad + 36px pill
+     min-height + 0.55rem pad ≈ 4.5rem. SubNav.astro overrides this
+     with the exact rendered height on load and resize. */
+  --subnav-height: 4.5rem;
 }
 
 * {
