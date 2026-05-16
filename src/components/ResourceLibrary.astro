@@ -1,0 +1,152 @@
+---
+import { resources, type Resource } from '../data/sources.ts';
+
+const LARGE_FILE_THRESHOLD_MB = 10;
+
+function parseSizeMb(size: string): number | null {
+  const match = size.match(/([\d.]+)\s*MB/i);
+  return match ? parseFloat(match[1]) : null;
+}
+
+interface CardProps extends Resource {
+  isLargeFile: boolean;
+  actionLabel: string;
+  ariaLabel: string;
+  searchHaystack: string;
+}
+
+const cards: CardProps[] = resources.map((r) => {
+  const sizeMb = parseSizeMb(r.size);
+  const hasFileSize = sizeMb !== null;
+  const isLargeFile =
+    r.type === 'pdf' && hasFileSize && sizeMb! >= LARGE_FILE_THRESHOLD_MB;
+
+  const actionLabel =
+    r.type === 'web' ? 'Open source' : r.type === 'pdf' ? 'Open report' : 'Open file';
+
+  const ariaSuffix =
+    r.type === 'pdf' && hasFileSize
+      ? `(opens ${r.size} PDF in new tab)`
+      : r.type === 'pdf'
+        ? '(opens PDF in new tab)'
+        : '(opens in new tab)';
+
+  return {
+    ...r,
+    isLargeFile,
+    actionLabel,
+    ariaLabel: `${actionLabel}: ${r.title} ${ariaSuffix}`,
+    searchHaystack: `${r.title} ${r.description} ${r.label} ${r.source}`.toLowerCase(),
+  };
+});
+---
+
+<div class="library-header">
+  <div>
+    <p class="section-label">Sources</p>
+    <h2>Key sources</h2>
+    <p class="library-note">Main reports are saved here so they are easy to open. Agency and organization pages open in a new tab.</p>
+  </div>
+  <label class="search-field" for="resourceSearch">
+    <span>Search sources</span>
+    <span class="search-field-input-wrap">
+      <svg class="search-field-icon" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <circle cx="9" cy="9" r="6"/>
+        <line x1="13.5" y1="13.5" x2="17.5" y2="17.5"/>
+      </svg>
+      <input id="resourceSearch" name="q" type="search" placeholder="Try Amtrak, marsh, permits, NOAA..." data-library-search>
+    </span>
+  </label>
+</div>
+
+<div class="filter-row" data-library-filters role="group" aria-label="Filter resources">
+  <button class="filter-chip is-active" data-filter="all" type="button" aria-pressed="true">All</button>
+  <button class="filter-chip" data-filter="pdf" type="button" aria-pressed="false">Reports</button>
+  <button class="filter-chip" data-filter="web" type="button" aria-pressed="false">Web</button>
+</div>
+
+<div class="resource-grid" data-library-grid>
+  {cards.map((card) => (
+    <article
+      class="resource-card"
+      data-resource-type={card.type}
+      data-resource-haystack={card.searchHaystack}
+    >
+      <div class="resource-meta">
+        <p class="resource-type">{card.label}</p>
+        <p class="resource-size">{card.size}</p>
+      </div>
+      <h3 class="resource-title">{card.title}</h3>
+      <p class="resource-description">{card.description}</p>
+      <p class="resource-source">{card.source}</p>
+      {card.isLargeFile && (
+        <p class="resource-largefile-hint">{`Large file · ${card.size} · opens in new tab`}</p>
+      )}
+      <a
+        class="resource-link"
+        href={card.file}
+        target="_blank"
+        rel="noopener"
+        aria-label={card.ariaLabel}
+      >
+        {card.actionLabel}
+      </a>
+    </article>
+  ))}
+</div>
+
+<p class="empty-state" data-library-empty role="status" aria-live="polite" hidden>No sources match that search yet.</p>
+
+<script>
+  // Resource library: every card is SSR'd at build time. This script
+  // only toggles a .is-hidden class on cards based on the active
+  // filter chip and search query. No DOM cloning; cards are visible
+  // without JS by design.
+  function initLibrary() {
+    const grid = document.querySelector<HTMLElement>('[data-library-grid]');
+    const search = document.querySelector<HTMLInputElement>('[data-library-search]');
+    const filterRow = document.querySelector<HTMLElement>('[data-library-filters]');
+    const empty = document.querySelector<HTMLElement>('[data-library-empty]');
+    if (!grid || !search || !filterRow || !empty) return;
+
+    let activeFilter: 'all' | 'pdf' | 'web' = 'all';
+
+    const cards = Array.from(grid.querySelectorAll<HTMLElement>('.resource-card'));
+
+    const render = () => {
+      const query = search.value.trim().toLowerCase();
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const cardType = card.dataset.resourceType;
+        const haystack = card.dataset.resourceHaystack ?? '';
+        const matchesFilter = activeFilter === 'all' || cardType === activeFilter;
+        const matchesQuery = query === '' || haystack.includes(query);
+        const visible = matchesFilter && matchesQuery;
+        card.classList.toggle('is-hidden', !visible);
+        if (visible) visibleCount++;
+      });
+      empty.hidden = visibleCount !== 0;
+    };
+
+    filterRow.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement | null;
+      const button = target?.closest<HTMLButtonElement>('[data-filter]');
+      if (!button) return;
+      const next = button.dataset.filter as 'all' | 'pdf' | 'web' | undefined;
+      if (!next) return;
+      activeFilter = next;
+      filterRow.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((chip) => {
+        const isActive = chip === button;
+        chip.classList.toggle('is-active', isActive);
+        chip.setAttribute('aria-pressed', String(isActive));
+      });
+      render();
+    });
+
+    search.addEventListener('input', render);
+
+    render();
+  }
+
+  document.addEventListener('astro:page-load', initLibrary);
+</script>

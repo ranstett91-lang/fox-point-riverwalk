@@ -1,0 +1,107 @@
+---
+interface Section {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  sections: Section[];
+  ariaLabel?: string;
+}
+
+const { sections, ariaLabel = 'On this page' } = Astro.props;
+---
+
+<nav class="subnav" aria-label={ariaLabel} data-subnav>
+  <ul class="subnav-list">
+    {sections.map(({ id, label }) => (
+      <li>
+        <a href={`#${id}`} data-subnav-link={id}>{label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  // Sticky sub-nav scroll-spy. Watches scroll position; toggles
+  // is-current + aria-current="location" on the matching pill. Ports
+  // the logic from the original app.js:20-70 and extends it to scroll
+  // the active pill into view on small screens (where the pill row is
+  // a horizontal scroll-snap container).
+  //
+  // Astro view transitions swap the DOM, so we re-initialize on
+  // astro:page-load instead of DOMContentLoaded.
+  function initSubNav() {
+    const subnavs = document.querySelectorAll<HTMLElement>('[data-subnav]');
+    if (!subnavs.length) return;
+
+    subnavs.forEach((subnav) => {
+      const links = Array.from(
+        subnav.querySelectorAll<HTMLAnchorElement>('a[data-subnav-link]'),
+      );
+      if (!links.length) return;
+
+      const sections = links
+        .map((link) => {
+          const id = link.dataset.subnavLink;
+          return id ? document.getElementById(id) : null;
+        })
+        .filter((s): s is HTMLElement => s !== null);
+      if (!sections.length) return;
+
+      // Activation offset: distance from the top of the viewport at which
+      // a section becomes the "current" one. Read from the rendered
+      // sub-nav height so changes to the visual size stay in sync.
+      const getActivationOffset = () => {
+        const navHeight = subnav.getBoundingClientRect().height;
+        return navHeight + 24;
+      };
+
+      const setActive = (id: string) => {
+        links.forEach((link) => {
+          const isCurrent = link.dataset.subnavLink === id;
+          link.classList.toggle('is-current', isCurrent);
+          if (isCurrent) {
+            link.setAttribute('aria-current', 'location');
+            // Keep the active pill visible inside the horizontal
+            // scroll-snap container on small screens.
+            link.scrollIntoView({
+              inline: 'center',
+              block: 'nearest',
+              behavior: 'smooth',
+            });
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      };
+
+      let frameId = 0;
+
+      const updateActiveSection = () => {
+        frameId = 0;
+        const activationOffset = getActivationOffset();
+        let activeSection = sections[0];
+        sections.forEach((section) => {
+          if (section.getBoundingClientRect().top <= activationOffset) {
+            activeSection = section;
+          }
+        });
+        setActive(activeSection.id);
+      };
+
+      const scheduleUpdate = () => {
+        if (!frameId) {
+          frameId = window.requestAnimationFrame(updateActiveSection);
+        }
+      };
+
+      scheduleUpdate();
+      window.addEventListener('scroll', scheduleUpdate, { passive: true });
+      window.addEventListener('resize', scheduleUpdate, { passive: true });
+      links.forEach((link) => link.addEventListener('click', scheduleUpdate));
+    });
+  }
+
+  document.addEventListener('astro:page-load', initSubNav);
+</script>

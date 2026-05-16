@@ -11,6 +11,7 @@
   --accent: #c87442;
   --accent-soft: #f0ddcf;
   --shadow: 0 24px 60px rgba(18, 54, 42, 0.12);
+  --subnav-height: 3rem;
 }
 
 * {
@@ -45,11 +46,15 @@
 
 html {
   scroll-behavior: smooth;
+  /* Sticky sub-nav offset: every <section id> sets scroll-margin-top so
+     clicked anchors land below the sticky bar rather than under it. */
+  scroll-padding-top: calc(var(--subnav-height) + 0.5rem);
 }
 
 /* Respect the operating-system motion preference: kill smooth scroll,
    animations, and transitions for users who request reduced motion.
-   Applied as a near-instant duration so visual state still updates. */
+   View Transitions API isn't covered by Astro out of the box, so the
+   ::view-transition pseudo-elements get an explicit override too. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -60,6 +65,10 @@ html {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
 
@@ -128,14 +137,11 @@ input {
 }
 
 .topbar-links a {
-  /* Brand-green ink — passes WCAG AA on the translucent-cream topbar.
-     Previously var(--muted) which fell to ~4.1:1 on the blurred bg. */
   display: inline-flex;
   align-items: center;
-  /* 44x44 minimum tap target on touch devices */
   min-height: 44px;
   padding: 0.55rem 0.75rem;
-  margin: -0.4rem -0.25rem; /* keeps optical alignment in the topbar row */
+  margin: -0.4rem -0.25rem;
   border-radius: 999px;
   color: var(--brand);
   font-weight: 600;
@@ -147,11 +153,91 @@ input {
 }
 
 .topbar-links a.is-current,
+.topbar-links a[aria-current="page"],
 .topbar-links a[aria-current="location"] {
   color: var(--brand);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 0.22em;
+}
+
+/* ─── STICKY IN-PAGE SUB-NAV ─── */
+.subnav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  margin: 0 1rem 1rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 250, 242, 0.92);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 8px 24px rgba(18, 54, 42, 0.06);
+}
+
+.subnav-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.subnav-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.subnav-list a:hover {
+  color: var(--brand);
+  background: rgba(18, 49, 38, 0.06);
+}
+
+.subnav-list a.is-current,
+.subnav-list a[aria-current="location"] {
+  background: var(--brand-soft);
+  color: var(--brand);
+}
+
+/* Section anchors land just below the sticky bar */
+main section[id] {
+  scroll-margin-top: calc(var(--subnav-height) + 0.5rem);
+}
+
+@media (max-width: 600px) {
+  .subnav {
+    /* Edge-to-edge on small screens so pills can scroll-snap horizontally */
+    margin: 0 0 1rem;
+    padding: 0.45rem 0.5rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+  .subnav-list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbar visually, keep functional */
+    scrollbar-width: none;
+  }
+  .subnav-list::-webkit-scrollbar {
+    display: none;
+  }
+  .subnav-list a {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
 }
 
 /* ─── FULL-BLEED HERO ─── */
@@ -194,7 +280,6 @@ input {
   max-width: 700px;
 }
 
-/* strip card chrome when hero copy floats over photo */
 .hero-copy-light {
   background: transparent !important;
   border: none !important;
@@ -257,10 +342,6 @@ input {
 }
 
 .skim-card {
-  /* Lighter chrome than before — the section-label kickers were removed
-     from these cards to avoid duplicating the section anchors below.
-     Card chrome is kept but shadow is softened so the band reads as a
-     summary band, not four full mini-cards competing with the hero. */
   padding: 0.95rem 1.05rem 1rem;
   border: 1px solid var(--line);
   border-radius: 1.25rem;
@@ -271,7 +352,6 @@ input {
 }
 
 .skim-title {
-  /* Title is now the lead element in the card; tighter top margin */
   margin: 0 0 0.4rem;
   color: var(--brand);
   font-size: 1rem;
@@ -415,8 +495,6 @@ input {
 }
 
 .deliverables-grid article {
-  /* Flex column so siblings in a grid row stay visually rhythmic
-     even when copy lengths differ. h3 anchors top, p flows below. */
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
@@ -457,15 +535,11 @@ input {
 }
 
 .status-contingent {
-  /* Darker terracotta — bumps contrast from ~4.7:1 to ~6.6:1 on the peach
-     chip background. Comfortable AA, approaches AAA for short text. */
   background: rgba(240, 221, 207, 0.95);
   color: #6e3e1e;
 }
 
 .status-future {
-  /* Darker slate — bumps contrast from ~5.6:1 to ~8:1 for parity with
-     the other two chips. */
   background: rgba(220, 226, 235, 0.95);
   color: #2b3f56;
 }
@@ -524,7 +598,6 @@ input {
 .search-field input {
   width: 100%;
   min-height: 3rem;
-  /* extra left padding makes room for the magnifier icon */
   padding: 0.85rem 1rem 0.85rem 2.6rem;
   border: 1px solid var(--line);
   border-radius: 1rem;
@@ -562,8 +635,6 @@ input {
 }
 
 .resource-card {
-  /* Flex column so the "Open report" button anchors to the card bottom
-     even when description lengths differ across the grid. */
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
@@ -571,6 +642,11 @@ input {
   border: 1px solid var(--line);
   border-radius: 1.5rem;
   background: rgba(255, 255, 255, 0.72);
+}
+
+/* Cards filtered out by search/filter — kept in DOM, hidden visually */
+.resource-card.is-hidden {
+  display: none;
 }
 
 .resource-card .resource-link {
@@ -589,9 +665,6 @@ input {
   font-size: 0.72rem;
 }
 
-/* Inline "large file" hint shown for big PDFs — alerts the user that
-   "Open report" will pull a heavy download. Sits between description
-   and button so it can't be missed. */
 .resource-largefile-hint {
   display: inline-flex;
   align-items: center;
@@ -670,7 +743,6 @@ input {
   color: var(--accent);
 }
 
-/* storm count rows */
 .wc-rows {
   display: flex;
   flex-direction: column;
@@ -727,7 +799,6 @@ input {
   flex-shrink: 0;
 }
 
-/* compound flooding scene */
 .compound-scene {
   flex: 1;
   display: flex;
@@ -819,13 +890,10 @@ input {
   border-top: 2.5px solid #3a6e96;
 }
 
-
-/* compound flooding scene treatment */
 .wc-intensity {
   background: linear-gradient(145deg, rgba(216, 231, 245, 0.4), rgba(255, 251, 245, 0.85));
 }
 
-/* thermometer */
 .wc-heat {
   background: linear-gradient(145deg, rgba(240, 221, 207, 0.35), rgba(255, 251, 245, 0.88));
 }
@@ -978,9 +1046,6 @@ input {
   background: var(--brand-soft);
 }
 
-/* Inline SVG schematic of the project corridor. Two orientation
-   variants — landscape for desktop, portrait for narrow viewports —
-   swap via the media query at the bottom of this block. */
 .site-schematic {
   width: 100%;
   height: auto;
@@ -1069,9 +1134,6 @@ input {
   stroke-dasharray: 6 4;
 }
 
-/* aspect-ratio handles sizing across breakpoints; explicit overrides
-   removed to keep the corridor schematic legible on small screens. */
-
 .photo-overlay {
   position: absolute;
   top: 1.5rem;
@@ -1080,8 +1142,6 @@ input {
 }
 
 @media (max-width: 720px) {
-  /* On mobile the badge sits below the portrait schematic so labels at the
-     bottom (Edgemoor, cove details) stay visible. */
   .photo-overlay {
     position: static;
     max-width: 100%;
@@ -1170,8 +1230,6 @@ input {
 }
 
 .corridor-brief-card {
-  /* Flex column equalizes internal rhythm across the 3-up grid;
-     CSS Grid stretches the cards, this aligns their content. */
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
@@ -1194,6 +1252,17 @@ input {
   margin: 0;
   color: var(--muted);
   line-height: 1.65;
+}
+
+.corridor-brief-card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.corridor-brief-card li + li {
+  margin-top: 0.25rem;
 }
 
 /* ─── PRECEDENT ─── */
@@ -1372,7 +1441,6 @@ input {
 .capital-bar-apu  { width: 34.3%; }
 .capital-bar-chem { width: 16%; }
 
-/* stacked total bar */
 .capital-total-row {
   padding: 1.25rem;
   border: 1px solid var(--line);
@@ -1439,7 +1507,6 @@ input {
   color: var(--ink);
 }
 
-/* gap card */
 .capital-gap-card {
   margin-top: 1rem;
   padding: 1.5rem;
@@ -1496,6 +1563,76 @@ input {
   font-size: 1.25rem;
 }
 
+/* ─── CALLOUT (sturgeon/HHFT warning, used on new pages) ─── */
+
+.callout {
+  margin: 1.25rem 0;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid rgba(200, 116, 66, 0.35);
+  border-left: 4px solid var(--accent);
+  border-radius: 1rem;
+  background: rgba(240, 221, 207, 0.35);
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.callout-label {
+  margin: 0 0 0.35rem;
+  color: #7a3e22;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.callout p {
+  margin: 0;
+  color: var(--ink);
+}
+
+/* ─── CHAMPIONS ─── */
+
+.champions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.champion-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.25rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.champion-name {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.25;
+}
+
+.champion-role {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.champion-blurb {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
 /* ─── RESPONSIVE ─── */
 
 @media (max-width: 980px) {
@@ -1530,9 +1667,6 @@ input {
     max-width: 100%;
   }
 
-  /* When the skim band stacks to a single column, the negative top
-     margin from the desktop layout would pull the first card up into
-     the wrapped hero pills. Give them a clean gap instead. */
   .skim-band {
     margin-top: 1rem;
   }
@@ -1595,13 +1729,10 @@ input {
     min-height: 0;
     max-width: 100%;
     padding: 1.25rem 1.25rem 1.5rem;
-    /* stack below the photo — pull up over the gradient */
     margin-top: -80px;
   }
   .hero-copy-light h1 {
     font-size: clamp(1.55rem, 6.2vw, 2rem);
-    /* Negative-leading at small sizes would collide ascenders/descenders
-       across 3–4 wrapped lines. Step the heading leading up under 600px. */
     line-height: 1.08;
     letter-spacing: -0.01em;
   }
@@ -1620,27 +1751,4 @@ input {
   .skim-band {
     margin: 0.85rem 0 0;
   }
-}
-
-/* ─── NOSCRIPT FALLBACK ─── */
-.resource-fallback {
-  margin: 1rem 0 0;
-  padding-left: 1.25rem;
-  color: var(--ink);
-  line-height: 1.65;
-}
-
-.resource-fallback li + li {
-  margin-top: 0.6rem;
-}
-
-.resource-fallback a {
-  color: var(--brand);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  font-weight: 600;
-}
-
-.resource-fallback a:hover {
-  color: var(--accent);
 }

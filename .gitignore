@@ -2,3 +2,18 @@
 .vercel
 .claude/
 *.m4a
+
+# Astro
+node_modules/
+dist/
+.astro/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
