@@ -9,14 +9,11 @@ interface Props {
 }
 
 const { sources } = Astro.props;
+const prefix = sources.length > 1 ? 'Sources: ' : 'Source: ';
+// All JSX inside the <p> is kept on one line so Astro does not emit
+// whitespace text nodes between the prefix, the links, and the "; "
+// separators. (Newlines + indentation inside a JSX expression become
+// preserved text nodes — that produced "Source:  <link>" with a
+// double space and trailing whitespace in an earlier version.)
 ---
-
-<p class="source-note section-source">
-  {sources.length > 1 ? 'Sources: ' : 'Source: '}
-  {sources.map((source, index) => (
-    <>
-      <a class="precedent-link" href={source.href} target="_blank" rel="noopener">{source.label}</a>
-      {index < sources.length - 1 ? '; ' : ''}
-    </>
-  ))}
-</p>
+<p class="source-note section-source">{prefix}{sources.map((source, index) => (<Fragment>{index > 0 ? '; ' : ''}<a class="precedent-link" href={source.href} target="_blank" rel="noopener">{source.label}</a></Fragment>))}</p>
