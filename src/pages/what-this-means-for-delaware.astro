@@ -8,7 +8,6 @@ const subnavSections = [
   { id: 'transit-gateway', label: 'Transit gateway' },
   { id: 'connecting-trails', label: 'Connecting trails' },
   { id: 'biking-walking', label: 'Biking & walking' },
-  { id: 'green-space', label: 'Green space & wellbeing' },
   { id: 'policy-funding', label: 'Policy & funding' },
   { id: 'champions', label: 'Champions' },
 ];
@@ -28,6 +27,55 @@ const subnavSections = [
       <h1>A $90M transit gateway, a half mile of shoreline, and the river they could connect.</h1>
       <p>The Claymont Regional Transportation Center is one of Delaware's largest single transit investments. Fox Point is the shoreline a short walk away.</p>
     </header>
+
+    <figure class="precedent-figure delaware-anchor-figure">
+      <svg
+        class="delaware-anchor-svg"
+        viewBox="0 0 720 260"
+        preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-labelledby="delaware-anchor-title delaware-anchor-desc"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title id="delaware-anchor-title">Half a mile between the transit center and the river</title>
+        <desc id="delaware-anchor-desc">A simplified map: the Harris B. McDowell III Transportation Center on the left, the Fox Point shoreline restoration in the middle, and the Delaware River on the right. The transit center and the river are roughly half a mile apart, with the Northeast Corridor rail line and Interstate 495 running between them.</desc>
+
+        <rect x="0" y="0" width="720" height="260" fill="#f2eee5"/>
+
+        <rect x="540" y="0" width="180" height="260" fill="#cbdfe8"/>
+        <path d="M 540 60 Q 580 50 620 60 T 700 60" fill="none" stroke="#a8c5d8" stroke-width="1.5" opacity="0.7"/>
+        <path d="M 540 110 Q 580 100 620 110 T 700 110" fill="none" stroke="#a8c5d8" stroke-width="1.5" opacity="0.7"/>
+        <path d="M 540 170 Q 580 160 620 170 T 700 170" fill="none" stroke="#a8c5d8" stroke-width="1.5" opacity="0.7"/>
+        <path d="M 540 220 Q 580 210 620 220 T 700 220" fill="none" stroke="#a8c5d8" stroke-width="1.5" opacity="0.7"/>
+        <text x="630" y="35" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="800" fill="#3a5e72" letter-spacing="1.5">DELAWARE RIVER</text>
+
+        <line x1="260" y1="40" x2="260" y2="220" stroke="#1a1a1a" stroke-width="3" stroke-dasharray="10 6" opacity="0.7"/>
+        <text x="260" y="245" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="600" fill="#5b574e" letter-spacing="0.4">AMTRAK NEC</text>
+
+        <line x1="340" y1="40" x2="340" y2="220" stroke="#8a8475" stroke-width="6" stroke-linecap="round" opacity="0.45"/>
+        <text x="340" y="245" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="600" fill="#5b574e" letter-spacing="0.4">I-495</text>
+
+        <g transform="translate(110, 110)">
+          <circle r="32" fill="#12362a" stroke="#fffaf2" stroke-width="3"/>
+          <rect x="-14" y="-12" width="28" height="20" rx="2.5" fill="#fffaf2"/>
+          <line x1="-9" y1="6" x2="-9" y2="11" stroke="#12362a" stroke-width="2"/>
+          <line x1="9" y1="6" x2="9" y2="11" stroke="#12362a" stroke-width="2"/>
+        </g>
+        <text x="110" y="170" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="800" fill="#12362a" letter-spacing="0.6">McDOWELL</text>
+        <text x="110" y="186" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="800" fill="#12362a" letter-spacing="0.6">TRANSIT CENTER</text>
+        <text x="110" y="204" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="600" fill="#607063">SEPTA · Amtrak · DART</text>
+
+        <rect x="420" y="95" width="100" height="50" rx="6" fill="rgba(200, 116, 66, 0.22)" stroke="#c87442" stroke-width="2.5"/>
+        <text x="470" y="124" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="12" font-weight="800" fill="#7a3e22" letter-spacing="0.4">FOX POINT</text>
+        <text x="470" y="170" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="600" fill="#7a3e22">2.7-acre restoration</text>
+
+        <line x1="142" y1="110" x2="420" y2="120" stroke="#3a6e44" stroke-width="2" stroke-dasharray="5 4"/>
+        <text x="280" y="100" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#3a6e44" letter-spacing="0.6">~ ½ MILE</text>
+      </svg>
+      <figcaption class="precedent-figure-caption">
+        Roughly half a mile separates the McDowell Transportation Center from the Fox Point shoreline. The rail line and I-495 run between them.
+      </figcaption>
+    </figure>
 
     <section class="panel" id="transit-gateway">
       <div class="section-header">
@@ -71,7 +119,7 @@ const subnavSections = [
           <p class="section-label">Connecting Trails</p>
           <h2>The East Coast Greenway runs through Claymont. Fox Point is the missing link to the river.</h2>
         </div>
-        <p class="section-copy">The East Coast Greenway is a 3,000-mile route from Maine to Florida. It runs directly through Claymont and connects to the existing Fox Point Riverview Trail — about a mile of trail that is already in place.</p>
+        <p class="section-copy">The East Coast Greenway is a 3,000-mile route from Maine to Florida. It runs directly through Claymont and connects to the existing Fox Point Riverview Trail — about a mile of trail that is already in place. If Fox Point closes the gap, this stretch could become one of the longest continuous publicly accessible riverfronts on the Northeast Corridor.</p>
       </div>
 
       <div class="corridor-brief-grid">
@@ -85,7 +133,7 @@ const subnavSections = [
         </article>
         <article class="corridor-brief-card">
           <h3 class="corridor-brief-eyebrow">Honest framing</h3>
-          <p>The Wilmington-to-Trenton stretch of the Greenway currently runs partly on roads and partly on existing trails. It is not yet a continuous publicly accessible riverfront. If Fox Point closes the gap, this stretch could become one of the longest continuous publicly accessible riverfronts on the Northeast Corridor.</p>
+          <p>The Wilmington-to-Trenton stretch of the Greenway currently runs partly on roads and partly on existing trails. It is not yet a continuous publicly accessible riverfront.</p>
         </article>
       </div>
 
@@ -123,44 +171,22 @@ const subnavSections = [
       </div>
     </section>
 
-    <section class="panel" id="green-space">
-      <div class="section-header">
-        <div>
-          <p class="section-label">Green Space &amp; Wellbeing</p>
-          <h2>What research tells us about community access to green and blue space.</h2>
-        </div>
-        <p class="section-copy">Public health research from the CDC, the World Health Organization, and peer-reviewed journals describes consistent patterns in communities with safe, accessible nature near where people live.</p>
-      </div>
-
-      <div class="corridor-brief-grid">
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Stress and the body’s response</h3>
-          <p>Time in green and blue space is associated with lower stress and a calmer cortisol response. The reviewed research describes general patterns; specific dose-response numbers vary by study.</p>
-        </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Cardiovascular health</h3>
-          <p>Safer walking and biking infrastructure is consistently linked with better cardiovascular outcomes in nearby communities. Effect size depends on use, terrain, and other factors.</p>
-        </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Community-accessible nature</h3>
-          <p>Nearby public nature is consistently linked with better community mental health, especially in places where green space has historically been scarce.</p>
-        </article>
-      </div>
-
-      <p class="source-note section-source">Sources: institutional public-health research (CDC, World Health Organization, peer-reviewed journals).</p>
-    </section>
-
     <section class="panel" id="policy-funding">
       <div class="section-header">
         <div>
           <p class="section-label">Policy &amp; Funding</p>
           <h2>The federal, state, and county pieces a Fox Point project could draw on.</h2>
         </div>
+        <p class="section-copy">Click each scope to expand the list of programs and plans Fox Point could draw on.</p>
       </div>
 
-      <div class="corridor-brief-grid">
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Federal</h3>
+      <div class="policy-accordion">
+        <details class="policy-row">
+          <summary>
+            <span class="policy-eyebrow">Federal</span>
+            <span class="policy-summary">USDOT grants, CDC place-based health funding, HUD neighborhoods</span>
+            <span class="policy-chevron" aria-hidden="true">+</span>
+          </summary>
           <ul>
             <li>USDOT Safe Streets and Roads for All</li>
             <li>USDOT RAISE grants</li>
@@ -168,23 +194,49 @@ const subnavSections = [
             <li>HHS / CDC place-based health funding</li>
             <li>HUD Choice Neighborhoods</li>
           </ul>
-        </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">State (Delaware)</h3>
+        </details>
+
+        <details class="policy-row">
+          <summary>
+            <span class="policy-eyebrow">State (Delaware)</span>
+            <span class="policy-summary">DelDOT trust fund, climate plan, Claymont master plans</span>
+            <span class="policy-chevron" aria-hidden="true">+</span>
+          </summary>
           <ul>
             <li>DelDOT Community Transportation Trust Fund</li>
             <li>2025 Delaware Climate Action Plan</li>
             <li>North Claymont Area Master Plan (WILMAPCO, 2017)</li>
             <li>2025 WILMAPCO Claymont Area Master Plan — parks and open space were the top community-named priority</li>
           </ul>
-        </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">County (New Castle)</h3>
+        </details>
+
+        <details class="policy-row">
+          <summary>
+            <span class="policy-eyebrow">County (New Castle)</span>
+            <span class="policy-summary">Trail and open space planning, county park system</span>
+            <span class="policy-chevron" aria-hidden="true">+</span>
+          </summary>
           <ul>
             <li>County trail and open space planning</li>
             <li>County park system</li>
           </ul>
-        </article>
+        </details>
+      </div>
+    </section>
+
+    <section class="panel read-next" aria-label="Read next">
+      <p class="section-label">Read Next</p>
+      <div class="read-next-grid">
+        <a class="read-next-card" href="/rail-corridor/">
+          <p class="read-next-eyebrow">Rail Corridor</p>
+          <h3>The climate stakes on the rail line that runs through this corridor.</h3>
+          <span class="read-next-cta">Read →</span>
+        </a>
+        <a class="read-next-card" href="/ecological-restoration/">
+          <p class="read-next-eyebrow">Ecological Restoration</p>
+          <h3>The federal water rule and endangered sturgeon on this stretch of river.</h3>
+          <span class="read-next-cta">Read →</span>
+        </a>
       </div>
     </section>
 

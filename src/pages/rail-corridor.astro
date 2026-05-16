@@ -9,6 +9,7 @@ const subnavSections = [
   { id: 'climate-risk', label: 'Climate risk' },
   { id: 'nec-visibility', label: 'NEC visibility' },
   { id: 'federal-investment', label: 'Federal investment' },
+  { id: 'fy27', label: 'FY27 deadline' },
   { id: 'mcbride-advocacy', label: "McBride's advocacy" },
   { id: 'champions', label: 'Champions' },
 ];
@@ -26,7 +27,7 @@ const subnavSections = [
     <header class="panel page-intro">
       <p class="kicker">The Rail Corridor</p>
       <h1>Climate risk, ridership, and the federal investment passing Fox Point every few minutes.</h1>
-      <p>Fox Point sits beside the busiest passenger rail line in America. Amtrak has documented the climate risk on this stretch in its own reports.</p>
+      <p>Fox Point sits beside the busiest passenger rail line in America. Amtrak has documented the climate risk here, the federal investment passing through every few minutes, and the September 2026 deadline when key authorizations expire.</p>
     </header>
 
     <section class="panel" id="climate-risk">
@@ -63,18 +64,69 @@ const subnavSections = [
         </article>
       </div>
 
-      <div class="corridor-brief-grid">
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Storms</h3>
-          <p>Heavy storms are roughly twice as common today as they were in 1960. More storms mean more chances for water to reach the tracks.</p>
+      <div class="trio-grid">
+        <article class="weather-card wc-rain">
+          <p class="wc-title">Heavy storms are almost twice as common as they were in 1960.</p>
+          <div class="wc-rows">
+            <div class="wc-row">
+              <span class="wc-year">1960s</span>
+              <div class="dot-strip">
+                <span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span>
+              </div>
+              <span class="wc-count">5×</span>
+            </div>
+            <div class="wc-row wc-row-now">
+              <span class="wc-year">Today</span>
+              <div class="dot-strip">
+                <span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span>
+                <span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span>
+              </div>
+              <span class="wc-count">10×</span>
+            </div>
+          </div>
+          <p class="wc-stat-num">+92%</p>
+          <p class="wc-connect">→ More storms mean more chances for water to reach the tracks. Amtrak recorded more than 450 weather-related disruptions from 2006 to 2019.</p>
         </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Heat</h3>
-          <p>Hotter summers are expected — about 4 to 5 degrees Fahrenheit higher by 2050. Extreme heat damages rails and signals.</p>
+
+        <article class="weather-card wc-intensity">
+          <p class="wc-title">Flooding now comes from both stronger storms and rising water.</p>
+          <div class="compound-scene" role="img" aria-label="Cross-section showing the Amtrak rail corridor squeezed between heavier storms above and rising seas below">
+            <div class="cs-sky">
+              <div class="cs-rain"></div>
+              <span class="cs-badge cs-badge-top">↓ Storms: +55% more intense</span>
+            </div>
+            <div class="cs-track-zone">
+              <div class="cs-rail"></div>
+              <div class="cs-ties"></div>
+              <div class="cs-rail"></div>
+            </div>
+            <div class="cs-flood-zone">
+              <span class="cs-badge cs-badge-bot">↑ Sea level rising — Wilmington stretch identified by Amtrak</span>
+            </div>
+          </div>
+          <p class="wc-connect">→ A restored living shoreline at Fox Point can help with both problems by slowing runoff and softening wave action before water reaches the rail edge.</p>
         </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Sea level</h3>
-          <p>Sea level is rising along the Delaware estuary. The Wilmington stretch is the section Amtrak has identified as most exposed.</p>
+
+        <article class="weather-card wc-heat">
+          <p class="wc-title">Hotter summers will put more stress on the rail line.</p>
+          <div class="wc-thermo-compare">
+            <div class="wc-thermo-item">
+              <div class="thermo-wrap">
+                <div class="thermo"><div class="thermo-fill tf-now"></div></div>
+                <div class="thermo-bulb tb-now"></div>
+              </div>
+              <span class="wc-year">Now</span>
+            </div>
+            <div class="wc-thermo-item">
+              <div class="thermo-wrap">
+                <div class="thermo"><div class="thermo-fill tf-2050"></div></div>
+                <div class="thermo-bulb tb-2050"></div>
+              </div>
+              <span class="wc-year wc-year-now">2050</span>
+            </div>
+          </div>
+          <p class="wc-stat-num">+4–5°F</p>
+          <p class="wc-connect">→ Extreme heat can damage rails and signals. Restored wetland plants at Fox Point can help cool the corridor edge.</p>
         </article>
       </div>
 
@@ -142,13 +194,26 @@ const subnavSections = [
 
       <p class="section-copy">Specific Northeast Corridor projects announced under this funding include the Hudson Tunnel, the Frederick Douglass Tunnel, the Susquehanna River Bridge, and other capital-renewal work along the line.</p>
 
-      <Callout label="Political context worth flagging">
-        <p>Key IIJA authorizations expire on September 30, 2026. Congresswoman Sarah McBride is co-leading bipartisan FY27 advocacy to keep the authorized funding levels in place.</p>
-      </Callout>
-
       <SourcesNote sources={[
         { label: 'Amtrak — New Era of Rail', href: 'https://www.amtrak.com/about-amtrak/new-era.html' },
         { label: 'FRA — IIJA programs', href: 'https://railroads.dot.gov/IIJA' },
+      ]} />
+    </section>
+
+    <section class="panel" id="fy27">
+      <div class="section-header">
+        <div>
+          <p class="section-label">What’s At Stake In FY27</p>
+          <h2>Key IIJA authorizations expire September 30, 2026.</h2>
+        </div>
+        <p class="section-copy">The Bipartisan Infrastructure Law is a five-year authorization. Without action by Congress, the authorized funding levels for Amtrak, the Federal-State Partnership grants that fund Northeast Corridor capital renewal, and the CRISI safety program revert at the end of FY26.</p>
+      </div>
+
+      <Callout label="The deadline">
+        <p>Congresswoman Sarah McBride is co-leading bipartisan FY27 advocacy — including the March 2026 Moulton–McBride letter — pressing House leadership to keep the authorized funding levels in place for Amtrak, the Federal-State Partnership grants, and the rail-safety programs the Northeast Corridor depends on.</p>
+      </Callout>
+
+      <SourcesNote sources={[
         { label: 'Moulton–McBride FY27 letter', href: 'https://moulton.house.gov/news/press-releases/moulton-mcbride-lead-bipartisan-group-colleagues-urging-full-funding-amtrak-and' },
       ]} />
     </section>
@@ -159,31 +224,74 @@ const subnavSections = [
           <p class="section-label">Sarah McBride's Federal Advocacy</p>
           <h2>What a freshman in the House minority can move.</h2>
         </div>
-        <p class="section-copy">Congresswoman McBride is a first-term U.S. Representative in the House minority. Her practical power is advocacy and committee work — not direct appropriations. Her specific relevance to Fox Point comes from her record on this corridor and this community.</p>
+        <p class="section-copy">Congresswoman McBride is a first-term U.S. Representative in the House minority. Her practical power is advocacy and committee work — not direct appropriations. Below are the levers she has used on this corridor and this community.</p>
       </div>
 
-      <div class="corridor-brief-grid">
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Local record</h3>
-          <p>Represented Claymont, Bellefonte, Edgemoor, and parts of Wilmington in the Delaware State Senate (District 1) from 2021 to 2025 before joining Congress.</p>
+      <div class="capital-stack">
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">Amtrak</p>
+            <p class="capital-source">Federal advocacy</p>
+          </div>
+          <div class="capital-detail">
+            <h3>Co-led the bipartisan FY27 Amtrak funding letter.</h3>
+            <p>The March 2026 Moulton–McBride letter pressed House leadership for full FY27 Amtrak and Northeast Corridor rail funding. Co-leading a bipartisan letter is one of the few tools a freshman in the minority has to keep a deadline visible.</p>
+          </div>
         </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Amtrak advocacy</h3>
-          <p>Co-led the March 2026 bipartisan Moulton–McBride letter pressing House leadership for full FY27 Amtrak and rail funding.</p>
+
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">Formula</p>
+            <p class="capital-source">Federal legislation</p>
+          </div>
+          <div class="capital-detail">
+            <h3>Introduced the Highway Fair Share Act.</h3>
+            <p>The bill aims to make federal highway formula funding more equitable across states. For Delaware — a small state whose formula share punches below the volume of traffic moving through it — that’s a structural fight, not a one-time ask.</p>
+          </div>
         </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Federal formula equity</h3>
-          <p>Introduced the Highway Fair Share Act to make federal highway formula funding more equitable across states.</p>
+
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">District</p>
+            <p class="capital-source">Local record</p>
+          </div>
+          <div class="capital-detail">
+            <h3>Represented Claymont in the Delaware State Senate, 2021–2025.</h3>
+            <p>District 1 covers Claymont, Bellefonte, Edgemoor, and parts of Wilmington — the exact community around Fox Point. That record is the ground for her standing on this corridor before she went to Congress.</p>
+          </div>
         </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">McDowell naming</h3>
-          <p>As a Delaware state senator, co-sponsored the legislation naming the Claymont Transportation Center the Harris B. McDowell III Transportation Center.</p>
+
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">Naming</p>
+            <p class="capital-source">State legislation</p>
+          </div>
+          <div class="capital-detail">
+            <h3>Co-sponsored the McDowell naming for the Claymont Transit Center.</h3>
+            <p>As a state senator, she co-sponsored the legislation naming the Claymont Transportation Center the Harris B. McDowell III Transportation Center — recognizing the senator whose record built the community Fox Point sits inside.</p>
+          </div>
         </article>
       </div>
 
       <SourcesNote sources={[
         { label: 'mcbride.house.gov', href: 'https://mcbride.house.gov/' },
       ]} />
+    </section>
+
+    <section class="panel read-next" aria-label="Read next">
+      <p class="section-label">Read Next</p>
+      <div class="read-next-grid">
+        <a class="read-next-card" href="/ecological-restoration/">
+          <p class="read-next-eyebrow">Ecological Restoration</p>
+          <h3>The federal water rule and the endangered sturgeon on this stretch.</h3>
+          <span class="read-next-cta">Read →</span>
+        </a>
+        <a class="read-next-card" href="/what-this-means-for-delaware/">
+          <p class="read-next-eyebrow">What This Means for Delaware</p>
+          <h3>The transit gateway and trail network this corridor connects to.</h3>
+          <span class="read-next-cta">Read →</span>
+        </a>
+      </div>
     </section>
 
     <section class="panel" id="champions">
