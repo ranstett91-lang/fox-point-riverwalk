@@ -123,13 +123,21 @@ const { sections, ariaLabel = 'On this page' } = Astro.props;
       const updateActiveSection = () => {
         frameId = 0;
         const activationOffset = getActivationOffset();
-        let activeSection = sections[0];
-        sections.forEach((section) => {
+        let activeSection: HTMLElement | null = null;
+        for (const section of sections) {
           if (section.getBoundingClientRect().top <= activationOffset) {
             activeSection = section;
           }
-        });
-        setActive(activeSection.id);
+        }
+        if (activeSection) {
+          setActive(activeSection.id);
+        } else {
+          // Above the first section — clear every pill.
+          links.forEach((link) => {
+            link.classList.remove('is-current');
+            link.removeAttribute('aria-current');
+          });
+        }
       };
 
       const scheduleUpdate = () => {

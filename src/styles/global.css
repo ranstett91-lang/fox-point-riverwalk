@@ -496,7 +496,7 @@ main section[id] {
   line-height: 1.02;
 }
 
-.panel h3,
+.panel h3:not(.skim-title):not(.risk-label):not(.corridor-brief-eyebrow),
 .resource-title {
   margin: 0;
   font-size: 1.15rem;
@@ -644,6 +644,15 @@ main section[id] {
 .filter-chip.is-active {
   background: var(--brand-soft);
   border-color: var(--brand);
+}
+
+.filter-chip-reset {
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.filter-chip-reset:hover {
+  color: var(--brand);
 }
 
 .resource-grid {

@@ -63,6 +63,7 @@ const cards: CardProps[] = resources.map((r) => {
   <button class="filter-chip is-active" data-filter="all" type="button" aria-pressed="true">All</button>
   <button class="filter-chip" data-filter="pdf" type="button" aria-pressed="false">Reports</button>
   <button class="filter-chip" data-filter="web" type="button" aria-pressed="false">Web</button>
+  <button class="filter-chip filter-chip-reset" type="button" data-library-reset hidden>Reset</button>
 </div>
 
 <div class="resource-grid" data-library-grid>
@@ -107,6 +108,7 @@ const cards: CardProps[] = resources.map((r) => {
     const search = document.querySelector<HTMLInputElement>('[data-library-search]');
     const filterRow = document.querySelector<HTMLElement>('[data-library-filters]');
     const empty = document.querySelector<HTMLElement>('[data-library-empty]');
+    const reset = document.querySelector<HTMLButtonElement>('[data-library-reset]');
     if (!grid || !search || !filterRow || !empty) return;
 
     let activeFilter: 'all' | 'pdf' | 'web' = 'all';
@@ -126,6 +128,7 @@ const cards: CardProps[] = resources.map((r) => {
         if (visible) visibleCount++;
       });
       empty.hidden = visibleCount !== 0;
+      if (reset) reset.hidden = activeFilter === 'all' && query === '';
     };
 
     filterRow.addEventListener('click', (event) => {
@@ -135,7 +138,7 @@ const cards: CardProps[] = resources.map((r) => {
       const next = button.dataset.filter as 'all' | 'pdf' | 'web' | undefined;
       if (!next) return;
       activeFilter = next;
-      filterRow.querySelectorAll<HTMLButtonElement>('.filter-chip').forEach((chip) => {
+      filterRow.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((chip) => {
         const isActive = chip === button;
         chip.classList.toggle('is-active', isActive);
         chip.setAttribute('aria-pressed', String(isActive));
@@ -144,6 +147,18 @@ const cards: CardProps[] = resources.map((r) => {
     });
 
     search.addEventListener('input', render);
+
+    reset?.addEventListener('click', () => {
+      activeFilter = 'all';
+      search.value = '';
+      filterRow.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach((chip) => {
+        const isAll = chip.dataset.filter === 'all';
+        chip.classList.toggle('is-active', isAll);
+        chip.setAttribute('aria-pressed', String(isAll));
+      });
+      render();
+      search.focus();
+    });
 
     render();
   }
