@@ -55,7 +55,7 @@ export const champions: Record<string, Champion> = {
     name: 'Debra Heffernan',
     role: 'Delaware State Representative, District 11',
     blurb:
-      'Heffernan has represented Bellefonte in the Delaware House since 2010 and co-chairs the Joint Capital Improvement Committee, one of two seats that must approve major capital authorizations. She pledged $3M in Bond Bill funding to meet state environmental requirements for the new Edgemoor port — $2.5M of that pledge is set aside for Fox Point wetland and park work, contingent on port construction starting and Diamond State Port Corporation approval. She also co-sponsored the April 2026 Wetlands Stewardship Act with Sen. Stephanie Hansen. Heffernan announced in April 2026 that she is not seeking re-election.',
+      'Heffernan has represented Bellefonte in the Delaware House since 2010 and co-chairs the Joint Capital Improvement Committee, one of two seats that must approve major capital authorizations. She pledged $3M in Bond Bill funding to meet state environmental requirements for the new Edgemoor port. Of that pledge, $2.5M is set aside for Fox Point wetland and park work — contingent on port construction starting and Diamond State Port Corporation approval. She also co-sponsored the April 2026 Wetlands Stewardship Act with Sen. Stephanie Hansen. Heffernan announced in April 2026 that she is not seeking re-election.',
     scope: 'state',
   },
   cartier: {
