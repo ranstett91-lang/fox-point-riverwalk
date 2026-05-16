@@ -15,9 +15,7 @@ const { sections, ariaLabel = 'On this page' } = Astro.props;
 <nav class="subnav" aria-label={ariaLabel} data-subnav>
   <ul class="subnav-list">
     {sections.map(({ id, label }) => (
-      <li>
-        <a href={`#${id}`} data-subnav-link={id}>{label}</a>
-      </li>
+      <li><a href={`#${id}`} data-subnav-link={id}>{label}</a></li>
     ))}
   </ul>
 </nav>
@@ -113,7 +111,16 @@ const { sections, ariaLabel = 'On this page' } = Astro.props;
                 linkRect.left - listRect.left + list.scrollLeft;
               const targetScroll =
                 linkOffsetInList - (listRect.width - linkRect.width) / 2;
-              list.scrollTo({ left: targetScroll, behavior: 'smooth' });
+              // Respect prefers-reduced-motion. CSS scroll-behavior:auto
+              // only governs user-agent-initiated scrolls; an explicit
+              // behavior:'smooth' on Element.scrollTo() overrides it.
+              const prefersReducedMotion = window.matchMedia(
+                '(prefers-reduced-motion: reduce)',
+              ).matches;
+              list.scrollTo({
+                left: targetScroll,
+                behavior: prefersReducedMotion ? 'auto' : 'smooth',
+              });
             }
           } else {
             link.removeAttribute('aria-current');
