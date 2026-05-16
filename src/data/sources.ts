@@ -89,7 +89,7 @@ export const resources: Resource[] = [
     size: 'Feb 2023',
     description:
       "NOAA’s summary of the settlement that sets aside $808,500 for restoration tied to the Edge Moor and Hay Road site.",
-    source: 'Official source for the Chemours settlement amount',
+    source: 'Official source for the Hay Road settlement amount',
   },
   {
     title: 'Fox Point Riverview Trail Overview',
