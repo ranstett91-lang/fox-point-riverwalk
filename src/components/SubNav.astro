@@ -1,0 +1,140 @@
+---
+interface Section {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  sections: Section[];
+  ariaLabel?: string;
+}
+
+const { sections, ariaLabel = 'On this page' } = Astro.props;
+---
+
+<nav class="subnav" aria-label={ariaLabel} data-subnav>
+  <ul class="subnav-list">
+    {sections.map(({ id, label }) => (
+      <li>
+        <a href={`#${id}`} data-subnav-link={id}>{label}</a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<script>
+  // Sticky sub-nav scroll-spy. Watches scroll position; toggles
+  // is-current + aria-current="location" on the matching pill. Ports
+  // the logic from the original app.js:20-70 and extends it to:
+  //
+  //  - keep the active pill visible inside the horizontal scroll-snap
+  //    container on small screens
+  //  - publish the rendered sub-nav height to --subnav-height so the
+  //    global scroll-padding-top stays accurate (otherwise clicked
+  //    anchors land under the sticky bar)
+  //  - scope every listener to an AbortController so view-transition
+  //    re-init cleanly tears down the previous page's window listeners
+  //    (otherwise scroll/resize handlers accumulate across navigations
+  //    and keep firing against detached DOM nodes).
+  let abortController: AbortController | null = null;
+
+  function initSubNav() {
+    abortController?.abort();
+    abortController = new AbortController();
+    const { signal } = abortController;
+
+    const subnavs = document.querySelectorAll<HTMLElement>('[data-subnav]');
+    if (!subnavs.length) return;
+
+    subnavs.forEach((subnav) => {
+      const links = Array.from(
+        subnav.querySelectorAll<HTMLAnchorElement>('a[data-subnav-link]'),
+      );
+      if (!links.length) return;
+
+      const sections = links
+        .map((link) => {
+          const id = link.dataset.subnavLink;
+          return id ? document.getElementById(id) : null;
+        })
+        .filter((s): s is HTMLElement => s !== null);
+      if (!sections.length) return;
+
+      // Publish the rendered sub-nav height as a CSS custom property so
+      // html { scroll-padding-top: calc(var(--subnav-height) + 0.5rem) }
+      // matches the visual size of the bar. Re-publish on resize.
+      const publishHeight = () => {
+        const height = subnav.getBoundingClientRect().height;
+        if (height > 0) {
+          document.documentElement.style.setProperty(
+            '--subnav-height',
+            `${height}px`,
+          );
+        }
+      };
+      publishHeight();
+
+      // Activation offset: distance from the top of the viewport at which
+      // a section becomes the "current" one. Mirrors --subnav-height
+      // plus a little breathing room.
+      const getActivationOffset = () =>
+        subnav.getBoundingClientRect().height + 24;
+
+      const setActive = (id: string) => {
+        links.forEach((link) => {
+          const isCurrent = link.dataset.subnavLink === id;
+          link.classList.toggle('is-current', isCurrent);
+          if (isCurrent) {
+            link.setAttribute('aria-current', 'location');
+            // Keep the active pill visible inside the horizontal
+            // scroll-snap container on small screens. On desktop the
+            // pill is already in view, so this is a no-op.
+            link.scrollIntoView({
+              inline: 'center',
+              block: 'nearest',
+              behavior: 'smooth',
+            });
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      };
+
+      let frameId = 0;
+
+      const updateActiveSection = () => {
+        frameId = 0;
+        const activationOffset = getActivationOffset();
+        let activeSection = sections[0];
+        sections.forEach((section) => {
+          if (section.getBoundingClientRect().top <= activationOffset) {
+            activeSection = section;
+          }
+        });
+        setActive(activeSection.id);
+      };
+
+      const scheduleUpdate = () => {
+        if (!frameId) {
+          frameId = window.requestAnimationFrame(updateActiveSection);
+        }
+      };
+
+      scheduleUpdate();
+      window.addEventListener('scroll', scheduleUpdate, { passive: true, signal });
+      window.addEventListener(
+        'resize',
+        () => {
+          publishHeight();
+          scheduleUpdate();
+        },
+        { passive: true, signal },
+      );
+      links.forEach((link) =>
+        link.addEventListener('click', scheduleUpdate, { signal }),
+      );
+    });
+  }
+
+  document.addEventListener('astro:page-load', initSubNav);
+</script>

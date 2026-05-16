@@ -1,0 +1,109 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Topbar from '../components/Topbar.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute canonical URL for this page. */
+  canonical: string;
+  /** Image used on og:image and twitter:image (absolute URL). Defaults to the site hero. */
+  ogImage?: string;
+  ogImageAlt?: string;
+  /** Set true on the landing page to preload the hero photo. */
+  preloadHero?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = 'https://fox-point-riverwalk.vercel.app/assets/hero-claymont-to-fox-point-state-park.jpg',
+  ogImageAlt = 'Aerial concept rendering of the Claymont-to-Fox-Point corridor.',
+  preloadHero = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#12362a" />
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Claymont to Fox Point" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1920" />
+    <meta property="og:image:height" content="1080" />
+    <meta property="og:image:alt" content={ogImageAlt} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/assets/icons/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/assets/icons/icon-180.png" />
+    {preloadHero && (
+      <link
+        rel="preload"
+        href="/assets/hero-claymont-to-fox-point-state-park.jpg"
+        as="image"
+        fetchpriority="high"
+      />
+    )}
+
+    <ViewTransitions />
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="page-shell">
+      <header class="hero" id="top">
+        <Topbar />
+        <slot name="hero" />
+      </header>
+
+      <slot name="subnav" />
+
+      <slot />
+
+      <div class="page-foot">
+        <a class="back-to-top" href="#top">↑ Back to top</a>
+      </div>
+    </div>
+
+    <script>
+      // Move keyboard focus into <main> when the skip-link is activated.
+      // Re-bound on every Astro view-transition page load.
+      function initSkipLink() {
+        const link = document.querySelector<HTMLAnchorElement>('.skip-link');
+        const main = document.querySelector<HTMLElement>('#main-content');
+        if (!link || !main) return;
+        link.addEventListener('click', () => {
+          window.requestAnimationFrame(() => {
+            try {
+              main.focus({ preventScroll: true });
+            } catch {
+              main.focus();
+            }
+          });
+        });
+      }
+      document.addEventListener('astro:page-load', initSkipLink);
+    </script>
+  </body>
+</html>

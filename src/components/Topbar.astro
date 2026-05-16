@@ -1,0 +1,32 @@
+---
+const links = [
+  { href: '/', label: 'Project' },
+  { href: '/ecological-restoration/', label: 'Restoration' },
+  { href: '/what-this-means-for-delaware/', label: 'Delaware' },
+  { href: '/rail-corridor/', label: 'Rail' },
+];
+
+const pathname = Astro.url.pathname;
+
+const isCurrent = (href: string) => {
+  if (href === '/') {
+    return pathname === '/' || pathname === '';
+  }
+  return pathname === href || pathname === href.replace(/\/$/, '');
+};
+---
+
+<nav class="topbar" aria-label="Site sections">
+  <a class="brandmark" href="/">Claymont to Fox Point</a>
+  <div class="topbar-links">
+    {links.map(({ href, label }) => (
+      <a
+        href={href}
+        aria-current={isCurrent(href) ? 'page' : undefined}
+        class:list={[{ 'is-current': isCurrent(href) }]}
+      >
+        {label}
+      </a>
+    ))}
+  </div>
+</nav>

@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubNav from '../components/SubNav.astro';
+import Champions from '../components/Champions.astro';
+import SourcesNote from '../components/SourcesNote.astro';
+
+const subnavSections = [
+  { id: 'transit-gateway', label: 'Transit gateway' },
+  { id: 'connecting-trails', label: 'Connecting trails' },
+  { id: 'biking-walking', label: 'Biking & walking' },
+  { id: 'green-space', label: 'Green space & wellbeing' },
+  { id: 'policy-funding', label: 'Policy & funding' },
+  { id: 'champions', label: 'Champions' },
+];
+---
+
+<BaseLayout
+  title="What This Means for Delaware | Claymont to Fox Point"
+  description="A $90M transit gateway, the East Coast Greenway, and a half-mile of restored shoreline that could connect Delaware's largest single transit investment directly to the Delaware River."
+  canonical="https://fox-point-riverwalk.vercel.app/what-this-means-for-delaware/"
+  ogImageAlt="Aerial view of the Claymont Transportation Center near the Fox Point shoreline."
+>
+  <SubNav slot="subnav" sections={subnavSections} />
+
+  <main id="main-content" tabindex="-1">
+    <header class="panel page-intro">
+      <p class="kicker">What This Means for Delaware</p>
+      <h1>A $90M transit gateway, a half mile of shoreline, and the river they could connect.</h1>
+      <p>The Claymont Regional Transportation Center is one of Delaware's largest single transit investments. Fox Point is the shoreline a short walk away.</p>
+    </header>
+
+    <section class="panel" id="transit-gateway">
+      <div class="section-header">
+        <div>
+          <p class="section-label">A $90M Transit Gateway</p>
+          <h2>The Harris B. McDowell III Transportation Center opened in December 2023. Fox Point sits a half mile away.</h2>
+        </div>
+        <p class="section-copy">The Claymont Regional Transportation Center cost $90 million. More than $51 million came from the Federal Transit Administration, including a $10 million TIGER grant; the state put in $38 million. It opened December 4, 2023.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">What the station offers</p>
+          <ul>
+            <li>Over 800 parking spaces</li>
+            <li>13 EV charging stations</li>
+            <li>ADA-accessible high-level platforms</li>
+            <li>Bicycle racks and repair stations</li>
+          </ul>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Who uses it</p>
+          <p>SEPTA’s Wilmington/Newark Line commuter rail, plus SEPTA and DART First State bus routes. About 1,200 SEPTA riders board in Claymont every weekday.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Who it’s named for</p>
+          <p>Harris B. McDowell III served Claymont in the Delaware State Senate from 1976 to 2021 — the longest tenure in the General Assembly’s history. At the dedication, Governor John Carney called him “the godfather of climate change legislation” in the state.</p>
+        </article>
+      </div>
+
+      <p class="section-copy">A restored shoreline at Fox Point would link one of Delaware’s largest single transit investments directly to the Delaware River.</p>
+
+      <SourcesNote sources={[
+        { label: 'State of Delaware — Claymont Transportation Center dedication', href: 'https://news.delaware.gov/2023/11/27/new-claymont-transportation-center-dedicated/' },
+      ]} />
+    </section>
+
+    <section class="panel" id="connecting-trails">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Connecting Trails</p>
+          <h2>The East Coast Greenway runs through Claymont. Fox Point is the missing link to the river.</h2>
+        </div>
+        <p class="section-copy">The East Coast Greenway is a 3,000-mile route from Maine to Florida. It runs directly through Claymont and connects to the existing Fox Point Riverview Trail — about a mile of trail that is already in place.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">What exists today</p>
+          <p>About one mile of the Fox Point Riverview Trail is already built. Delaware Greenways is a named project partner.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">What the longer vision adds</p>
+          <p>The broader concept extends the shoreline corridor about two miles north to reach the Transit Center.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Honest framing</p>
+          <p>The Wilmington-to-Trenton stretch of the Greenway currently runs partly on roads and partly on existing trails. It is not yet a continuous publicly accessible riverfront. If Fox Point closes the gap, this stretch could become one of the longest continuous publicly accessible riverfronts on the Northeast Corridor.</p>
+        </article>
+      </div>
+
+      <SourcesNote sources={[
+        { label: 'East Coast Greenway — Mid-Atlantic states', href: 'https://greenway.org/states/mid-atlantic/pennsylvania/' },
+      ]} />
+    </section>
+
+    <section class="panel" id="biking-walking">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Safer Biking And Walking</p>
+          <h2>Closing the gap means car-free access to the Delaware.</h2>
+        </div>
+        <p class="section-copy">Delaware ranks sixth among U.S. states for bicycle friendliness. Restoring Fox Point closes a real gap on the ground.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">State ranking</p>
+          <p>Sixth in the country for bicycle friendliness, per the League of American Bicyclists.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">The Jack A. Markell Trail</p>
+          <p>A 16-mile round trip between the Wilmington Riverfront and historic New Castle — already a popular ride.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">What Fox Point closes</p>
+          <p>The current gap forces cyclists onto Philadelphia Pike and the shoulders of I-495 to reach the river. The restored shoreline is the safer alternative.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Car-free access</p>
+          <p>The link between the Transit Center and the waterfront means people can reach the Delaware River without a car.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="green-space">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Green Space &amp; Wellbeing</p>
+          <h2>What research tells us about community access to green and blue space.</h2>
+        </div>
+        <p class="section-copy">Public health research from the CDC, the World Health Organization, and peer-reviewed journals describes consistent patterns in communities with safe, accessible nature near where people live.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Stress and the body’s response</p>
+          <p>Time in green and blue space is associated with lower stress and a calmer cortisol response. The reviewed research describes general patterns; specific dose-response numbers vary by study.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Cardiovascular health</p>
+          <p>Safer walking and biking infrastructure is consistently linked with better cardiovascular outcomes in nearby communities. Effect size depends on use, terrain, and other factors.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Community-accessible nature</p>
+          <p>Nearby public nature is consistently linked with better community mental health, especially in places where green space has historically been scarce.</p>
+        </article>
+      </div>
+
+      <p class="source-note section-source">
+        Specific stat citations for this section are intentionally left general pending review. Sources are institutional (CDC, WHO, peer-reviewed research) rather than a single named study.
+      </p>
+    </section>
+
+    <section class="panel" id="policy-funding">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Policy &amp; Funding</p>
+          <h2>The federal, state, and county pieces a Fox Point project could draw on.</h2>
+        </div>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Federal</p>
+          <ul>
+            <li>USDOT Safe Streets and Roads for All</li>
+            <li>USDOT RAISE grants</li>
+            <li>USDOT Active Transportation Infrastructure Investment Program</li>
+            <li>HHS / CDC place-based health funding</li>
+            <li>HUD Choice Neighborhoods</li>
+          </ul>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">State (Delaware)</p>
+          <ul>
+            <li>DelDOT Community Transportation Trust Fund</li>
+            <li>2025 Delaware Climate Action Plan</li>
+            <li>North Claymont Area Master Plan (WILMAPCO, 2017)</li>
+            <li>2025 WILMAPCO Claymont Area Master Plan — parks and open space were the top community-named priority</li>
+          </ul>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">County (New Castle)</p>
+          <ul>
+            <li>County trail and open space planning</li>
+            <li>County park system</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="champions">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Champions</p>
+          <h2>The people whose record and position make this work possible.</h2>
+        </div>
+      </div>
+      <Champions ids={['mcdowell', 'mcbride', 'lambert', 'cartier', 'cruce']} />
+    </section>
+  </main>
+</BaseLayout>
