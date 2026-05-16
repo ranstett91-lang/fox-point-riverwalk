@@ -1,0 +1,22 @@
+---
+interface Source {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  sources: Source[];
+}
+
+const { sources } = Astro.props;
+---
+
+<p class="source-note section-source">
+  {sources.length > 1 ? 'Sources: ' : 'Source: '}
+  {sources.map((source, index) => (
+    <>
+      <a class="precedent-link" href={source.href} target="_blank" rel="noopener">{source.label}</a>
+      {index < sources.length - 1 ? '; ' : ''}
+    </>
+  ))}
+</p>

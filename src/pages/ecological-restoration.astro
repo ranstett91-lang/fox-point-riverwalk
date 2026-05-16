@@ -1,0 +1,176 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubNav from '../components/SubNav.astro';
+import Champions from '../components/Champions.astro';
+import Callout from '../components/Callout.astro';
+import SourcesNote from '../components/SourcesNote.astro';
+
+const subnavSections = [
+  { id: 'the-rule', label: 'The federal rule' },
+  { id: 'what-fox-point-delivers', label: 'What Fox Point delivers' },
+  { id: 'species', label: 'The species at stake' },
+  { id: 'policy-funding', label: 'Policy & funding' },
+  { id: 'champions', label: 'Champions' },
+];
+---
+
+<BaseLayout
+  title="Ecological Restoration | Claymont to Fox Point"
+  description="A new federal water rule, two endangered sturgeon, and a restoration plan that lines up with both. How Fox Point fits the new federal standard for the Delaware River."
+  canonical="https://fox-point-riverwalk.vercel.app/ecological-restoration/"
+  ogImageAlt="Aerial view of the Delaware River shoreline near Fox Point, in the federally protected sturgeon habitat stretch."
+>
+  <SubNav slot="subnav" sections={subnavSections} />
+
+  <main id="main-content" tabindex="-1">
+    <section class="panel" id="the-rule">
+      <div class="section-header">
+        <div>
+          <p class="section-label">The New Federal Rule</p>
+          <h2>The Delaware River has a new federal water standard, and Fox Point sits inside the stretch it protects.</h2>
+        </div>
+        <p class="section-copy">On November 28, 2025, a new federal water rule took effect along a 38-mile stretch of the Delaware River — from Philadelphia down to Wilmington. Fox Point sits inside that stretch.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">What the rule does</p>
+          <p>It sets a higher bar for dissolved oxygen — the part of water that fish and other river life need to breathe. Two federally endangered fish are the reason: Atlantic Sturgeon and Shortnose Sturgeon.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">When it protects them</p>
+          <ul>
+            <li>Spawning · March 1 – June 30</li>
+            <li>Juveniles growing · July 1 – October 31</li>
+            <li>Overwintering · November 1 – end of February</li>
+          </ul>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Where the work goes</p>
+          <p>In December 2025, the Delaware River Basin Commission began the technical work that helps the states meet the new standard. Most of the conversation has been about wastewater plant upgrades. Less attention has gone to nature-based projects that do complementary work.</p>
+        </article>
+      </div>
+
+      <SourcesNote sources={[
+        { label: 'EPA final rule (water quality standards, Delaware River)', href: 'https://www.epa.gov/wqs-tech/water-quality-standards-delaware-river' },
+        { label: 'Federal Register Doc 2025-18816', href: 'https://www.federalregister.gov/documents/2025/09/29/2025-18816/water-quality-standards-to-protect-aquatic-life-in-the-delaware-river' },
+      ]} />
+    </section>
+
+    <section class="panel" id="what-fox-point-delivers">
+      <div class="section-header">
+        <div>
+          <p class="section-label">What Fox Point Delivers</p>
+          <h2>The restoration plan lines up with the new standard in clear ways.</h2>
+        </div>
+        <p class="section-copy">Fox Point alone does not fix dissolved oxygen for the whole river. Upgrades to wastewater treatment plants are the main lever. But the Fox Point plan does complementary work the new rule cares about.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Wetland expansion</p>
+          <p>Phase 1 of the state plan restores 2.7 acres. A broader 2021 University of Delaware concept design grows the wetland from 1.69 up to 4.54 acres over time.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">A living shoreline</p>
+          <p>A vegetated edge stabilizes the eroding industrial bank and keeps sediment from washing into the river.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">A tidal marsh that scrubs nitrogen</p>
+          <p>Marsh plants pull up nitrogen — including ammonia, which is one of the inputs that drives oxygen loss in this stretch of the river.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Habitat in a federal sturgeon zone</p>
+          <p>Fox Point sits inside the critical habitat the federal government has named as a sturgeon nursery and migration path.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel" id="species">
+      <div class="section-header">
+        <div>
+          <p class="section-label">The Species At Stake</p>
+          <h2>Two federally endangered sturgeon use this stretch of the river.</h2>
+        </div>
+        <p class="section-copy">Atlantic Sturgeon are fish that move between fresh and salt water. They have lived in the Delaware River for more than 100 million years. The Delaware population is genetically unique, with fewer than 250 spawning adults left.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Atlantic Sturgeon</p>
+          <p>Federally designated critical habitat runs 137 kilometers from the Route 1 Toll Bridge in Trenton down to Hope Creek, NJ. Fox Point sits well inside that zone, in nursery and migration habitat.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Shortnose Sturgeon</p>
+          <p>Smaller than the Atlantic Sturgeon and also federally endangered. The two species share much of the same habitat in this stretch of the river.</p>
+        </article>
+      </div>
+
+      <Callout label="Worth building in from day one">
+        <p>The Hudson Highlands Fjord Trail — the precedent project named on the project brief — has had its southern section delayed at least two years over concerns about these exact two species in the Hudson River. Building sturgeon protection into Fox Point’s design from the start protects both the species and the project schedule.</p>
+      </Callout>
+
+      <SourcesNote sources={[
+        { label: 'DRBC sturgeon page', href: 'https://www.nj.gov/drbc/basin/living/atlantic-sturgeon.html' },
+        { label: 'DNREC sturgeon page', href: 'https://dnrec.delaware.gov/fish-wildlife/fishing/sturgeon/' },
+        { label: 'Delaware Riverkeeper Network', href: 'https://delawareriverkeeper.org/issues/species-protection/atlantic-sturgeon/' },
+        { label: 'Highlands Current — HHFT southern section delay', href: 'https://highlandscurrent.org/2026/02/10/fjord-trail-to-prioritize-northern-section/' },
+      ]} />
+    </section>
+
+    <section class="panel" id="policy-funding">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Policy &amp; Funding</p>
+          <h2>The pieces a Fox Point restoration could draw on.</h2>
+        </div>
+        <p class="section-copy">Federal, state, and county pieces are in place. The job is to line them up.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Federal</p>
+          <ul>
+            <li>EPA Clean Water Act water quality standards (the new rule)</li>
+            <li>NOAA Restoration Center — the $808K Hay Road settlement, with room to grow</li>
+            <li>U.S. Fish and Wildlife Service endangered species partnerships</li>
+            <li>NFWF Delaware River Watershed Conservation Fund</li>
+            <li>EPA Urban Waters Federal Partnership</li>
+          </ul>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">State (Delaware)</p>
+          <ul>
+            <li>DNREC January 2025 Damage Assessment and Restoration Plan, which names Fox Point Cove</li>
+            <li>2025 Delaware Climate Action Plan</li>
+            <li>Wetlands Stewardship Act, introduced April 2026 by Sen. Stephanie Hansen and Rep. Debra Heffernan</li>
+            <li>Heffernan Bond Bill pledge — $2.5M set aside for Fox Point inside a $3M state pledge, contingent on Edgemoor port construction and Diamond State Port Corporation approval</li>
+          </ul>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">County (New Castle)</p>
+          <ul>
+            <li>County environmental review and permitting</li>
+            <li>County trail and open space planning</li>
+          </ul>
+        </article>
+      </div>
+
+      <SourcesNote sources={[
+        { label: 'DNREC DARP public notice WHS20250010', href: 'https://dnrec.delaware.gov/public-notices/whs20250010/' },
+        { label: '2025 Delaware Climate Action Plan', href: 'https://documents.dnrec.delaware.gov/energy/Climate-Plan/2025-Delaware-Climate-Action-Plan.pdf' },
+        { label: 'Wetlands Stewardship Act / Edgemoor expansion', href: 'https://senatedems.delaware.gov/2026/04/08/edgemoor-port-expansion-now-shovel-ready/' },
+      ]} />
+    </section>
+
+    <section class="panel" id="champions">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Champions</p>
+          <h2>The people whose record and position make this work possible.</h2>
+        </div>
+      </div>
+      <Champions ids={['mcbride', 'lambert', 'cartier', 'heffernan']} />
+    </section>
+  </main>
+</BaseLayout>
