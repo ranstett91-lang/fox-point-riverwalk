@@ -1,0 +1,20 @@
+---
+import { getChampions } from '../data/champions.ts';
+
+interface Props {
+  ids: string[];
+}
+
+const { ids } = Astro.props;
+const cards = getChampions(ids);
+---
+
+<div class="champions-grid">
+  {cards.map((champion) => (
+    <article class="champion-card" data-portrait-slot>
+      <p class="champion-role">{champion.role}</p>
+      <h3 class="champion-name">{champion.name}</h3>
+      <p class="champion-blurb">{champion.blurb}</p>
+    </article>
+  ))}
+</div>
