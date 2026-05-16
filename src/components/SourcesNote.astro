@@ -16,4 +16,4 @@ const prefix = sources.length > 1 ? 'Sources: ' : 'Source: ';
 // preserved text nodes — that produced "Source:  <link>" with a
 // double space and trailing whitespace in an earlier version.)
 ---
-<p class="source-note section-source">{prefix}{sources.map((source, index) => (<Fragment>{index > 0 ? '; ' : ''}<a class="precedent-link" href={source.href} target="_blank" rel="noopener">{source.label}</a></Fragment>))}</p>
+<p class="source-note section-source">{prefix}{sources.map((source, index) => (<Fragment>{index > 0 ? '; ' : ''}<a class="precedent-link" href={source.href} target="_blank" rel="noopener" aria-label={`${source.label} (opens in new tab)`}>{source.label}</a></Fragment>))}</p>
