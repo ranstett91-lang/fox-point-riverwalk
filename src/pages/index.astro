@@ -5,10 +5,8 @@ import ResourceLibrary from '../components/ResourceLibrary.astro';
 
 const subnavSections = [
   { id: 'site', label: 'Site' },
-  { id: 'plan', label: 'Plan' },
   { id: 'funding', label: 'Funding' },
   { id: 'stakes', label: 'Stakes' },
-  { id: 'precedent', label: 'Precedent' },
   { id: 'library', label: 'Sources' },
 ];
 ---
@@ -219,39 +217,9 @@ const subnavSections = [
           </g>
         </svg>
       </div>
-      <div class="site-chips">
-        <span>Phase 1 · 2.7 acres · $5M pledged</span>
-        <span>Existing trail · ~ 1 mi</span>
-        <span>Long-term vision · ~ 2 mi to Transit Center</span>
+      <p class="site-trail-link-row">
         <a class="site-chip-link" href="https://delawaregreenways.org/trail/fox-point-riverview-trail/" target="_blank" rel="noopener">See the existing trail →</a>
-      </div>
-    </section>
-
-    <section class="panel corridor-section" id="plan">
-      <div class="section-header">
-        <div>
-          <p class="section-label">Project Readiness</p>
-          <h2>Delaware already wrote the Fox Point plan.</h2>
-        </div>
-        <p class="section-copy">This is not just a big idea. The state has already named the site, outlined the work, and shown the next steps.</p>
-      </div>
-
-      <div class="corridor-brief-grid">
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">State Status</h3>
-          <p>Delaware’s environmental agency, DNREC, already lists this as a managed cleanup area. The project area covers about 203 river acres across 1.4 miles, including Fox Point Cove.</p>
-        </article>
-
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Planned Work</h3>
-          <p>The state plan calls for marsh restoration at Fox Point Cove, including invasive plant removal, shoreline grading, clean fill, native planting, wave-break structures, and erosion control near Stoney Creek Wharf.</p>
-        </article>
-
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Next Steps</h3>
-          <p>Phase 1 covers 2.7 acres of wetland work under the state’s January 2025 plan. A broader 2021 University of Delaware conceptual design envisions wetland expansion from 1.69 to 4.54 acres over time. Next comes engineering, permits, construction, and three years of follow-up monitoring.</p>
-        </article>
-      </div>
+      </p>
     </section>
 
     <section class="panel capital-section" id="funding">
@@ -365,54 +333,6 @@ const subnavSections = [
         </div>
       </div>
       <a class="stakes-strip-link" href="/rail-corridor/#climate-risk">See the full climate risk picture →</a>
-    </section>
-
-    <section class="panel precedent-section" id="precedent">
-      <div class="section-header">
-        <div>
-          <p class="section-label">Precedent</p>
-          <h2>The model is built.<br />We can borrow it.</h2>
-        </div>
-        <p class="section-copy">Fox Point and the Hudson Highlands share the harder version of a shoreline-restoration problem — a thin strip of riverfront wedged between an active passenger rail line on one side and a highway on the other, with rising water and limited public access. The Hudson Highlands Fjord Trail (HHFT) shows the model can be built.</p>
-      </div>
-
-      <figure class="precedent-figure">
-        <img
-          src="/assets/precedent-hhft-rendering.jpg"
-          alt="Hudson Highlands Fjord Trail design rendering: a gravel shared-use path along the Hudson River shoreline with a boulder edge stabilizing the bank, a long wood bench, and a planted buffer separating walkers and cyclists from the rail corridor."
-          class="precedent-figure-image"
-          width="768"
-          height="501"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="precedent-figure-caption">
-          Hudson Highlands Fjord Trail · design rendering. Boulder edge, expanded trail, planted buffer — the same toolkit Fox Point needs.
-        </figcaption>
-      </figure>
-
-      <div class="precedent-grid">
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Hudson Highlands Fjord Trail</h3>
-          <ul class="precedent-list">
-            <li>Hudson River shoreline</li>
-            <li>Metro-North Hudson Line</li>
-            <li>NY State Route 9D</li>
-            <li>Restoring access + shoreline resilience</li>
-          </ul>
-        </article>
-        <article class="corridor-brief-card precedent-card-here">
-          <h3 class="corridor-brief-eyebrow">Claymont → Fox Point</h3>
-          <ul class="precedent-list">
-            <li>Delaware River shoreline</li>
-            <li>Amtrak Northeast Corridor</li>
-            <li>Interstate 495</li>
-            <li>Restoring access + shoreline resilience</li>
-          </ul>
-        </article>
-      </div>
-
-      <p class="source-note section-source">Source: <a class="precedent-link" href="https://hhft.org" target="_blank" rel="noopener">hhft.org</a></p>
     </section>
 
     <section class="panel read-next" aria-label="Read next">
