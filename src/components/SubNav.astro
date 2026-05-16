@@ -87,13 +87,34 @@ const { sections, ariaLabel = 'On this page' } = Astro.props;
           if (isCurrent) {
             link.setAttribute('aria-current', 'location');
             // Keep the active pill visible inside the horizontal
-            // scroll-snap container on small screens. On desktop the
-            // pill is already in view, so this is a no-op.
-            link.scrollIntoView({
-              inline: 'center',
-              block: 'nearest',
-              behavior: 'smooth',
-            });
+            // scroll-snap container on small screens — but ONLY when
+            // the list is actually a horizontal scroll container.
+            //
+            // On desktop the list is flex-wrap: wrap (no horizontal
+            // overflow). Calling Element.scrollIntoView() there walks
+            // up to the document as the nearest scrollable ancestor.
+            // Combined with html { scroll-padding-top: ... } from the
+            // sticky-bar offset, the browser treats the pill (visually
+            // inside the sticky bar at viewport top) as "inside the
+            // padded region" and smoothly scrolls the document to
+            // bring it out of the pad — producing a ghost scroll on
+            // every scroll-spy update and a feedback loop that makes
+            // the page feel unresponsive to touch.
+            //
+            // Scoping the scroll explicitly to the .subnav-list (and
+            // only when it actually overflows) keeps the horizontal
+            // mobile scroll-into-center behavior while never touching
+            // the document.
+            const list = link.closest<HTMLElement>('.subnav-list');
+            if (list && list.scrollWidth > list.clientWidth) {
+              const linkRect = link.getBoundingClientRect();
+              const listRect = list.getBoundingClientRect();
+              const linkOffsetInList =
+                linkRect.left - listRect.left + list.scrollLeft;
+              const targetScroll =
+                linkOffsetInList - (listRect.width - linkRect.width) / 2;
+              list.scrollTo({ left: targetScroll, behavior: 'smooth' });
+            }
           } else {
             link.removeAttribute('aria-current');
           }
