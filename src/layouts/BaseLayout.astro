@@ -112,11 +112,16 @@ const {
       // Publish the rendered .page-header height (Topbar + SubNav
       // stacked, both sticky) to --page-header-height so the global
       // scroll-padding-top and the SubNav scroll-spy can offset by the
-      // actual sticky-bar height. Re-publish on resize and re-init on
-      // every view-transition page load.
+      // actual sticky-bar height. Re-publish on resize and whenever
+      // the bar itself reflows — most commonly when web fonts finish
+      // loading and the Topbar text re-measures slightly taller or
+      // shorter than the fallback font produced at first paint.
+      // Re-init on every view-transition page load.
       let pageHeaderAbortController: AbortController | null = null;
+      let pageHeaderResizeObserver: ResizeObserver | null = null;
       function initPageHeaderHeight() {
         pageHeaderAbortController?.abort();
+        pageHeaderResizeObserver?.disconnect();
         pageHeaderAbortController = new AbortController();
         const { signal } = pageHeaderAbortController;
         const header = document.querySelector<HTMLElement>('[data-page-header]');
@@ -132,6 +137,10 @@ const {
         };
         publish();
         window.addEventListener('resize', publish, { passive: true, signal });
+        if (typeof ResizeObserver !== 'undefined') {
+          pageHeaderResizeObserver = new ResizeObserver(publish);
+          pageHeaderResizeObserver.observe(header);
+        }
       }
       document.addEventListener('astro:page-load', initPageHeaderHeight);
     </script>
