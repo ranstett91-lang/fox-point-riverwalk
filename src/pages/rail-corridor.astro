@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SubNav from '../components/SubNav.astro';
+import Champions from '../components/Champions.astro';
+import Callout from '../components/Callout.astro';
+import SourcesNote from '../components/SourcesNote.astro';
+
+const subnavSections = [
+  { id: 'climate-risk', label: 'Climate risk' },
+  { id: 'nec-visibility', label: 'NEC visibility' },
+  { id: 'federal-investment', label: 'Federal investment' },
+  { id: 'mcbride-advocacy', label: "McBride's advocacy" },
+  { id: 'champions', label: 'Champions' },
+];
+---
+
+<BaseLayout
+  title="The Rail Corridor | Claymont to Fox Point"
+  description="Climate risk, visibility on the busiest line in America, federal infrastructure investment, and what a freshman U.S. Representative can do for Amtrak funding."
+  canonical="https://fox-point-riverwalk.vercel.app/rail-corridor/"
+  ogImageAlt="The Northeast Corridor rail line passing the Fox Point shoreline along the Delaware River."
+>
+  <SubNav slot="subnav" sections={subnavSections} />
+
+  <main id="main-content" tabindex="-1">
+    <header class="panel page-intro">
+      <p class="kicker">The Rail Corridor</p>
+      <h1>Climate risk, ridership, and the federal investment passing Fox Point every few minutes.</h1>
+      <p>Fox Point sits beside the busiest passenger rail line in America. Amtrak has documented the climate risk on this stretch in its own reports.</p>
+    </header>
+
+    <section class="panel" id="climate-risk">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Climate Risk On Our Stretch</p>
+          <h2>Amtrak has documented the cost of doing nothing.</h2>
+        </div>
+        <p class="section-copy">Amtrak’s own climate planners have focused on the Wilmington stretch as the Northeast Corridor’s most exposed section — low elevation, two rivers, and a concentration of critical rail infrastructure at the river’s edge. Internal Amtrak modeling shows the Wilmington Maintenance Yard, West Yard Substation, Bellevue Substation, and the Consolidated National Operations Center all face significant flooding risk by 2050.</p>
+      </div>
+
+      <div class="risk-big-row">
+        <article class="risk-stat-card">
+          <p class="risk-number">$127M</p>
+          <p class="risk-label">Losses already recorded</p>
+          <p class="risk-sub">Delay and revenue costs · 2006–2019</p>
+          <div class="risk-bar-track">
+            <div class="risk-bar-fill rfill-84"></div>
+          </div>
+        </article>
+        <article class="risk-stat-card">
+          <p class="risk-number">450+</p>
+          <p class="risk-label">Storm-related disruptions</p>
+          <p class="risk-sub">2006–2019 · Northeast Corridor</p>
+          <div class="risk-bar-track">
+            <div class="risk-bar-fill rfill-full"></div>
+          </div>
+        </article>
+        <article class="risk-stat-card risk-hot-card">
+          <p class="risk-number">$220M</p>
+          <p class="risk-label">Possible future losses</p>
+          <p class="risk-sub">Next decade · if nothing changes</p>
+          <div class="risk-gradient-bar"></div>
+        </article>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Storms</p>
+          <p>Heavy storms are roughly twice as common today as they were in 1960. More storms mean more chances for water to reach the tracks.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Heat</p>
+          <p>Hotter summers are expected — about 4 to 5 degrees Fahrenheit higher by 2050. Extreme heat damages rails and signals.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Sea level</p>
+          <p>Sea level is rising along the Delaware estuary. The Wilmington stretch is the section Amtrak has identified as most exposed.</p>
+        </article>
+      </div>
+
+      <SourcesNote sources={[
+        { label: 'Amtrak Climate Vulnerability Assessment (2022)', href: '/docs/reference/amtrak-climate-vulnerability-assessment-summary-2022.pdf' },
+        { label: "Bloomberg investigation of Amtrak's internal climate report", href: 'https://www.bloomberg.com/graphics/2018-amtrak-sea-level/' },
+      ]} />
+    </section>
+
+    <section class="panel" id="nec-visibility">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Visibility On The Busiest Line In America</p>
+          <h2>Trains pass Fox Point every few minutes.</h2>
+        </div>
+        <p class="section-copy">The Northeast Corridor serves more than 53 million Americans every year and connects a regional economy worth $5.9 trillion — about a fifth of the national total.</p>
+      </div>
+
+      <div class="risk-big-row">
+        <article class="risk-stat-card">
+          <p class="risk-number">15M+</p>
+          <p class="risk-label">FY25 ridership</p>
+          <p class="risk-sub">Acela + Northeast Regional · 21% above pre-pandemic</p>
+        </article>
+        <article class="risk-stat-card">
+          <p class="risk-number">628K</p>
+          <p class="risk-label">Average weekday riders</p>
+          <p class="risk-sub">Amtrak + commuter railroads</p>
+        </article>
+        <article class="risk-stat-card">
+          <p class="risk-number">$5.9T</p>
+          <p class="risk-label">Regional GDP served</p>
+          <p class="risk-sub">~ 20% of national GDP</p>
+        </article>
+      </div>
+
+      <SourcesNote sources={[
+        { label: 'Moulton–McBride bipartisan letter on Amtrak FY27 funding', href: 'https://moulton.house.gov/news/press-releases/moulton-mcbride-lead-bipartisan-group-colleagues-urging-full-funding-amtrak-and' },
+      ]} />
+    </section>
+
+    <section class="panel" id="federal-investment">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Federal Infrastructure Investment</p>
+          <h2>The 2021 Bipartisan Infrastructure Law put $66 billion into rail.</h2>
+        </div>
+        <p class="section-copy">That is the largest federal rail investment in Amtrak’s history. The numbers below are the verified IIJA figures — not the rounded approximations that sometimes circulate.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Direct to Amtrak</p>
+          <p>$22 billion over five years.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">FRA Federal-State Partnership grants</p>
+          <p>$36 billion total, of which $24 billion is dedicated to the Northeast Corridor — bridges, tunnels, capital renewal, stations.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Safety and grade crossings</p>
+          <p>$5 billion for CRISI safety grants; $3 billion for the Railroad Crossing Elimination Program.</p>
+        </article>
+      </div>
+
+      <p class="section-copy">Specific Northeast Corridor projects announced under this funding include the Hudson Tunnel, the Frederick Douglass Tunnel, the Susquehanna River Bridge, and other capital-renewal work along the line.</p>
+
+      <Callout label="Political context worth flagging">
+        <p>Key IIJA authorizations expire on September 30, 2026. Congresswoman Sarah McBride is co-leading bipartisan FY27 advocacy to keep the authorized funding levels in place.</p>
+      </Callout>
+
+      <SourcesNote sources={[
+        { label: 'Amtrak — New Era of Rail', href: 'https://www.amtrak.com/about-amtrak/new-era.html' },
+        { label: 'FRA — IIJA programs', href: 'https://railroads.dot.gov/IIJA' },
+        { label: 'Moulton–McBride FY27 letter', href: 'https://moulton.house.gov/news/press-releases/moulton-mcbride-lead-bipartisan-group-colleagues-urging-full-funding-amtrak-and' },
+      ]} />
+    </section>
+
+    <section class="panel" id="mcbride-advocacy">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Sarah McBride's Federal Advocacy</p>
+          <h2>What a freshman in the House minority can move.</h2>
+        </div>
+        <p class="section-copy">Congresswoman McBride is a first-term U.S. Representative in the House minority. Her practical power is advocacy and committee work — not direct appropriations. Her specific relevance to Fox Point comes from her record on this corridor and this community.</p>
+      </div>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Local record</p>
+          <p>Represented Claymont, Bellefonte, Edgemoor, and parts of Wilmington in the Delaware State Senate (District 1) from 2021 to 2025 before joining Congress.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Amtrak advocacy</p>
+          <p>Co-led the March 2026 bipartisan Moulton–McBride letter pressing House leadership for full FY27 Amtrak and rail funding.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">Federal formula equity</p>
+          <p>Introduced the Highway Fair Share Act to make federal highway formula funding more equitable across states.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <p class="corridor-brief-eyebrow">McDowell naming</p>
+          <p>As a Delaware state senator, co-sponsored the legislation naming the Claymont Transportation Center the Harris B. McDowell III Transportation Center.</p>
+        </article>
+      </div>
+
+      <SourcesNote sources={[
+        { label: 'mcbride.house.gov', href: 'https://mcbride.house.gov/' },
+      ]} />
+    </section>
+
+    <section class="panel" id="champions">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Champions</p>
+          <h2>The people whose record and position make this work possible.</h2>
+        </div>
+      </div>
+      <Champions ids={['mcdowell', 'mcbride', 'cruce']} />
+    </section>
+  </main>
+</BaseLayout>

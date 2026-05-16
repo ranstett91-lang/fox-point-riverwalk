@@ -1590,6 +1590,33 @@ main section[id] {
   color: var(--ink);
 }
 
+/* ─── PAGE INTRO (top of new content pages) ─── */
+
+.page-intro {
+  margin: 1rem 1rem 0.5rem;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+.page-intro .kicker {
+  margin: 0 0 0.6rem;
+}
+
+.page-intro h1 {
+  margin: 0 0 0.6rem;
+  max-width: 22ch;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.1rem, 4.5vw, 3.4rem);
+  line-height: 1.04;
+}
+
+.page-intro p {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
 /* ─── CHAMPIONS ─── */
 
 .champions-grid {
