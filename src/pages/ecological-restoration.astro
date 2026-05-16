@@ -6,9 +6,9 @@ import Callout from '../components/Callout.astro';
 import SourcesNote from '../components/SourcesNote.astro';
 
 const subnavSections = [
+  { id: 'species', label: 'The species at stake' },
   { id: 'the-rule', label: 'The federal rule' },
   { id: 'what-fox-point-delivers', label: 'What Fox Point delivers' },
-  { id: 'species', label: 'The species at stake' },
   { id: 'policy-funding', label: 'Policy & funding' },
   { id: 'champions', label: 'Champions' },
 ];
@@ -16,7 +16,7 @@ const subnavSections = [
 
 <BaseLayout
   title="Ecological Restoration | Claymont to Fox Point"
-  description="A new federal water rule, two endangered sturgeon, and a restoration plan that lines up with both. How Fox Point fits the new federal standard for the Delaware River."
+  description="Two endangered sturgeon, a new federal water rule, and a restoration plan that lines up with both. How Fox Point fits the federal standard for the Delaware River."
   canonical="https://fox-point-riverwalk.vercel.app/ecological-restoration/"
   ogImageAlt="Aerial view of the Delaware River shoreline near Fox Point, in the federally protected sturgeon habitat stretch."
 >
@@ -25,9 +25,41 @@ const subnavSections = [
   <main id="main-content" tabindex="-1">
     <header class="panel page-intro">
       <p class="kicker">Ecological Restoration</p>
-      <h1>A new federal water rule meets a ready restoration plan.</h1>
-      <p>A 38-mile stretch of the Delaware River — including Fox Point — now sits under a higher federal standard for dissolved oxygen and aquatic life. Fox Point's restoration plan does complementary work on that same stretch.</p>
+      <h1>Two endangered sturgeon and a new federal water rule both point to this stretch of river.</h1>
+      <p>A 38-mile stretch of the Delaware River — including Fox Point — sits inside federal sturgeon habitat and, since November 2025, a higher federal standard for dissolved oxygen. Fox Point’s restoration plan does complementary work on that same stretch.</p>
     </header>
+
+    <section class="panel" id="species">
+      <div class="section-header">
+        <div>
+          <p class="section-label">The Species At Stake</p>
+          <h2>Two federally endangered sturgeon use this stretch of the river.</h2>
+        </div>
+        <p class="section-copy">Atlantic Sturgeon are fish that move between fresh and salt water. They have lived in the Delaware River for more than 100 million years. The Delaware population is genetically unique, with fewer than 250 spawning adults left.</p>
+      </div>
+
+      <Callout label="Worth building in from day one">
+        <p>The Hudson Highlands Fjord Trail — the precedent project named on the project brief — has had its southern section delayed at least two years over concerns about these exact two species in the Hudson River. Building sturgeon protection into Fox Point’s design from the start protects both the species and the project schedule.</p>
+      </Callout>
+
+      <div class="corridor-brief-grid">
+        <article class="corridor-brief-card">
+          <h3 class="corridor-brief-eyebrow">Atlantic Sturgeon</h3>
+          <p>Federally designated critical habitat runs 137 kilometers from the Route 1 Toll Bridge in Trenton down to Hope Creek, NJ. Fox Point sits well inside that zone, in nursery and migration habitat.</p>
+        </article>
+        <article class="corridor-brief-card">
+          <h3 class="corridor-brief-eyebrow">Shortnose Sturgeon</h3>
+          <p>Smaller than the Atlantic Sturgeon and also federally endangered. The two species share much of the same habitat in this stretch of the river.</p>
+        </article>
+      </div>
+
+      <SourcesNote sources={[
+        { label: 'DRBC sturgeon page', href: 'https://www.nj.gov/drbc/basin/living/atlantic-sturgeon.html' },
+        { label: 'DNREC sturgeon page', href: 'https://dnrec.delaware.gov/fish-wildlife/fishing/sturgeon/' },
+        { label: 'Delaware Riverkeeper Network', href: 'https://delawareriverkeeper.org/issues/species-protection/atlantic-sturgeon/' },
+        { label: 'Highlands Current — HHFT southern section delay', href: 'https://highlandscurrent.org/2026/02/10/fjord-trail-to-prioritize-northern-section/' },
+      ]} />
+    </section>
 
     <section class="panel" id="the-rule">
       <div class="section-header">
@@ -41,7 +73,7 @@ const subnavSections = [
       <div class="corridor-brief-grid">
         <article class="corridor-brief-card">
           <h3 class="corridor-brief-eyebrow">What the rule does</h3>
-          <p>It sets a higher bar for dissolved oxygen — the part of water that fish and other river life need to breathe. Two federally endangered fish are the reason: Atlantic Sturgeon and Shortnose Sturgeon.</p>
+          <p>It sets a higher bar for dissolved oxygen — the part of water that fish and other river life need to breathe. The two endangered sturgeon are the reason it exists.</p>
         </article>
         <article class="corridor-brief-card">
           <h3 class="corridor-brief-eyebrow">When it protects them</h3>
@@ -69,59 +101,103 @@ const subnavSections = [
           <p class="section-label">What Fox Point Delivers</p>
           <h2>The restoration plan lines up with the new standard in clear ways.</h2>
         </div>
-        <p class="section-copy">Fox Point alone does not fix dissolved oxygen for the whole river. Upgrades to wastewater treatment plants are the main lever. But the Fox Point plan does complementary work the new rule cares about.</p>
+        <p class="section-copy">Fox Point alone does not fix dissolved oxygen for the whole river — wastewater treatment upgrades are the main lever. But the restoration plan does complementary work the new rule cares about.</p>
       </div>
 
-      <div class="corridor-brief-grid">
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Wetland expansion</h3>
-          <p>Phase 1 of the state plan restores 2.7 acres. A broader 2021 University of Delaware concept design grows the wetland from 1.69 up to 4.54 acres over time.</p>
+      <figure class="shoreline-figure">
+        <svg
+          class="shoreline-svg"
+          viewBox="0 0 720 240"
+          preserveAspectRatio="xMidYMid meet"
+          role="img"
+          aria-labelledby="shoreline-title shoreline-desc"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title id="shoreline-title">Living shoreline cross-section</title>
+          <desc id="shoreline-desc">A simplified cross-section moving from the industrial upland on the left, down through a stabilized bank, into a vegetated tidal marsh, and out to the Delaware River on the right. Three labels mark the three jobs the living shoreline does: stabilize the bank, scrub nitrogen from runoff with marsh plants, and provide nursery habitat in a federal sturgeon zone.</desc>
+
+          <rect x="0" y="0" width="720" height="240" fill="#f2eee5"/>
+
+          <rect x="0" y="0" width="180" height="240" fill="#e6dfd0"/>
+          <line x1="180" y1="0" x2="180" y2="240" stroke="#b59a76" stroke-width="2" stroke-dasharray="6 4" opacity="0.7"/>
+          <text x="90" y="34" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#7a5a30" letter-spacing="0.6">INDUSTRIAL UPLAND</text>
+
+          <path d="M 180 60 L 290 145 L 380 175 L 480 195 L 720 195 L 720 240 L 180 240 Z" fill="#d8e7d7" stroke="#3a6e44" stroke-width="2"/>
+
+          <path d="M 220 145 Q 230 130 240 145 Q 250 130 260 145 Q 270 130 280 145" fill="none" stroke="#3a6e44" stroke-width="2"/>
+          <path d="M 300 158 Q 310 143 320 158 Q 330 143 340 158" fill="none" stroke="#3a6e44" stroke-width="2"/>
+          <path d="M 360 172 Q 370 157 380 172 Q 390 157 400 172 Q 410 157 420 172" fill="none" stroke="#3a6e44" stroke-width="2"/>
+          <path d="M 440 187 Q 450 172 460 187 Q 470 172 480 187" fill="none" stroke="#3a6e44" stroke-width="2"/>
+
+          <rect x="480" y="195" width="240" height="45" fill="#cbdfe8"/>
+          <path d="M 480 217 Q 510 210 540 217 T 600 217 T 660 217 T 720 217" fill="none" stroke="#a8c5d8" stroke-width="1.5" opacity="0.7"/>
+          <path d="M 480 230 Q 510 223 540 230 T 600 230 T 660 230 T 720 230" fill="none" stroke="#a8c5d8" stroke-width="1.5" opacity="0.7"/>
+
+          <line x1="225" y1="100" x2="225" y2="135" stroke="#7a3e22" stroke-width="1.5"/>
+          <circle cx="225" cy="98" r="3" fill="#c87442"/>
+          <text x="225" y="90" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">STABILIZE</text>
+          <text x="225" y="78" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">THE BANK</text>
+
+          <line x1="365" y1="120" x2="365" y2="165" stroke="#7a3e22" stroke-width="1.5"/>
+          <circle cx="365" cy="118" r="3" fill="#c87442"/>
+          <text x="365" y="110" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">SCRUB</text>
+          <text x="365" y="98" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">NITROGEN</text>
+
+          <line x1="580" y1="155" x2="580" y2="215" stroke="#7a3e22" stroke-width="1.5"/>
+          <circle cx="580" cy="153" r="3" fill="#c87442"/>
+          <text x="580" y="145" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">STURGEON</text>
+          <text x="580" y="133" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">HABITAT</text>
+
+          <text x="660" y="34" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#3a5e72" letter-spacing="1.5">DELAWARE RIVER</text>
+        </svg>
+        <figcaption class="shoreline-caption">A living shoreline at Fox Point does three jobs at once: it stabilizes the eroding industrial bank, lets marsh plants pull nitrogen from runoff, and adds nursery habitat inside a federal sturgeon zone.</figcaption>
+      </figure>
+
+      <div class="capital-stack">
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">2.7 ac</p>
+            <p class="capital-source">Phase 1 wetland</p>
+          </div>
+          <div class="capital-detail">
+            <h3>Wetland expansion at Fox Point Cove.</h3>
+            <p>Phase 1 of the state plan restores 2.7 acres. A broader 2021 University of Delaware concept design grows the wetland from 1.69 up to 4.54 acres over time.</p>
+          </div>
         </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">A living shoreline</h3>
-          <p>A vegetated edge stabilizes the eroding industrial bank and keeps sediment from washing into the river.</p>
+
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">~ 0.5 mi</p>
+            <p class="capital-source">Stabilized edge</p>
+          </div>
+          <div class="capital-detail">
+            <h3>A living shoreline along the industrial bank.</h3>
+            <p>A vegetated edge stabilizes the eroding industrial bank and keeps sediment from washing into the river. Wave-break structures soften incoming wave action before it reaches the rail edge.</p>
+          </div>
         </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">A tidal marsh that scrubs nitrogen</h3>
-          <p>Marsh plants pull up nitrogen — including ammonia, which is one of the inputs that drives oxygen loss in this stretch of the river.</p>
+
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">N-scrub</p>
+            <p class="capital-source">Nitrogen uptake</p>
+          </div>
+          <div class="capital-detail">
+            <h3>Tidal marsh that pulls nitrogen from runoff.</h3>
+            <p>Marsh plants pull up nitrogen — including ammonia, which is one of the inputs that drives oxygen loss in this stretch of the river. That makes the marsh complementary to the wastewater-plant upgrades the federal rule depends on.</p>
+          </div>
         </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Habitat in a federal sturgeon zone</h3>
-          <p>Fox Point sits inside the critical habitat the federal government has named as a sturgeon nursery and migration path.</p>
+
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">137 km</p>
+            <p class="capital-source">Federal habitat</p>
+          </div>
+          <div class="capital-detail">
+            <h3>Habitat inside a federal sturgeon zone.</h3>
+            <p>Fox Point sits inside the 137-kilometer critical habitat the federal government has named as a sturgeon nursery and migration path. Restoration here adds usable nursery habitat where it counts.</p>
+          </div>
         </article>
       </div>
-    </section>
-
-    <section class="panel" id="species">
-      <div class="section-header">
-        <div>
-          <p class="section-label">The Species At Stake</p>
-          <h2>Two federally endangered sturgeon use this stretch of the river.</h2>
-        </div>
-        <p class="section-copy">Atlantic Sturgeon are fish that move between fresh and salt water. They have lived in the Delaware River for more than 100 million years. The Delaware population is genetically unique, with fewer than 250 spawning adults left.</p>
-      </div>
-
-      <div class="corridor-brief-grid">
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Atlantic Sturgeon</h3>
-          <p>Federally designated critical habitat runs 137 kilometers from the Route 1 Toll Bridge in Trenton down to Hope Creek, NJ. Fox Point sits well inside that zone, in nursery and migration habitat.</p>
-        </article>
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Shortnose Sturgeon</h3>
-          <p>Smaller than the Atlantic Sturgeon and also federally endangered. The two species share much of the same habitat in this stretch of the river.</p>
-        </article>
-      </div>
-
-      <Callout label="Worth building in from day one">
-        <p>The Hudson Highlands Fjord Trail — the precedent project named on the project brief — has had its southern section delayed at least two years over concerns about these exact two species in the Hudson River. Building sturgeon protection into Fox Point’s design from the start protects both the species and the project schedule.</p>
-      </Callout>
-
-      <SourcesNote sources={[
-        { label: 'DRBC sturgeon page', href: 'https://www.nj.gov/drbc/basin/living/atlantic-sturgeon.html' },
-        { label: 'DNREC sturgeon page', href: 'https://dnrec.delaware.gov/fish-wildlife/fishing/sturgeon/' },
-        { label: 'Delaware Riverkeeper Network', href: 'https://delawareriverkeeper.org/issues/species-protection/atlantic-sturgeon/' },
-        { label: 'Highlands Current — HHFT southern section delay', href: 'https://highlandscurrent.org/2026/02/10/fjord-trail-to-prioritize-northern-section/' },
-      ]} />
     </section>
 
     <section class="panel" id="policy-funding">
@@ -167,6 +243,22 @@ const subnavSections = [
         { label: '2025 Delaware Climate Action Plan', href: 'https://documents.dnrec.delaware.gov/energy/Climate-Plan/2025-Delaware-Climate-Action-Plan.pdf' },
         { label: 'Wetlands Stewardship Act / Edgemoor expansion', href: 'https://senatedems.delaware.gov/2026/04/08/edgemoor-port-expansion-now-shovel-ready/' },
       ]} />
+    </section>
+
+    <section class="panel read-next" aria-label="Read next">
+      <p class="section-label">Read Next</p>
+      <div class="read-next-grid">
+        <a class="read-next-card" href="/rail-corridor/">
+          <p class="read-next-eyebrow">Rail Corridor</p>
+          <h3>The rail line that runs through this habitat — and the climate risk on it.</h3>
+          <span class="read-next-cta">Read →</span>
+        </a>
+        <a class="read-next-card" href="/what-this-means-for-delaware/">
+          <p class="read-next-eyebrow">What This Means for Delaware</p>
+          <h3>The transit and trail context a half-mile from the restoration site.</h3>
+          <span class="read-next-cta">Read →</span>
+        </a>
+      </div>
     </section>
 
     <section class="panel" id="champions">

@@ -4,17 +4,18 @@ import SubNav from '../components/SubNav.astro';
 import ResourceLibrary from '../components/ResourceLibrary.astro';
 
 const subnavSections = [
-  { id: 'amtrak', label: 'Risk' },
-  { id: 'precedent', label: 'Precedent' },
   { id: 'site', label: 'Site' },
+  { id: 'plan', label: 'Plan' },
   { id: 'funding', label: 'Funding' },
+  { id: 'stakes', label: 'Stakes' },
+  { id: 'precedent', label: 'Precedent' },
   { id: 'library', label: 'Sources' },
 ];
 ---
 
 <BaseLayout
   title="Claymont to Fox Point | Project Brief"
-  description="Project brief for Fox Point Cove: climate risk along the rail line, a clear shoreline restoration plan, and the early work needed to unlock about $5.03M already tied to the site."
+  description="Project brief for Fox Point Cove: a 2.7-acre wetland restoration with about $5.03M already linked to the site, a state plan, and the early work needed to turn pledges into shovels."
   canonical="https://fox-point-riverwalk.vercel.app/"
   ogImageAlt="Aerial concept rendering of the Claymont-to-Fox-Point corridor: Delaware River, living-shoreline boardwalk, Amtrak train along the Northeast Corridor, and I-495."
   preloadHero={true}
@@ -40,10 +41,10 @@ const subnavSections = [
             Long-term, the vision continues the shoreline north to the Claymont Transit Center.
           </p>
           <div class="hero-points hero-points-light">
-            <span>$5.03M already tied to the site</span>
-            <span>State plan in place</span>
+            <span>$5M pledged</span>
+            <span>State plan</span>
             <span>203 river acres</span>
-            <span>Early project work is the gap</span>
+            <span>Early work is the gap</span>
           </div>
         </section>
       </div>
@@ -57,20 +58,20 @@ const subnavSections = [
 
     <section class="skim-band" aria-label="Executive skim">
       <article class="skim-card">
-        <h3 class="skim-title">Amtrak already documents the risk.</h3>
-        <p class="skim-copy">Fox Point sits beside a part of the Northeast Corridor where flooding risk and delay costs are already well documented.</p>
+        <h3 class="skim-title">What is this?</h3>
+        <p class="skim-copy">A 2.7-acre wetland restoration at Fox Point Cove, with a long-term vision continuing the shoreline north to the Claymont Transit Center.</p>
       </article>
       <article class="skim-card">
-        <h3 class="skim-title">The site and the plan are already clear.</h3>
-        <p class="skim-copy">The site boundary, the state plan, and DNREC oversight make this easier to move than a project starting from scratch.</p>
+        <h3 class="skim-title">Has anyone committed money?</h3>
+        <p class="skim-copy">$5.03M is already linked to the site across three funding sources — a state bond pledge, a DNREC restoration line, and a NOAA settlement.</p>
       </article>
       <article class="skim-card">
-        <h3 class="skim-title">Pay for the work that gets the project ready.</h3>
-        <p class="skim-copy">The gap is design, permits, planning, and people working together to turn a strong idea into a real project.</p>
+        <h3 class="skim-title">Is there a plan?</h3>
+        <p class="skim-copy">DNREC named the site in a January 2025 plan. The state has outlined the work and the next steps.</p>
       </article>
       <article class="skim-card">
-        <h3 class="skim-title">$5.03M can move faster with the right early work.</h3>
-        <p class="skim-copy">This would not create demand from scratch. It would help existing dollars move toward a project people can actually build.</p>
+        <h3 class="skim-title">What is missing?</h3>
+        <p class="skim-copy">Design, permits, and the coordination to turn pledges into construction.</p>
       </article>
     </section>
   </Fragment>
@@ -78,163 +79,11 @@ const subnavSections = [
   <SubNav slot="subnav" sections={subnavSections} />
 
   <main id="main-content" tabindex="-1">
-    <section class="panel risk-section" id="amtrak">
-      <div class="section-header">
-        <div>
-          <p class="section-label">Risk</p>
-          <h2>Fox Point is the Northeast Corridor’s most vulnerable shoreline.</h2>
-        </div>
-        <p class="section-copy">Amtrak’s own climate planners have focused on the Wilmington stretch as the Northeast Corridor’s most exposed section — low elevation, two rivers, and a concentration of critical rail infrastructure at the river’s edge. Fox Point sits where those pressures meet the rail line, and Amtrak has already recorded the cost.</p>
-      </div>
-
-      <div class="risk-big-row">
-        <article class="risk-stat-card">
-          <p class="risk-number">$127M</p>
-          <h3 class="risk-label">Losses already recorded</h3>
-          <p class="risk-sub">Delay and revenue costs · 2006–2019</p>
-          <div class="risk-bar-track">
-            <div class="risk-bar-fill rfill-84"></div>
-          </div>
-        </article>
-
-        <article class="risk-stat-card">
-          <p class="risk-number">450+</p>
-          <h3 class="risk-label">Storm-related disruptions</h3>
-          <p class="risk-sub">2006–2019 · Northeast Corridor</p>
-          <div class="risk-bar-track">
-            <div class="risk-bar-fill rfill-full"></div>
-          </div>
-        </article>
-
-        <article class="risk-stat-card risk-hot-card">
-          <p class="risk-number">$220M</p>
-          <h3 class="risk-label">Possible future losses</h3>
-          <p class="risk-sub">Next decade · if nothing changes</p>
-          <div class="risk-gradient-bar"></div>
-        </article>
-      </div>
-
-      <div class="trio-grid">
-        <article class="weather-card wc-rain">
-          <p class="wc-title">Heavy storms are almost twice as common as they were in 1960.</p>
-          <div class="wc-rows">
-            <div class="wc-row">
-              <span class="wc-year">1960s</span>
-              <div class="dot-strip">
-                <span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span>
-              </div>
-              <span class="wc-count">5×</span>
-            </div>
-            <div class="wc-row wc-row-now">
-              <span class="wc-year">Today</span>
-              <div class="dot-strip">
-                <span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span>
-                <span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span><span aria-hidden="true" class="dot"></span>
-              </div>
-              <span class="wc-count">10×</span>
-            </div>
-          </div>
-          <p class="wc-stat-num">+92%</p>
-          <p class="wc-connect">→ More storms mean more chances for water to reach the tracks. Amtrak recorded more than 450 weather-related disruptions from 2006 to 2019.</p>
-        </article>
-
-        <article class="weather-card wc-intensity">
-          <p class="wc-title">Flooding now comes from both stronger storms and rising water.</p>
-          <div class="compound-scene" role="img" aria-label="Cross-section showing the Amtrak rail corridor squeezed between heavier storms above and rising seas below">
-            <div class="cs-sky">
-              <div class="cs-rain"></div>
-              <span class="cs-badge cs-badge-top">↓ Storms: +55% more intense</span>
-            </div>
-            <div class="cs-track-zone">
-              <div class="cs-rail"></div>
-              <div class="cs-ties"></div>
-              <div class="cs-rail"></div>
-            </div>
-            <div class="cs-flood-zone">
-              <span class="cs-badge cs-badge-bot">↑ Sea level rising — Wilmington stretch identified by Amtrak</span>
-            </div>
-          </div>
-          <p class="wc-connect">→ A restored living shoreline at Fox Point can help with both problems by slowing runoff and softening wave action before water reaches the rail edge.</p>
-        </article>
-
-        <article class="weather-card wc-heat">
-          <p class="wc-title">Hotter summers will put more stress on the rail line.</p>
-          <div class="wc-thermo-compare">
-            <div class="wc-thermo-item">
-              <div class="thermo-wrap">
-                <div class="thermo"><div class="thermo-fill tf-now"></div></div>
-                <div class="thermo-bulb tb-now"></div>
-              </div>
-              <span class="wc-year">Now</span>
-            </div>
-            <div class="wc-thermo-item">
-              <div class="thermo-wrap">
-                <div class="thermo"><div class="thermo-fill tf-2050"></div></div>
-                <div class="thermo-bulb tb-2050"></div>
-              </div>
-              <span class="wc-year wc-year-now">2050</span>
-            </div>
-          </div>
-          <p class="wc-stat-num">+4–5°F</p>
-          <p class="wc-connect">→ Extreme heat can damage rails and signals. Restored wetland plants at Fox Point can help cool the corridor edge.</p>
-        </article>
-      </div>
-
-      <p class="source-note section-source">Sources: Amtrak Climate Vulnerability Assessment (2022); Amtrak Climate Resilience Strategic Plan (2022); NEC Climate Pilot Adaptation Plan (2017)</p>
-    </section>
-
-    <section class="panel precedent-section" id="precedent">
-      <div class="section-header">
-        <div>
-          <p class="section-label">Precedent</p>
-          <h2>The model is built.<br />We can borrow it.</h2>
-        </div>
-        <p class="section-copy">Fox Point and the Hudson Highlands share the harder version of a shoreline-restoration problem — a thin strip of riverfront wedged between an active passenger rail line on one side and a highway on the other, with rising water and limited public access. The Hudson Highlands Fjord Trail (HHFT) shows the model can be built.</p>
-      </div>
-
-      <figure class="precedent-figure">
-        <img
-          src="/assets/precedent-hhft-rendering.jpg"
-          alt="Hudson Highlands Fjord Trail design rendering: a gravel shared-use path along the Hudson River shoreline with a boulder edge stabilizing the bank, a long wood bench, and a planted buffer separating walkers and cyclists from the rail corridor."
-          class="precedent-figure-image"
-          width="768"
-          height="501"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="precedent-figure-caption">
-          Hudson Highlands Fjord Trail · design rendering. Boulder edge, expanded trail, planted buffer — the same toolkit Fox Point needs.
-        </figcaption>
-      </figure>
-
-      <div class="precedent-grid">
-        <article class="corridor-brief-card">
-          <h3 class="corridor-brief-eyebrow">Hudson Highlands Fjord Trail</h3>
-          <ul class="precedent-list">
-            <li>Hudson River shoreline</li>
-            <li>Metro-North Hudson Line</li>
-            <li>NY State Route 9D</li>
-            <li>Restoring access + shoreline resilience</li>
-          </ul>
-        </article>
-        <article class="corridor-brief-card precedent-card-here">
-          <h3 class="corridor-brief-eyebrow">Claymont → Fox Point</h3>
-          <ul class="precedent-list">
-            <li>Delaware River shoreline</li>
-            <li>Amtrak Northeast Corridor</li>
-            <li>Interstate 495</li>
-            <li>Restoring access + shoreline resilience</li>
-          </ul>
-        </article>
-      </div>
-
-      <p class="source-note section-source">Source: <a class="precedent-link" href="https://hhft.org" target="_blank" rel="noopener">hhft.org</a></p>
-    </section>
-
     <section class="photo-section" id="site">
       <div class="photo-header">
         <p class="section-label">Site Readiness</p>
         <h2>Phase 1 restores the cove. The vision reconnects the shoreline to the Claymont Transit Center.</h2>
+        <p class="photo-lead-in">The orange box is Phase 1. The green segment is the trail that already exists. The dashed segment is the long-term vision — about 2 miles of shoreline north to the Transit Center.</p>
       </div>
       <div class="photo-card">
         <svg
@@ -369,27 +218,16 @@ const subnavSections = [
             <text x="360" y="308" text-anchor="middle" class="site-schematic-label site-schematic-label--water" font-size="14" letter-spacing="1.5">RIVER</text>
           </g>
         </svg>
-
-        <div class="photo-overlay">
-          <div class="photo-badge">
-            <p class="photo-badge-title">Phase 1 — Fox Point Cove</p>
-            <p>$5M pledged and a state plan in place for a 2.7-acre wetland restoration. The long-term vision continues the shoreline about 2 miles north to the Claymont Transit Center.</p>
-            <a class="photo-trail-link" href="https://delawaregreenways.org/trail/fox-point-riverview-trail/" target="_blank" rel="noopener">See the existing trail →</a>
-          </div>
-        </div>
       </div>
       <div class="site-chips">
-        <span>Phase 1 funded · $5M pledged</span>
-        <span>2.7 acres of wetland restoration</span>
+        <span>Phase 1 · 2.7 acres · $5M pledged</span>
         <span>Existing trail · ~ 1 mi</span>
-        <span>Long-term reconnection · ~ 2 mi</span>
-        <span>203 river acres in scope</span>
-        <span>Delaware Greenways trail partner</span>
-        <span>Established state park</span>
+        <span>Long-term vision · ~ 2 mi to Transit Center</span>
+        <a class="site-chip-link" href="https://delawaregreenways.org/trail/fox-point-riverview-trail/" target="_blank" rel="noopener">See the existing trail →</a>
       </div>
     </section>
 
-    <section class="panel corridor-section">
+    <section class="panel corridor-section" id="plan">
       <div class="section-header">
         <div>
           <p class="section-label">Project Readiness</p>
@@ -509,32 +347,87 @@ const subnavSections = [
       </div>
     </section>
 
-    <section class="panel actions-section">
+    <section class="panel stakes-strip" id="stakes">
+      <p class="section-label">Why Now</p>
+      <h2 class="stakes-strip-headline">Amtrak has already priced the cost of doing nothing on this stretch.</h2>
+      <div class="stakes-strip-row">
+        <div class="stakes-strip-item">
+          <p class="stakes-strip-num">$127M</p>
+          <p class="stakes-strip-label">Losses already recorded · 2006–2019</p>
+        </div>
+        <div class="stakes-strip-item">
+          <p class="stakes-strip-num">450+</p>
+          <p class="stakes-strip-label">Storm-related disruptions on the NEC</p>
+        </div>
+        <div class="stakes-strip-item">
+          <p class="stakes-strip-num">$220M</p>
+          <p class="stakes-strip-label">Possible future losses if nothing changes</p>
+        </div>
+      </div>
+      <a class="stakes-strip-link" href="/rail-corridor/#climate-risk">See the full climate risk picture →</a>
+    </section>
+
+    <section class="panel precedent-section" id="precedent">
       <div class="section-header">
         <div>
-          <p class="section-label">What This Work Would Produce</p>
-          <h2>Materials DNREC and Delaware Greenways can put to work.</h2>
+          <p class="section-label">Precedent</p>
+          <h2>The model is built.<br />We can borrow it.</h2>
         </div>
-        <p class="section-copy">The point is to move Fox Point from an idea with real backing to a project with materials people can use right away.</p>
+        <p class="section-copy">Fox Point and the Hudson Highlands share the harder version of a shoreline-restoration problem — a thin strip of riverfront wedged between an active passenger rail line on one side and a highway on the other, with rising water and limited public access. The Hudson Highlands Fjord Trail (HHFT) shows the model can be built.</p>
       </div>
 
-      <div class="deliverables-grid">
-        <article>
-          <h3>Shared project brief</h3>
-          <p>A short set of words, images, and facts that agencies, local groups, and other supporters can all use without rewriting the story each time.</p>
+      <figure class="precedent-figure">
+        <img
+          src="/assets/precedent-hhft-rendering.jpg"
+          alt="Hudson Highlands Fjord Trail design rendering: a gravel shared-use path along the Hudson River shoreline with a boulder edge stabilizing the bank, a long wood bench, and a planted buffer separating walkers and cyclists from the rail corridor."
+          class="precedent-figure-image"
+          width="768"
+          height="501"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="precedent-figure-caption">
+          Hudson Highlands Fjord Trail · design rendering. Boulder edge, expanded trail, planted buffer — the same toolkit Fox Point needs.
+        </figcaption>
+      </figure>
+
+      <div class="precedent-grid">
+        <article class="corridor-brief-card">
+          <h3 class="corridor-brief-eyebrow">Hudson Highlands Fjord Trail</h3>
+          <ul class="precedent-list">
+            <li>Hudson River shoreline</li>
+            <li>Metro-North Hudson Line</li>
+            <li>NY State Route 9D</li>
+            <li>Restoring access + shoreline resilience</li>
+          </ul>
         </article>
-        <article>
-          <h3>Design and permit package</h3>
-          <p>The practical design work needed to turn the restoration plan into clear permit and construction decisions.</p>
+        <article class="corridor-brief-card precedent-card-here">
+          <h3 class="corridor-brief-eyebrow">Claymont → Fox Point</h3>
+          <ul class="precedent-list">
+            <li>Delaware River shoreline</li>
+            <li>Amtrak Northeast Corridor</li>
+            <li>Interstate 495</li>
+            <li>Restoring access + shoreline resilience</li>
+          </ul>
         </article>
-        <article>
-          <h3>Shared work plan</h3>
-          <p>One shared plan for DNREC, Delaware Greenways, local advocates, and other groups so the work can move with less confusion.</p>
-        </article>
-        <article>
-          <h3>Funding roadmap</h3>
-          <p>A clear map of which dollars can move, what triggers them, and what early work needs to happen first.</p>
-        </article>
+      </div>
+
+      <p class="source-note section-source">Source: <a class="precedent-link" href="https://hhft.org" target="_blank" rel="noopener">hhft.org</a></p>
+    </section>
+
+    <section class="panel read-next" aria-label="Read next">
+      <p class="section-label">Read Next</p>
+      <div class="read-next-grid">
+        <a class="read-next-card" href="/rail-corridor/">
+          <p class="read-next-eyebrow">Rail Corridor</p>
+          <h3>The climate risk and federal investment along the rail line.</h3>
+          <span class="read-next-cta">Read →</span>
+        </a>
+        <a class="read-next-card" href="/ecological-restoration/">
+          <p class="read-next-eyebrow">Ecological Restoration</p>
+          <h3>A new federal water rule and two endangered sturgeon on this stretch.</h3>
+          <span class="read-next-cta">Read →</span>
+        </a>
       </div>
     </section>
 
