@@ -1613,7 +1613,12 @@ main section[id] {
   line-height: 1.04;
 }
 
-.page-intro p {
+/* Lede paragraph styles — scoped via :not(.kicker) so the kicker
+   element (also a <p>) keeps its accent-orange / 0.8rem styling.
+   Without :not(.kicker), `.page-intro p` (spec 0,1,1) would beat
+   `.kicker` (0,1,0) on color and font-size, flattening the visual
+   hierarchy on every new page intro. */
+.page-intro p:not(.kicker) {
   margin: 0;
   max-width: 60ch;
   color: var(--muted);

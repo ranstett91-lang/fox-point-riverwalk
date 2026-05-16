@@ -20,13 +20,7 @@ const isCurrent = (href: string) => {
   <a class="brandmark" href="/">Claymont to Fox Point</a>
   <div class="topbar-links">
     {links.map(({ href, label }) => (
-      <a
-        href={href}
-        aria-current={isCurrent(href) ? 'page' : undefined}
-        class:list={[{ 'is-current': isCurrent(href) }]}
-      >
-        {label}
-      </a>
+      <a href={href} aria-current={isCurrent(href) ? 'page' : undefined} class:list={[{ 'is-current': isCurrent(href) }]}>{label}</a>
     ))}
   </div>
 </nav>
