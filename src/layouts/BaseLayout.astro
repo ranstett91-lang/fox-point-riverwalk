@@ -71,13 +71,17 @@ const {
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <div class="page-shell">
-      <header class="hero" id="top">
+    <div class="page-shell" id="top">
+      <div class="page-header" data-page-header>
         <Topbar />
-        <slot name="hero" />
-      </header>
+        <slot name="subnav" />
+      </div>
 
-      <slot name="subnav" />
+      {Astro.slots.has('hero') && (
+        <header class="hero">
+          <slot name="hero" />
+        </header>
+      )}
 
       <slot />
 
@@ -104,6 +108,32 @@ const {
         });
       }
       document.addEventListener('astro:page-load', initSkipLink);
+
+      // Publish the rendered .page-header height (Topbar + SubNav
+      // stacked, both sticky) to --page-header-height so the global
+      // scroll-padding-top and the SubNav scroll-spy can offset by the
+      // actual sticky-bar height. Re-publish on resize and re-init on
+      // every view-transition page load.
+      let pageHeaderAbortController: AbortController | null = null;
+      function initPageHeaderHeight() {
+        pageHeaderAbortController?.abort();
+        pageHeaderAbortController = new AbortController();
+        const { signal } = pageHeaderAbortController;
+        const header = document.querySelector<HTMLElement>('[data-page-header]');
+        if (!header) return;
+        const publish = () => {
+          const h = header.getBoundingClientRect().height;
+          if (h > 0) {
+            document.documentElement.style.setProperty(
+              '--page-header-height',
+              `${h}px`,
+            );
+          }
+        };
+        publish();
+        window.addEventListener('resize', publish, { passive: true, signal });
+      }
+      document.addEventListener('astro:page-load', initPageHeaderHeight);
     </script>
   </body>
 </html>

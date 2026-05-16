@@ -27,9 +27,9 @@ const { sections, ariaLabel = 'On this page' } = Astro.props;
   //
   //  - keep the active pill visible inside the horizontal scroll-snap
   //    container on small screens
-  //  - publish the rendered sub-nav height to --subnav-height so the
-  //    global scroll-padding-top stays accurate (otherwise clicked
-  //    anchors land under the sticky bar)
+  //  - measure the sticky .page-header (Topbar + SubNav stacked) so
+  //    the scroll-spy activation offset matches the actual height of
+  //    everything pinned to the top of the viewport
   //  - scope every listener to an AbortController so view-transition
   //    re-init cleanly tears down the previous page's window listeners
   //    (otherwise scroll/resize handlers accumulate across navigations
@@ -58,25 +58,15 @@ const { sections, ariaLabel = 'On this page' } = Astro.props;
         .filter((s): s is HTMLElement => s !== null);
       if (!sections.length) return;
 
-      // Publish the rendered sub-nav height as a CSS custom property so
-      // html { scroll-padding-top: calc(var(--subnav-height) + 0.5rem) }
-      // matches the visual size of the bar. Re-publish on resize.
-      const publishHeight = () => {
-        const height = subnav.getBoundingClientRect().height;
-        if (height > 0) {
-          document.documentElement.style.setProperty(
-            '--subnav-height',
-            `${height}px`,
-          );
-        }
+      // Activation offset: distance from the top of the viewport at
+      // which a section becomes the "current" one. The sticky element
+      // is .page-header (Topbar + SubNav stacked), so we measure that
+      // — not just the SubNav. BaseLayout's own script publishes the
+      // same value as --page-header-height for scroll-padding-top.
+      const getActivationOffset = () => {
+        const pageHeader = document.querySelector<HTMLElement>('[data-page-header]');
+        return (pageHeader?.getBoundingClientRect().height ?? 0) + 24;
       };
-      publishHeight();
-
-      // Activation offset: distance from the top of the viewport at which
-      // a section becomes the "current" one. Mirrors --subnav-height
-      // plus a little breathing room.
-      const getActivationOffset = () =>
-        subnav.getBoundingClientRect().height + 24;
 
       const setActive = (id: string) => {
         links.forEach((link) => {
@@ -150,14 +140,7 @@ const { sections, ariaLabel = 'On this page' } = Astro.props;
 
       scheduleUpdate();
       window.addEventListener('scroll', scheduleUpdate, { passive: true, signal });
-      window.addEventListener(
-        'resize',
-        () => {
-          publishHeight();
-          scheduleUpdate();
-        },
-        { passive: true, signal },
-      );
+      window.addEventListener('resize', scheduleUpdate, { passive: true, signal });
       links.forEach((link) =>
         link.addEventListener('click', scheduleUpdate, { signal }),
       );
