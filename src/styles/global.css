@@ -184,8 +184,18 @@ input {
 }
 
 /* ─── IN-PAGE SUB-NAV (sticky via parent .page-header) ─── */
+/* Content-width floating segmented control — sized to its chips,
+   centered on the page. The full-width bar previously left ~800px
+   of empty cream beside the chips at desktop and read as boxy.
+   `width: max-content` shrink-wraps to the chip group; `margin: 0
+   auto` centers. `max-width: calc(100% - 2rem)` keeps it within
+   the 1180px page-shell with a 1rem gutter so it never collides
+   with the topbar's pill edges above. */
 .subnav {
-  margin: 0 1rem 1rem;
+  display: block;
+  width: max-content;
+  max-width: calc(100% - 2rem);
+  margin: 0 auto 1rem;
   padding: 0.55rem 0.85rem;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -247,8 +257,14 @@ main section[id] {
 
 @media (max-width: 600px) {
   .subnav {
-    /* Edge-to-edge on small screens so pills can scroll-snap horizontally */
+    /* Edge-to-edge on small screens so pills can scroll-snap horizontally.
+       Overrides the desktop max-content sizing so the bar fills the
+       viewport (anchor for the horizontal scroll affordance and the
+       left/right fade gradients). */
     position: relative;
+    display: block;
+    width: auto;
+    max-width: none;
     margin: 0 0 1rem;
     padding: 0.45rem 0.5rem;
     border-radius: 0;
@@ -1378,12 +1394,22 @@ p.resource-largefile-hint {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.74rem;
-  font-weight: 800;
+  /* The earlier 0.74rem / weight 800 was mushy on dark backgrounds:
+     extra-heavy strokes at ~12px on macOS subpixel AA bled cream-on-
+     green into "blurry" letterforms. Bumping size + dropping weight
+     to 700 sharpens the strokes; antialiased font-smoothing renders
+     white-on-dark text crisply (the macOS default subpixel AA is
+     tuned for dark-on-light); slight letter-spacing eliminates the
+     remaining digit-collision look on small viewports. */
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.015em;
   color: #fffaf1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   white-space: nowrap;
-  padding: 0 0.6rem;
+  padding: 0 0.7rem;
   border-radius: 999px;
 }
 
@@ -1526,6 +1552,17 @@ p.resource-largefile-hint {
     rgba(255, 255, 255, 0.6);
   border: 1px solid var(--line);
   text-align: center;
+}
+
+/* Atlantic Sturgeon silhouette above the numeral: signals subject
+   matter without imagery overhead, currentcolor-driven so it tints
+   with the surrounding text. Width-capped to the feature-stat's
+   interior so it never crowds the "< 250" numeral underneath. */
+.feature-stat-art {
+  width: clamp(180px, 28vw, 280px);
+  height: auto;
+  color: var(--brand);
+  margin-bottom: 0.25rem;
 }
 
 /* Scoped to win specificity against `.lede, .panel p, ...` which
