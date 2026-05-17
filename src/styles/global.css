@@ -198,8 +198,14 @@ input {
 .subnav-list {
   display: flex;
   align-items: center;
+  /* Center the chips horizontally inside the full-width subnav pill.
+     Left-aligned chips left ~840px of empty space at desktop and the
+     bar felt boxy; centered is the Apple-grade pattern (apple.com/
+     iphone-air sticky nav). Falls back to flex-start at mobile since
+     the list scrolls horizontally there. */
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 0.3rem 0.55rem;
+  gap: 0.4rem 0.75rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -208,11 +214,17 @@ input {
 .subnav-list a {
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
-  padding: 0.35rem 0.85rem;
+  /* Roomier chip footprint: was min-height 36 / padding .35 .85 /
+     font .88rem — that read as small, unfinished punctuation inside
+     a tall full-width bar. Bumping the chip body so the bar feels
+     proportionate to its visual weight. Still under the 44px HIG
+     limit on desktop (mouse target); mobile @media override at
+     ≤600px keeps the 44px touch target there. */
+  min-height: 40px;
+  padding: 0.5rem 1.1rem;
   border-radius: 999px;
   color: var(--muted);
-  font-size: 0.88rem;
+  font-size: 0.95rem;
   font-weight: 600;
   transition: color 160ms ease, background-color 160ms ease;
 }
@@ -277,6 +289,11 @@ main section[id] {
     );
   }
   .subnav-list {
+    /* Override the desktop `justify-content: center`: when the list
+       overflows horizontally, centering causes the leading chip to
+       clip out of view. Flex-start anchors content to the left so
+       horizontal scroll starts cleanly. */
+    justify-content: flex-start;
     flex-wrap: nowrap;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -404,7 +421,15 @@ main section[id] {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
-  margin: -4.25rem 1rem 0;
+  /* Old -4.25rem overlap was too aggressive at wide viewports: the
+     cards reached up far enough that any large-viewport zoom or
+     image-crop variance let the hero-points pills bleed through the
+     card gaps. Halve the overlap so the "anchored to hero" gesture
+     still reads but the pills sit cleanly above the card top edge
+     at every desktop width. Paired with .hero-fb-content
+     padding-bottom this gives a guaranteed minimum 60px of pill
+     clearance regardless of pill row count or viewport. */
+  margin: -2rem 1rem 0;
 }
 
 .skim-card {
@@ -1503,7 +1528,12 @@ p.resource-largefile-hint {
   text-align: center;
 }
 
-.feature-stat-num {
+/* Scoped to win specificity against `.lede, .panel p, ...` which
+   otherwise wins (0,1,1 > 0,1,0) and paints the numeral as muted
+   gray-green instead of brand green. Same cascade trap that bit
+   .resource-largefile-hint. */
+.feature-stat .feature-stat-num,
+p.feature-stat-num {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(3.4rem, 8vw, 6.5rem);
@@ -1542,7 +1572,11 @@ p.resource-largefile-hint {
   color: var(--brand);
 }
 
-.community-cta-lede {
+/* Same cascade scoping as .feature-stat-num — the unscoped class
+   loses to `.panel p` (0,1,1 > 0,1,0) and renders this lede as
+   muted instead of ink. */
+.community-cta .community-cta-lede,
+p.community-cta-lede {
   margin: 0 0 1.25rem;
   max-width: 60ch;
   color: var(--ink);
