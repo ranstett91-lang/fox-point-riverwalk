@@ -56,19 +56,19 @@ const subnavSections = [
 
     <section class="skim-band" aria-label="Executive skim">
       <article class="skim-card">
-        <h3 class="skim-title">What is this?</h3>
+        <h2 class="skim-title">What is this?</h2>
         <p class="skim-copy">A 2.7-acre wetland restoration at Fox Point Cove, with a long-term vision continuing the shoreline north to the Claymont Transit Center.</p>
       </article>
       <article class="skim-card">
-        <h3 class="skim-title">Has anyone committed money?</h3>
+        <h2 class="skim-title">Has anyone committed money?</h2>
         <p class="skim-copy">$5.03M is already linked to the site across three funding sources — a state bond pledge, a DNREC restoration line, and a NOAA settlement.</p>
       </article>
       <article class="skim-card">
-        <h3 class="skim-title">Is there a plan?</h3>
+        <h2 class="skim-title">Is there a plan?</h2>
         <p class="skim-copy">DNREC named the site in a January 2025 plan. The state has outlined the work and the next steps.</p>
       </article>
       <article class="skim-card">
-        <h3 class="skim-title">What is missing?</h3>
+        <h2 class="skim-title">What is missing?</h2>
         <p class="skim-copy">Design, permits, and the coordination to turn pledges into construction.</p>
       </article>
     </section>
@@ -351,8 +351,94 @@ const subnavSections = [
       </div>
     </section>
 
+    <section class="panel community-cta" aria-labelledby="cta-heading">
+      <p class="section-label">What you can do</p>
+      <h2 id="cta-heading">Tell the people who can move this.</h2>
+      <p class="community-cta-lede">
+        Funding is already on the table. What is still needed is the early work
+        that turns pledges into permits and shovels. Constituent letters to
+        Delaware's federal delegation are the most direct lever — they tell
+        committees and agencies that Fox Point is a priority back home.
+      </p>
+      <div class="community-cta-actions">
+        <a
+          class="community-cta-btn community-cta-btn-primary"
+          href="https://mcbride.house.gov/contact"
+          target="_blank"
+          rel="noopener"
+        >
+          Contact your representative →
+        </a>
+        <button
+          class="community-cta-btn community-cta-btn-secondary"
+          type="button"
+          data-share-brief
+        >
+          Share this brief
+        </button>
+      </div>
+      <p class="community-cta-fineprint">
+        Not a Delaware constituent? You can still write to the
+        <a
+          href="https://www.epa.gov/aboutepa/regional-and-geographic-offices"
+          target="_blank"
+          rel="noopener"
+        >EPA's regional office</a> about the Delaware River water-quality
+        standard, or share this page with someone who is.
+      </p>
+    </section>
+
     <section class="library panel" id="library">
       <ResourceLibrary />
     </section>
+
+    <script>
+      // Web Share API with clipboard fallback. No external libraries,
+      // CSP-safe (no inline). Looks for any [data-share-brief] button
+      // and wires it up on every page-load, scoped via AbortController
+      // so view-transitions don't leak listeners across navigations.
+      let shareAbortController: AbortController | null = null;
+      function initShareButtons() {
+        shareAbortController?.abort();
+        shareAbortController = new AbortController();
+        const { signal } = shareAbortController;
+        const buttons = document.querySelectorAll<HTMLButtonElement>('[data-share-brief]');
+        buttons.forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            const shareData = {
+              title: document.title,
+              text: 'Claymont to Fox Point — project brief',
+              url: window.location.href,
+            };
+            try {
+              if (navigator.share && navigator.canShare?.(shareData)) {
+                await navigator.share(shareData);
+                return;
+              }
+            } catch (err) {
+              if ((err as DOMException)?.name === 'AbortError') return;
+            }
+            try {
+              await navigator.clipboard.writeText(shareData.url);
+              const original = btn.textContent;
+              btn.textContent = 'Link copied ✓';
+              btn.setAttribute('aria-live', 'polite');
+              setTimeout(() => {
+                btn.textContent = original;
+              }, 2400);
+            } catch {
+              // Final fallback — open mail client. Users on browsers
+              // without clipboard API still get a working share path.
+              window.location.href =
+                'mailto:?subject=' +
+                encodeURIComponent(shareData.title) +
+                '&body=' +
+                encodeURIComponent(shareData.url);
+            }
+          }, { signal });
+        });
+      }
+      document.addEventListener('astro:page-load', initShareButtons);
+    </script>
   </main>
 </BaseLayout>

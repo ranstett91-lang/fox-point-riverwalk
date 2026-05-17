@@ -144,6 +144,9 @@ input {
 }
 
 .brandmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   font-weight: 800;
   letter-spacing: 0.02em;
 }
@@ -233,11 +236,45 @@ main section[id] {
 @media (max-width: 600px) {
   .subnav {
     /* Edge-to-edge on small screens so pills can scroll-snap horizontally */
+    position: relative;
     margin: 0 0 1rem;
     padding: 0.45rem 0.5rem;
     border-radius: 0;
     border-left: none;
     border-right: none;
+  }
+  /* Right-edge fade affordance: tells the user there's more content
+     to scroll. Sized just wide enough to feel like an Apple-style
+     overflow hint without obscuring a full chip. Uses the subnav
+     background color so it visually melts into the bar. The
+     left-edge counterpart handles scrolled-into-view state. */
+  .subnav::after,
+  .subnav::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1.75rem;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .subnav::after {
+    right: 0;
+    background: linear-gradient(
+      to right,
+      rgba(255, 250, 242, 0),
+      rgba(255, 250, 242, 0.92) 70%,
+      rgba(255, 250, 242, 1)
+    );
+  }
+  .subnav::before {
+    left: 0;
+    background: linear-gradient(
+      to left,
+      rgba(255, 250, 242, 0),
+      rgba(255, 250, 242, 0.92) 70%,
+      rgba(255, 250, 242, 1)
+    );
   }
   .subnav-list {
     flex-wrap: nowrap;
@@ -253,6 +290,13 @@ main section[id] {
   .subnav-list a {
     scroll-snap-align: start;
     flex-shrink: 0;
+    /* Apple HIG 44pt tap target on touch screens. Desktop keeps the
+       slimmer 36px chip height for visual restraint; mobile gets the
+       full HIG-compliant size. */
+    min-height: 44px;
+    /* `white-space: nowrap` (added in #26) prevents long labels like
+       "The species at stake" from wrapping inside the pill; kept here
+       so the rule is co-located with the other mobile chip overrides. */
     white-space: nowrap;
   }
 }
@@ -294,6 +338,11 @@ main section[id] {
   align-items: center;
   min-height: 560px;
   padding: clamp(1.5rem, 4vw, 3rem);
+  /* Extra bottom padding clears the .skim-band's -4.25rem negative
+     margin so the hero-points pills don't visually collide with the
+     skim-cards at desktop widths. Skim-band is display:flow on mobile
+     (≤720px), so no extra clearance is needed there. */
+  padding-bottom: clamp(5rem, 8vw, 6.5rem);
   max-width: 700px;
 }
 
@@ -675,7 +724,12 @@ main section[id] {
   font-size: 0.72rem;
 }
 
-.resource-largefile-hint {
+/* .resource-card scoping wins specificity against `.panel p` which
+   otherwise repaints this hint as var(--muted) (#607063) — at 11.5px
+   uppercase on rgba(240,221,207,.65) that drops contrast to 3.99:1,
+   failing WCAG 1.4.3 AA. Using --brand here gives ~9:1. */
+.resource-card .resource-largefile-hint,
+p.resource-largefile-hint {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -683,8 +737,8 @@ main section[id] {
   padding: 0.4rem 0.65rem;
   align-self: flex-start;
   border-radius: 999px;
-  background: rgba(240, 221, 207, 0.65);
-  color: #6e3e1e;
+  background: rgba(240, 221, 207, 0.85);
+  color: var(--brand);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -1429,6 +1483,145 @@ main section[id] {
   color: var(--ink);
 }
 
+/* ─── FEATURE STAT (oversized single-stat moment) ─────────────
+   A reading-rhythm break for sections that would otherwise be
+   header → card-grid → cards. The numeral does the work of an
+   image: a single arresting fact, large serif, centered, with a
+   short caption underneath. Apple uses this same shape on
+   apple.com/environment ("0.0036%", "100%", etc.). */
+.feature-stat {
+  display: grid;
+  justify-items: center;
+  gap: 0.6rem;
+  margin: 1.5rem 0 1.75rem;
+  padding: clamp(1.75rem, 4vw, 2.5rem) 1.25rem;
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(120% 110% at 50% 0%, rgba(216, 231, 215, 0.55), transparent 60%),
+    rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.feature-stat-num {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.4rem, 8vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  color: var(--brand);
+}
+
+.feature-stat-label {
+  margin: 0;
+  max-width: 38ch;
+  color: var(--ink);
+  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+  line-height: 1.55;
+}
+
+/* ─── COMMUNITY CTA (close-the-loop panel) ─────────────────────
+   Apple-style call-to-action: one primary verb, one secondary
+   option, plain language, no moralizing. Two buttons of equal
+   tap height (44pt Apple HIG), primary filled, secondary outlined.
+   The fineprint paragraph gives a "still useful if you don't fit
+   the primary path" off-ramp. */
+.community-cta {
+  background:
+    radial-gradient(120% 100% at 100% 0%, rgba(200, 116, 66, 0.10), transparent 55%),
+    radial-gradient(100% 100% at 0% 100%, rgba(216, 231, 215, 0.55), transparent 55%),
+    rgba(255, 255, 255, 0.55);
+}
+
+.community-cta h2 {
+  margin: 0.35rem 0 0.6rem;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.12;
+  color: var(--brand);
+}
+
+.community-cta-lede {
+  margin: 0 0 1.25rem;
+  max-width: 60ch;
+  color: var(--ink);
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.community-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.1rem;
+}
+
+.community-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Apple HIG 44pt tap target. */
+  min-height: 44px;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 0.96rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease,
+              transform 180ms ease, box-shadow 180ms ease;
+}
+
+.community-cta-btn-primary {
+  background: var(--brand);
+  color: #fffaf1;
+  border: 1px solid var(--brand);
+  box-shadow: 0 6px 18px rgba(18, 54, 42, 0.18);
+}
+
+.community-cta-btn-primary:hover {
+  background: #0e2a20;
+  transform: translateY(-1px);
+}
+
+.community-cta-btn-secondary {
+  background: transparent;
+  color: var(--brand);
+  border: 1px solid var(--brand);
+}
+
+.community-cta-btn-secondary:hover {
+  background: rgba(18, 49, 38, 0.06);
+  transform: translateY(-1px);
+}
+
+.community-cta-fineprint {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.community-cta-fineprint a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+@media (max-width: 480px) {
+  .community-cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .community-cta-btn {
+    width: 100%;
+  }
+}
+
 /* ─── PAGE INTRO (top of new content pages) ─── */
 
 .page-intro {
@@ -1444,8 +1637,13 @@ main section[id] {
   margin: 0 0 0.6rem;
   max-width: 22ch;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.1rem, 4.5vw, 3.4rem);
-  line-height: 1.04;
+  /* Old clamp(2.1rem, 4.5vw, 3.4rem) bottomed out at 33.6px on phones,
+     wrapping long content-page H1s ("Two endangered sturgeon and a new
+     federal water rule both point to this stretch of river.") to ~7
+     lines at 360px. Drop the floor to 1.55rem so the H1 stays 3–4
+     lines on phones while keeping the editorial 3.4rem at desktop. */
+  font-size: clamp(1.55rem, 5.6vw, 3.4rem);
+  line-height: 1.06;
 }
 
 /* Lede paragraph styles — scoped via :not(.kicker) so the kicker
@@ -1562,13 +1760,21 @@ main section[id] {
 
   .topbar-links {
     justify-content: space-between;
+    /* Keep all four links on a single row beneath the brandmark.
+       Previously they wrapped to a 2x2 grid at <=420px when the
+       labels' combined width exceeded the container. */
     flex-wrap: nowrap;
     gap: 0.25rem;
   }
 
   .topbar-links a {
+    /* Shrink horizontal padding so labels keep 44px tap height
+       (min-height: 44px set at .topbar-links a base rule) but
+       fit on one row at narrow phones. Apple HIG keeps targets
+       large; we only trim horizontal whitespace. */
     padding: 0.45rem 0.55rem;
     font-size: 0.95rem;
+    white-space: nowrap;
   }
 
   .page-intro {
@@ -1666,7 +1872,10 @@ main section[id] {
 .site-chip-link {
   display: inline-flex;
   align-items: center;
-  padding: 0.55rem 0.95rem;
+  /* Apple HIG 44pt tap target. Padding clamped to keep the pill
+     visually compact but the click area meets touch guidelines. */
+  min-height: 44px;
+  padding: 0.7rem 1.1rem;
   border: 1px solid var(--accent);
   border-radius: 999px;
   background: rgba(200, 116, 66, 0.08);
@@ -1737,7 +1946,9 @@ main section[id] {
   display: inline-flex;
   align-items: center;
   margin-top: 1rem;
-  padding: 0.6rem 1rem;
+  /* Apple HIG 44pt tap target. */
+  min-height: 44px;
+  padding: 0.75rem 1.15rem;
   border: 1px solid var(--brand);
   border-radius: 999px;
   color: var(--brand);
