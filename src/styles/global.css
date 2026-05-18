@@ -1554,38 +1554,94 @@ p.resource-largefile-hint {
    header → card-grid → cards. The numeral does the work of an
    image: a single arresting fact, large serif, centered, with a
    short caption underneath. Apple uses this same shape on
-   apple.com/environment ("0.0036%", "100%", etc.). */
+   apple.com/environment ("0.0036%", "100%", etc.).
+
+   The .feature-stat--inhabited variant additionally inhabits the
+   block with a 25×10 grid of 250 mini-sturgeon silhouettes that
+   fill the entire panel as a faded background. Each fish represents
+   one of the ~250 remaining spawning Atlantic Sturgeon in the
+   Delaware River — so every glance at the numeral lands on top of
+   the actual visualized population it refers to. */
 .feature-stat {
+  position: relative;
   display: grid;
   justify-items: center;
   gap: 0.6rem;
   margin: 1.5rem 0 1.75rem;
-  padding: clamp(1.75rem, 4vw, 2.5rem) 1.25rem;
+  padding: clamp(2rem, 4.5vw, 3rem) 1.5rem;
   border-radius: 1.5rem;
   background:
     radial-gradient(120% 110% at 50% 0%, rgba(216, 231, 215, 0.55), transparent 60%),
     rgba(255, 255, 255, 0.6);
   border: 1px solid var(--line);
   text-align: center;
+  overflow: hidden;
 }
 
-/* Atlantic Sturgeon silhouette above the numeral: signals subject
-   matter without imagery overhead, currentcolor-driven so it tints
-   with the surrounding text. Width-capped to the feature-stat's
-   interior so it never crowds the "< 250" numeral underneath. */
-.feature-stat-art {
-  width: clamp(180px, 28vw, 280px);
-  height: auto;
+/* The 250-sturgeon backdrop. Absolute-positioned to fill the entire
+   feature-stat including its padding zone, then pushed to the back
+   of the stacking order so text layers cleanly on top. Opacity is
+   tuned low (~0.14) so 25×10 = 250 fish read as ambient texture,
+   not foreground content — leaving the < 250 numeral and caption
+   fully legible. `pointer-events: none` lets clicks pass through. */
+.feature-stat-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   color: var(--brand);
-  margin-bottom: 0.25rem;
+  opacity: 0.16;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Anniversary kicker tying the numeric coincidence — Atlantic
+   Sturgeon spawning population (~250) sits at the same count as
+   the United States in its 250th year (2026). Small, balanced,
+   one declarative pair of sentences.
+   Scoped to `.feature-stat .feature-stat-kicker` / `p.feature-stat-kicker`
+   to win specificity vs `.panel p` (which would otherwise repaint
+   the kicker as var(--muted) — the same cascade trap that bit
+   .feature-stat-num and .community-cta-lede). */
+.feature-stat .feature-stat-kicker,
+p.feature-stat-kicker {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.55rem;
+  max-width: 36ch;
+  color: var(--brand);
+  font-size: clamp(0.78rem, 1.1vw, 0.88rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+.feature-stat-kicker-mark {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fffaf1;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
 }
 
 /* Scoped to win specificity against `.lede, .panel p, ...` which
    otherwise wins (0,1,1 > 0,1,0) and paints the numeral as muted
    gray-green instead of brand green. Same cascade trap that bit
-   .resource-largefile-hint. */
+   .resource-largefile-hint. z-index keeps the numeral above the
+   .feature-stat-bg sturgeon backdrop. */
 .feature-stat .feature-stat-num,
 p.feature-stat-num {
+  position: relative;
+  z-index: 1;
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(3.4rem, 8vw, 6.5rem);
@@ -1596,6 +1652,8 @@ p.feature-stat-num {
 }
 
 .feature-stat-label {
+  position: relative;
+  z-index: 1;
   margin: 0;
   max-width: 38ch;
   color: var(--ink);

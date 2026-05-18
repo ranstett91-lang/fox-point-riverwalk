@@ -12,6 +12,23 @@ const subnavSections = [
   { id: 'policy-funding', label: 'Policy & funding' },
   { id: 'champions', label: 'Champions' },
 ];
+
+// Background of exactly 250 Atlantic Sturgeon silhouettes — one per
+// spawning adult left in the Delaware River population. Rendered as
+// an SVG pattern filling the entire feature-stat block, so the count
+// IS the backdrop: every "< 250" the reader sees is sitting on top
+// of the actual 250 fish it refers to.
+//
+// SVG pattern with `patternUnits="objectBoundingBox"` makes each tile
+// a fraction of the filled rect's size — width 1/COLS, height 1/ROWS.
+// That means the tile count is fixed at COLS × ROWS regardless of how
+// big the .feature-stat block is rendered at any breakpoint. Exactly
+// 250 fish, always.
+const STURGEON_COUNT = 250;
+const STURGEON_COLS = 25;
+const STURGEON_ROWS = STURGEON_COUNT / STURGEON_COLS;
+const STURGEON_TILE_WIDTH_PCT = 1 / STURGEON_COLS; // → 0.04
+const STURGEON_TILE_HEIGHT_PCT = 1 / STURGEON_ROWS; // → 0.1
 ---
 
 <BaseLayout
@@ -38,130 +55,58 @@ const subnavSections = [
         <p class="section-copy">Atlantic Sturgeon are fish that move between fresh and salt water.</p>
       </div>
 
-      <figure class="feature-stat">
+      <figure class="feature-stat feature-stat--inhabited">
         <svg
-          class="feature-stat-art"
-          viewBox="0 0 420 120"
+          class="feature-stat-bg"
           xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          focusable="false"
+          preserveAspectRatio="none"
+          role="img"
+          aria-label={`Background pattern of exactly ${STURGEON_COUNT} sturgeon silhouettes filling the entire block — one for each remaining spawning adult in the Delaware River population`}
         >
-          <!-- Atlantic Sturgeon (Acipenser oxyrinchus oxyrinchus) — drawn
-               left-facing to match the rostrum's natural orientation in
-               most reference photography. Anatomically driven by the
-               diagnostic features:
-                 • Long pointed rostrum (snout)
-                 • 4 barbels under the chin (sensory whiskers)
-                 • 5 rows of bony scutes: dorsal ridge + lateral lines
-                 • Underslung mouth, set back from rostrum tip
-                 • Single dorsal fin set far back (near tail)
-                 • Anal fin opposite dorsal, set back too
-                 • Heterocercal (asymmetric) tail with elongated upper lobe
-                 • Pectoral fins low and forward, pelvic fins mid-belly
-               currentcolor-driven so the illustration inherits theme. -->
-
-          <!-- Body silhouette: spindle-shaped with pointed rostrum on
-               the LEFT, narrowing into the caudal peduncle on the right. -->
-          <g fill="currentColor" opacity="0.20">
-            <path d="M 12 64
-                     L 38 58 L 64 52 Q 80 50 100 49
-                     Q 160 47 240 49
-                     Q 300 51 340 56
-                     Q 360 60 372 64
-                     L 372 76
-                     Q 360 80 340 84
-                     Q 300 89 240 91
-                     Q 160 93 100 91
-                     Q 80 90 64 88
-                     L 38 82 Z" />
-          </g>
-
-          <!-- Caudal peduncle taper into heterocercal tail.
-               Upper lobe is roughly 2–3x longer than lower lobe — the
-               diagnostic shark-like asymmetry of sturgeon caudal fins. -->
-          <g fill="currentColor" opacity="0.30">
-            <path d="M 372 64
-                     L 396 28 L 412 22 L 408 40 L 396 60
-                     L 408 70 L 412 86 L 396 80 L 372 76 Z" />
-          </g>
-
-          <!-- Single dorsal fin, set FAR BACK toward the tail
-               (~73% along body) — characteristic of sturgeon. -->
-          <g fill="currentColor" opacity="0.36">
-            <path d="M 286 49 L 304 28 L 326 30 L 334 49 Z" />
-          </g>
-
-          <!-- Anal fin, mirroring the dorsal across the body axis. -->
-          <g fill="currentColor" opacity="0.32">
-            <path d="M 290 91 L 306 110 L 326 108 L 334 91 Z" />
-          </g>
-
-          <!-- Pectoral fin: large, set low and forward (~25% along body),
-               trailing back along the underbelly. -->
-          <g fill="currentColor" opacity="0.32">
-            <path d="M 92 86 L 108 108 L 138 104 L 122 88 Z" />
-          </g>
-
-          <!-- Pelvic fin: smaller, set mid-belly (~52% along body). -->
-          <g fill="currentColor" opacity="0.28">
-            <path d="M 200 90 L 214 106 L 234 102 L 224 90 Z" />
-          </g>
-
-          <!-- Dorsal scute row — the diagnostic feature. Five spiked
-               plates along the spine, increasing in size toward the
-               head where the armor is thickest. -->
-          <g fill="currentColor" opacity="0.55">
-            <path d="M 86 47 L 94 36 L 102 47 Z" />
-            <path d="M 124 45 L 132 34 L 140 45 Z" />
-            <path d="M 164 44 L 172 33 L 180 44 Z" />
-            <path d="M 204 44 L 212 33 L 220 44 Z" />
-            <path d="M 244 44 L 252 33 L 260 44 Z" />
-            <path d="M 282 45 L 290 34 L 298 45 Z" />
-          </g>
-
-          <!-- Lateral scute line — the row of plates along the side -->
-          <path d="M 70 70 L 320 73"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1"
-                opacity="0.32" />
-
-          <!-- Gill slit (curved opening just behind head) -->
-          <path d="M 64 56 Q 60 64 64 76"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.2"
-                stroke-linecap="round"
-                opacity="0.40" />
-
-          <!-- Eye: small, set high on the head, well back from rostrum tip -->
-          <circle cx="44" cy="62" r="2.2" fill="currentColor" opacity="0.75" />
-
-          <!-- Underslung mouth — diagnostic of sturgeon (extensible,
-               positioned on the underside, set well back from the
-               rostrum tip). Drawn as a subtle slit. -->
-          <path d="M 22 78 Q 30 82 40 79"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.1"
-                stroke-linecap="round"
-                opacity="0.50" />
-
-          <!-- Four barbels under the rostrum — the sensory whiskers
-               sturgeon use to find prey on the river bottom. Hanging
-               in a row between the rostrum tip and the mouth. -->
-          <g stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.60">
-            <path d="M 20 76 Q 17 84 14 92" />
-            <path d="M 26 78 Q 24 86 22 94" />
-            <path d="M 32 78 Q 31 86 30 94" />
-            <path d="M 38 78 Q 38 86 38 94" />
-          </g>
+          <!-- Pattern tile = 1/25 wide × 1/10 tall of the filled rect
+               (objectBoundingBox). Tiling across the full rect yields
+               COLS × ROWS = 250 visible fish at any rendered size.
+               Inside each tile a 14×6 viewBox positions a single
+               simplified sturgeon — pointed rostrum, body, asymmetric
+               forked tail — drawn in currentcolor so the whole pattern
+               picks up the feature-stat's text color. -->
+          <defs>
+            <pattern
+              id="sturgeon-pattern"
+              patternUnits="objectBoundingBox"
+              x="0"
+              y="0"
+              width={STURGEON_TILE_WIDTH_PCT}
+              height={STURGEON_TILE_HEIGHT_PCT}
+              viewBox="0 0 14 6"
+              preserveAspectRatio="xMidYMid meet"
+            >
+              <path
+                d="M 0 3
+                   L 1.6 1.2 L 9 1.2
+                   L 12 0.2 L 14 0.7
+                   L 12.8 3
+                   L 14 5.3 L 12 5.8 L 9 4.8
+                   L 1.6 4.8 Z"
+                fill="currentColor"
+              />
+            </pattern>
+          </defs>
+          <rect
+            width="100%"
+            height="100%"
+            fill="url(#sturgeon-pattern)"
+          />
         </svg>
+        <p class="feature-stat-kicker">
+          <span class="feature-stat-kicker-mark">2026</span>
+          America turns 250. So does this population.
+        </p>
         <p class="feature-stat-num">&lt; 250</p>
         <figcaption class="feature-stat-label">
-          spawning Atlantic Sturgeon left in the Delaware River population —
-          a genetically unique line that has lived in this stretch for over
-          100 million years.
+          spawning Atlantic Sturgeon left in the Delaware River — one for
+          every year of American independence. A genetically unique line
+          that has lived in this stretch for over 100 million years.
         </figcaption>
       </figure>
 
