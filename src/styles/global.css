@@ -1664,11 +1664,20 @@ p.feature-stat-num {
   color: var(--brand);
 }
 
+/* Caption sits on top of the 250-sturgeon backdrop. A subtle
+   paper-tinted scrim behind the text scrubs the pattern noise
+   enough for the small regular-weight type to stay legible,
+   without creating a hard card boundary that would fight the
+   seamless figure. The pill kicker above and the giant numeral
+   between have their own visual weight so don't need scrims. */
 .feature-stat-label {
   position: relative;
   z-index: 1;
   margin: 0;
   max-width: 38ch;
+  padding: 0.5rem 0.95rem;
+  border-radius: 0.65rem;
+  background: rgba(255, 250, 242, 0.62);
   color: var(--ink);
   font-size: clamp(0.95rem, 1.4vw, 1.05rem);
   line-height: 1.55;
