@@ -35,10 +35,128 @@ const subnavSections = [
           <p class="section-label">The Species At Stake</p>
           <h2>Two federally endangered sturgeon use this stretch of the river.</h2>
         </div>
-        <p class="section-copy">Atlantic Sturgeon are fish that move between fresh and salt water. They have lived in the Delaware River for more than 100 million years.</p>
+        <p class="section-copy">Atlantic Sturgeon are fish that move between fresh and salt water.</p>
       </div>
 
-      <figure class="feature-stat" aria-label="Atlantic Sturgeon population in the Delaware River">
+      <figure class="feature-stat">
+        <svg
+          class="feature-stat-art"
+          viewBox="0 0 420 120"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <!-- Atlantic Sturgeon (Acipenser oxyrinchus oxyrinchus) — drawn
+               left-facing to match the rostrum's natural orientation in
+               most reference photography. Anatomically driven by the
+               diagnostic features:
+                 • Long pointed rostrum (snout)
+                 • 4 barbels under the chin (sensory whiskers)
+                 • 5 rows of bony scutes: dorsal ridge + lateral lines
+                 • Underslung mouth, set back from rostrum tip
+                 • Single dorsal fin set far back (near tail)
+                 • Anal fin opposite dorsal, set back too
+                 • Heterocercal (asymmetric) tail with elongated upper lobe
+                 • Pectoral fins low and forward, pelvic fins mid-belly
+               currentcolor-driven so the illustration inherits theme. -->
+
+          <!-- Body silhouette: spindle-shaped with pointed rostrum on
+               the LEFT, narrowing into the caudal peduncle on the right. -->
+          <g fill="currentColor" opacity="0.20">
+            <path d="M 12 64
+                     L 38 58 L 64 52 Q 80 50 100 49
+                     Q 160 47 240 49
+                     Q 300 51 340 56
+                     Q 360 60 372 64
+                     L 372 76
+                     Q 360 80 340 84
+                     Q 300 89 240 91
+                     Q 160 93 100 91
+                     Q 80 90 64 88
+                     L 38 82 Z" />
+          </g>
+
+          <!-- Caudal peduncle taper into heterocercal tail.
+               Upper lobe is roughly 2–3x longer than lower lobe — the
+               diagnostic shark-like asymmetry of sturgeon caudal fins. -->
+          <g fill="currentColor" opacity="0.30">
+            <path d="M 372 64
+                     L 396 28 L 412 22 L 408 40 L 396 60
+                     L 408 70 L 412 86 L 396 80 L 372 76 Z" />
+          </g>
+
+          <!-- Single dorsal fin, set FAR BACK toward the tail
+               (~73% along body) — characteristic of sturgeon. -->
+          <g fill="currentColor" opacity="0.36">
+            <path d="M 286 49 L 304 28 L 326 30 L 334 49 Z" />
+          </g>
+
+          <!-- Anal fin, mirroring the dorsal across the body axis. -->
+          <g fill="currentColor" opacity="0.32">
+            <path d="M 290 91 L 306 110 L 326 108 L 334 91 Z" />
+          </g>
+
+          <!-- Pectoral fin: large, set low and forward (~25% along body),
+               trailing back along the underbelly. -->
+          <g fill="currentColor" opacity="0.32">
+            <path d="M 92 86 L 108 108 L 138 104 L 122 88 Z" />
+          </g>
+
+          <!-- Pelvic fin: smaller, set mid-belly (~52% along body). -->
+          <g fill="currentColor" opacity="0.28">
+            <path d="M 200 90 L 214 106 L 234 102 L 224 90 Z" />
+          </g>
+
+          <!-- Dorsal scute row — the diagnostic feature. Five spiked
+               plates along the spine, increasing in size toward the
+               head where the armor is thickest. -->
+          <g fill="currentColor" opacity="0.55">
+            <path d="M 86 47 L 94 36 L 102 47 Z" />
+            <path d="M 124 45 L 132 34 L 140 45 Z" />
+            <path d="M 164 44 L 172 33 L 180 44 Z" />
+            <path d="M 204 44 L 212 33 L 220 44 Z" />
+            <path d="M 244 44 L 252 33 L 260 44 Z" />
+            <path d="M 282 45 L 290 34 L 298 45 Z" />
+          </g>
+
+          <!-- Lateral scute line — the row of plates along the side -->
+          <path d="M 70 70 L 320 73"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1"
+                opacity="0.32" />
+
+          <!-- Gill slit (curved opening just behind head) -->
+          <path d="M 64 56 Q 60 64 64 76"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.2"
+                stroke-linecap="round"
+                opacity="0.40" />
+
+          <!-- Eye: small, set high on the head, well back from rostrum tip -->
+          <circle cx="44" cy="62" r="2.2" fill="currentColor" opacity="0.75" />
+
+          <!-- Underslung mouth — diagnostic of sturgeon (extensible,
+               positioned on the underside, set well back from the
+               rostrum tip). Drawn as a subtle slit. -->
+          <path d="M 22 78 Q 30 82 40 79"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.1"
+                stroke-linecap="round"
+                opacity="0.50" />
+
+          <!-- Four barbels under the rostrum — the sensory whiskers
+               sturgeon use to find prey on the river bottom. Hanging
+               in a row between the rostrum tip and the mouth. -->
+          <g stroke="currentColor" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.60">
+            <path d="M 20 76 Q 17 84 14 92" />
+            <path d="M 26 78 Q 24 86 22 94" />
+            <path d="M 32 78 Q 31 86 30 94" />
+            <path d="M 38 78 Q 38 86 38 94" />
+          </g>
+        </svg>
         <p class="feature-stat-num">&lt; 250</p>
         <figcaption class="feature-stat-label">
           spawning Atlantic Sturgeon left in the Delaware River population —
@@ -143,19 +261,19 @@ const subnavSections = [
           <path d="M 480 230 Q 510 223 540 230 T 600 230 T 660 230 T 720 230" fill="none" stroke="#a8c5d8" stroke-width="1.5" opacity="0.7"/>
 
           <line x1="225" y1="100" x2="225" y2="135" stroke="#7a3e22" stroke-width="1.5"/>
-          <circle cx="225" cy="98" r="3" fill="#c87442"/>
-          <text x="225" y="90" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">STABILIZE</text>
-          <text x="225" y="78" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">THE BANK</text>
+          <circle cx="225" cy="98" r="3.5" fill="#c87442"/>
+          <text x="225" y="78" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#7a3e22" letter-spacing="0.4">STABILIZE</text>
+          <text x="225" y="90" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#7a3e22" letter-spacing="0.4">THE BANK</text>
 
           <line x1="365" y1="120" x2="365" y2="165" stroke="#7a3e22" stroke-width="1.5"/>
-          <circle cx="365" cy="118" r="3" fill="#c87442"/>
-          <text x="365" y="110" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">SCRUB</text>
-          <text x="365" y="98" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">NITROGEN</text>
+          <circle cx="365" cy="118" r="3.5" fill="#c87442"/>
+          <text x="365" y="98" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#7a3e22" letter-spacing="0.4">FILTER</text>
+          <text x="365" y="110" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#7a3e22" letter-spacing="0.4">NITROGEN</text>
 
           <line x1="580" y1="155" x2="580" y2="215" stroke="#7a3e22" stroke-width="1.5"/>
-          <circle cx="580" cy="153" r="3" fill="#c87442"/>
-          <text x="580" y="145" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">STURGEON</text>
-          <text x="580" y="133" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="10" font-weight="800" fill="#7a3e22" letter-spacing="0.4">HABITAT</text>
+          <circle cx="580" cy="153" r="3.5" fill="#c87442"/>
+          <text x="580" y="133" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#7a3e22" letter-spacing="0.4">STURGEON</text>
+          <text x="580" y="145" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#7a3e22" letter-spacing="0.4">HABITAT</text>
 
           <text x="660" y="34" text-anchor="middle" font-family="Avenir Next, Segoe UI, sans-serif" font-size="11" font-weight="800" fill="#3a5e72" letter-spacing="1.5">DELAWARE RIVER</text>
         </svg>

@@ -373,6 +373,8 @@ const subnavSections = [
           class="community-cta-btn community-cta-btn-secondary"
           type="button"
           data-share-brief
+          data-share-label="Share this brief"
+          aria-live="polite"
         >
           Share this brief
         </button>
@@ -394,15 +396,30 @@ const subnavSections = [
 
     <script>
       // Web Share API with clipboard fallback. No external libraries,
-      // CSP-safe (no inline). Looks for any [data-share-brief] button
-      // and wires it up on every page-load, scoped via AbortController
-      // so view-transitions don't leak listeners across navigations.
+      // CSP-safe (no inline event handlers). Wires up every
+      // [data-share-brief] button on each astro:page-load, scoped via
+      // AbortController so view-transitions don't leak listeners.
+      //
+      // The canonical label is read from the data-share-label attr —
+      // NOT from textContent at click time — so rapid double-clicks
+      // can't capture the transient "Link copied ✓" state as the
+      // "original" to restore. Each button also tracks an in-flight
+      // copy via a WeakSet so overlapping resets don't fight.
       let shareAbortController: AbortController | null = null;
+      const restoreTimers = new WeakMap<HTMLButtonElement, number>();
+
       function initShareButtons() {
         shareAbortController?.abort();
         shareAbortController = new AbortController();
         const { signal } = shareAbortController;
+
         const buttons = document.querySelectorAll<HTMLButtonElement>('[data-share-brief]');
+
+        const restoreLabel = (btn: HTMLButtonElement) => {
+          const label = btn.dataset.shareLabel ?? 'Share';
+          btn.textContent = label;
+        };
+
         buttons.forEach((btn) => {
           btn.addEventListener('click', async () => {
             const shareData = {
@@ -410,25 +427,35 @@ const subnavSections = [
               text: 'Claymont to Fox Point — project brief',
               url: window.location.href,
             };
+
+            // 1) Web Share API — native sheet on mobile / some desktops.
             try {
-              if (navigator.share && navigator.canShare?.(shareData)) {
+              if (navigator.share && (!navigator.canShare || navigator.canShare(shareData))) {
                 await navigator.share(shareData);
                 return;
               }
             } catch (err) {
               if ((err as DOMException)?.name === 'AbortError') return;
+              // Otherwise fall through to clipboard fallback.
             }
+
+            // 2) Clipboard fallback.
             try {
               await navigator.clipboard.writeText(shareData.url);
-              const original = btn.textContent;
               btn.textContent = 'Link copied ✓';
-              btn.setAttribute('aria-live', 'polite');
-              setTimeout(() => {
-                btn.textContent = original;
+              // Cancel any pending restore from a previous click so the
+              // newest click owns the next restoration window.
+              const pending = restoreTimers.get(btn);
+              if (pending) window.clearTimeout(pending);
+              const timer = window.setTimeout(() => {
+                restoreLabel(btn);
+                restoreTimers.delete(btn);
               }, 2400);
+              restoreTimers.set(btn, timer);
+              return;
             } catch {
-              // Final fallback — open mail client. Users on browsers
-              // without clipboard API still get a working share path.
+              // 3) Final fallback — mailto. Some browsers gate
+              // clipboard access on permissions/secure-context.
               window.location.href =
                 'mailto:?subject=' +
                 encodeURIComponent(shareData.title) +
