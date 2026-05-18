@@ -79,9 +79,24 @@ body {
   margin: 0;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   color: var(--ink);
+  /* Layered environment background: the side panels beside the
+     1180px page-shell used to show as flat dead cream. The four
+     stacked layers below give the periphery depth without competing
+     with content — read top-down:
+       1) Orange-warm sunrise tint at the top-left
+       2) Soft brand-green wash on the right shoulder (river/forest)
+       3) Cooler blue-green pool at bottom-left (water)
+       4) Base vertical paper gradient (existing)
+     `background-attachment: fixed` keeps the orientation stable as
+     you scroll, so the periphery feels like a single environment
+     rather than a strip that scrolls with the content. */
   background:
-    radial-gradient(circle at top left, rgba(200, 116, 66, 0.16), transparent 28%),
-    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 35%, #f8f4ed 100%);
+    radial-gradient(60% 40% at 12% 8%, rgba(200, 116, 66, 0.18), transparent 60%),
+    radial-gradient(45% 55% at 96% 22%, rgba(18, 49, 38, 0.10), transparent 65%),
+    radial-gradient(60% 50% at 4% 88%, rgba(58, 110, 130, 0.10), transparent 65%),
+    radial-gradient(55% 40% at 92% 92%, rgba(216, 231, 215, 0.55), transparent 65%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 38%, #f8f4ed 100%);
+  background-attachment: fixed;
 }
 
 img {
