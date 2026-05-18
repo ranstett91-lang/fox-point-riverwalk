@@ -1569,15 +1569,24 @@ p.resource-largefile-hint {
   text-align: center;
 }
 
-/* Atlantic Sturgeon silhouette above the numeral: signals subject
-   matter without imagery overhead, currentcolor-driven so it tints
-   with the surrounding text. Width-capped to the feature-stat's
-   interior so it never crowds the "< 250" numeral underneath. */
+/* The feature-stat art above the "< 250" numeral. Two variants:
+   - default: a single anatomically-accurate sturgeon silhouette
+   - .feature-stat-art-grid: a 25 × 10 grid of 250 mini-sturgeon
+     icons, one per remaining spawning adult in the Delaware River
+     population. The grid variant is the rhetorical visualization
+     — "this is all of them in one small box" — so it wants to be
+     a little wider than the single silhouette to let the 250 fish
+     breathe. currentcolor-driven so the illustration inherits the
+     surrounding theme. */
 .feature-stat-art {
   width: clamp(180px, 28vw, 280px);
   height: auto;
   color: var(--brand);
   margin-bottom: 0.25rem;
+}
+.feature-stat-art-grid {
+  width: clamp(280px, 60vw, 480px);
+  margin-bottom: 0.75rem;
 }
 
 /* Scoped to win specificity against `.lede, .panel p, ...` which
