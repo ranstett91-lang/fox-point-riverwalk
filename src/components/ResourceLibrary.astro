@@ -3,9 +3,17 @@ import { resources, type Resource } from '../data/sources.ts';
 
 const LARGE_FILE_THRESHOLD_MB = 10;
 
+/**
+ * Extract a megabyte count from a size string like "60.1 MB".
+ * Returns null when the string has no parseable "<number> MB" pair,
+ * or when parsing produces NaN / Infinity from malformed input like
+ * ". MB" or "abc MB".
+ */
 function parseSizeMb(size: string): number | null {
   const match = size.match(/([\d.]+)\s*MB/i);
-  return match ? parseFloat(match[1]) : null;
+  if (!match) return null;
+  const value = parseFloat(match[1]);
+  return Number.isFinite(value) ? value : null;
 }
 
 interface CardProps extends Resource {
@@ -17,15 +25,17 @@ interface CardProps extends Resource {
 
 const cards: CardProps[] = resources.map((r) => {
   const sizeMb = parseSizeMb(r.size);
-  const hasFileSize = sizeMb !== null;
+  // Inline the null check so TypeScript narrows `sizeMb` to `number`
+  // for the comparison — drops a non-null assertion (sizeMb!) that
+  // was previously needed because the boolean alias didn't narrow.
   const isLargeFile =
-    r.type === 'pdf' && hasFileSize && sizeMb! >= LARGE_FILE_THRESHOLD_MB;
+    r.type === 'pdf' && sizeMb !== null && sizeMb >= LARGE_FILE_THRESHOLD_MB;
 
   const actionLabel =
     r.type === 'web' ? 'Open source' : r.type === 'pdf' ? 'Open report' : 'Open file';
 
   const ariaSuffix =
-    r.type === 'pdf' && hasFileSize
+    r.type === 'pdf' && sizeMb !== null
       ? `(opens ${r.size} PDF in new tab)`
       : r.type === 'pdf'
         ? '(opens PDF in new tab)'

@@ -24,9 +24,9 @@ const subnavSections = [
 // That means the tile count is fixed at COLS × ROWS regardless of how
 // big the .feature-stat block is rendered at any breakpoint. Exactly
 // 250 fish, always.
-const STURGEON_COUNT = 250;
 const STURGEON_COLS = 25;
-const STURGEON_ROWS = STURGEON_COUNT / STURGEON_COLS;
+const STURGEON_ROWS = 10;
+const STURGEON_COUNT = STURGEON_COLS * STURGEON_ROWS;
 const STURGEON_TILE_WIDTH_PCT = 1 / STURGEON_COLS; // → 0.04
 const STURGEON_TILE_HEIGHT_PCT = 1 / STURGEON_ROWS; // → 0.1
 ---
@@ -61,7 +61,7 @@ const STURGEON_TILE_HEIGHT_PCT = 1 / STURGEON_ROWS; // → 0.1
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
           role="img"
-          aria-label={`Background pattern of exactly ${STURGEON_COUNT} sturgeon silhouettes filling the entire block — one for each remaining spawning adult in the Delaware River population`}
+          aria-label={`Background pattern of ${STURGEON_COLS} × ${STURGEON_ROWS} = ${STURGEON_COUNT} sturgeon silhouettes filling the entire block — one for each remaining spawning adult in the Delaware River population`}
         >
           <!-- Pattern tile = 1/25 wide × 1/10 tall of the filled rect
                (objectBoundingBox). Tiling across the full rect yields
@@ -78,18 +78,46 @@ const STURGEON_TILE_HEIGHT_PCT = 1 / STURGEON_ROWS; // → 0.1
               y="0"
               width={STURGEON_TILE_WIDTH_PCT}
               height={STURGEON_TILE_HEIGHT_PCT}
-              viewBox="0 0 14 6"
+              viewBox="0 0 20 8"
               preserveAspectRatio="xMidYMid meet"
             >
+              <!-- One mini-sturgeon, drawn left-facing in a 20×8 box.
+                   The path traces the sturgeon's diagnostic profile so
+                   that even at ~30 px wide on screen each fish reads
+                   as a sturgeon, not a generic fish:
+
+                     • pointed rostrum (the long conical snout)
+                     • 3 dorsal scute spikes — the row of bony plates
+                       that gives the species its armored ridge
+                     • asymmetric heterocercal tail — the upper lobe
+                       angles up and back well past the lower lobe,
+                       the shark-like asymmetry diagnostic of sturgeon
+
+                   The path is built as one closed silhouette (no
+                   overlapping subpaths) so currentcolor fills cleanly. -->
               <path
-                d="M 0 3
-                   L 1.6 1.2 L 9 1.2
-                   L 12 0.2 L 14 0.7
-                   L 12.8 3
-                   L 14 5.3 L 12 5.8 L 9 4.8
-                   L 1.6 4.8 Z"
+                d="M 0 4
+                   L 1.6 2.7 L 4 2.2
+                   L 4.6 1.4 L 5.4 2.1
+                   L 6.6 2
+                   L 7.2 1.1 L 8 2
+                   L 9.6 1.95
+                   L 10.2 1.05 L 11 1.95
+                   L 12.2 2
+                   L 16 0.3 L 18.6 0.8
+                   L 14 4.2
+                   L 18 6.6 L 15.6 7.3
+                   L 12.2 6
+                   L 9.6 6.05
+                   L 6.6 6
+                   L 4 5.8 L 1.6 5.3 Z"
                 fill="currentColor"
               />
+              <!-- Eye dot positioned on the head, set back from the
+                   rostrum tip and just above the body centerline. Adds
+                   a single high-contrast pixel of detail that helps
+                   the fish read as a fish at small sizes. -->
+              <circle cx="2.6" cy="3.4" r="0.32" fill="currentColor" opacity="0.55" />
             </pattern>
           </defs>
           <rect

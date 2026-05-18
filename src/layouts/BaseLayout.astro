@@ -128,7 +128,13 @@ const {
         if (!header) return;
         const publish = () => {
           const h = header.getBoundingClientRect().height;
-          if (h > 0) {
+          // Skip writes during transient zero-height frames (a
+          // view-transition mid-flight can briefly measure 0). The
+          // CSS :root has a 9rem fallback, so the variable always
+          // resolves; this guard just avoids overwriting a valid
+          // measurement with a transient zero that would shift
+          // scroll-padding-top down to nothing for one frame.
+          if (h > 0 && Number.isFinite(h)) {
             document.documentElement.style.setProperty(
               '--page-header-height',
               `${h}px`,

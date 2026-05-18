@@ -1583,9 +1583,11 @@ p.resource-largefile-hint {
    feature-stat including its padding zone, then pushed to the back
    of the stacking order so text layers cleanly on top. Opacity is
    tuned to ~0.28 so 25×10 = 250 fish read as legible silhouettes —
-   the visual proof of "250 sturgeon left" — without competing with
-   the < 250 numeral or caption that sit on top. `pointer-events:
-   none` lets clicks pass through. */
+   the visual proof of "250 sturgeon left" — visible at the panel's
+   edges. The .feature-stat--inhabited::after radial cream wash below
+   keeps the numeral and caption legible in the center over this
+   higher-opacity backdrop. `pointer-events: none` lets clicks pass
+   through to whatever sits beneath the panel. */
 .feature-stat-bg {
   position: absolute;
   inset: 0;
@@ -1595,6 +1597,27 @@ p.resource-largefile-hint {
   opacity: 0.28;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Soft cream radial wash between the sturgeon backdrop (z-index:0)
+   and the text content (z-index:1). At ~85% paper-cream opacity in
+   the center and transparent at the edges, the wash lifts the
+   kicker/numeral/caption out of the pattern without hiding the 250
+   fish at the periphery — the population is still visible everywhere
+   the eye lands first; the reading zone is just lighter. */
+.feature-stat--inhabited::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      65% 55% at 50% 50%,
+      rgba(255, 250, 242, 0.92),
+      rgba(255, 250, 242, 0.55) 55%,
+      rgba(255, 250, 242, 0) 80%
+    );
 }
 
 /* Anniversary kicker tying the numeric coincidence — Atlantic
@@ -1668,10 +1691,15 @@ p.feature-stat-num {
   position: relative;
   z-index: 1;
   margin: 0;
-  max-width: 38ch;
+  max-width: 42ch;
   color: var(--ink);
-  font-size: clamp(0.95rem, 1.4vw, 1.05rem);
-  line-height: 1.55;
+  /* Bumped from .95-1.05rem / weight inherited (400). The thicker
+     stroke and tighter line-height pull the caption forward of the
+     250-fish pattern so it doesn't compete with silhouettes behind
+     every word. */
+  font-size: clamp(1rem, 1.4vw, 1.08rem);
+  font-weight: 500;
+  line-height: 1.5;
 }
 
 /* ─── COMMUNITY CTA (close-the-loop panel) ─────────────────────
