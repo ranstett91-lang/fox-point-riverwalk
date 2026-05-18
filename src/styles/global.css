@@ -423,29 +423,6 @@ main section[id] {
   font-weight: 600;
 }
 
-.hero-fb-chips {
-  position: absolute;
-  bottom: 1.4rem;
-  right: 1.4rem;
-  z-index: 3;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: flex-end;
-}
-
-.hero-fb-chips span {
-  padding: 0.4rem 0.8rem;
-  border: 1px solid rgba(255, 250, 241, 0.35);
-  border-radius: 999px;
-  background: rgba(10, 28, 20, 0.55);
-  color: #fffaf1;
-  font-size: 0.78rem;
-  font-weight: 700;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-
 .skim-band {
   position: relative;
   z-index: 4;
@@ -1923,10 +1900,6 @@ p.community-cta-lede {
 
   .skim-band {
     margin-top: 1rem;
-  }
-
-  .hero-fb-chips {
-    display: none;
   }
 }
 
