@@ -127,20 +127,18 @@ input {
 /* ─── STICKY PAGE HEADER (Topbar + SubNav stacked) ─── */
 /* Both bars share one sticky context so the page-level navigation
    (Project / Restoration / Delaware / Rail) stays visible alongside
-   the per-page section anchors. The frosted backdrop covers the gap
-   between the two pill rows so content scrolling behind blurs
-   cleanly across the whole sticky area. */
+   the per-page section anchors. The wrapper itself is transparent —
+   each pill carries its own frosted backdrop, so the two pills read
+   as two distinct floating shapes on the page rather than as a
+   blocky cream band with two pill cutouts inside it. */
 .page-header {
   position: sticky;
   top: 0;
   z-index: 30;
   padding: 1rem 0 0;
-  background: rgba(255, 250, 242, 0.88);
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  background: transparent;
 }
 
-.topbar,
 .panel {
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
@@ -155,7 +153,14 @@ input {
   padding: 0.85rem 1rem;
   border: 1px solid var(--line);
   border-radius: 999px;
+  /* Frosted pill: own translucent background + backdrop-filter so
+     content scrolling under the topbar blurs cleanly even though the
+     parent .page-header is now transparent. Matched box-shadow with
+     .subnav so the two pills read as a coordinated floating pair. */
   background: rgba(255, 250, 242, 0.78);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 8px 24px rgba(18, 54, 42, 0.06);
 }
 
 .brandmark {
@@ -1700,6 +1705,34 @@ p.feature-stat-num {
   font-size: clamp(1rem, 1.4vw, 1.08rem);
   font-weight: 500;
   line-height: 1.5;
+}
+
+/* Small citation line under the caption. Federal authority for the
+   <250 figure (NOAA Fisheries lists the New York Bight DPS — which
+   includes the Delaware population — as endangered, with current
+   abundance figures well below 250 spawning adults). Muted weight so
+   the numeral and caption stay primary; positioned above the sturgeon
+   backdrop with the same z-index pattern as siblings. */
+.feature-stat-source {
+  position: relative;
+  z-index: 1;
+  margin: 0.35rem 0 0;
+  max-width: 42ch;
+  color: var(--muted);
+  font-size: clamp(0.74rem, 0.95vw, 0.82rem);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.feature-stat-source a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.feature-stat-source a:hover {
+  color: var(--brand);
 }
 
 /* ─── COMMUNITY CTA (close-the-loop panel) ─────────────────────
