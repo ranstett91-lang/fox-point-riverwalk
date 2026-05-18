@@ -79,6 +79,11 @@ body {
   margin: 0;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
   color: var(--ink);
+  /* Prevent stray horizontal overflow from leaking into the layout on
+     narrow viewports. `overflow-x: clip` clips without establishing a
+     scroll container (unlike `hidden`), so `position: sticky` on
+     .page-header still works against the viewport. */
+  overflow-x: clip;
   /* Layered environment background: the side panels beside the
      1180px page-shell used to show as flat dead cream. The four
      stacked layers below give the periphery depth without competing
@@ -931,6 +936,11 @@ p.resource-largefile-hint {
   border-radius: 0.85rem;
   overflow: hidden;
   border: 1px solid var(--line);
+  /* min-width:0 lets the flex parent shrink below its content's
+     intrinsic width on narrow phones — without it, the nowrap
+     badge below could grow the scene past the card and cause a
+     page-wide horizontal scroll. */
+  min-width: 0;
 }
 
 .cs-sky {
@@ -941,6 +951,7 @@ p.resource-largefile-hint {
   display: flex;
   align-items: flex-start;
   padding: 0.35rem 0.5rem;
+  min-width: 0;
 }
 
 .cs-rain {
@@ -964,6 +975,7 @@ p.resource-largefile-hint {
   position: relative;
   z-index: 2;
   letter-spacing: 0.01em;
+  max-width: 100%;
 }
 
 .cs-badge-top {
@@ -1013,6 +1025,7 @@ p.resource-largefile-hint {
   align-items: flex-end;
   padding: 0.35rem 0.5rem;
   border-top: 2.5px solid #3a6e96;
+  min-width: 0;
 }
 
 .wc-intensity {
@@ -2035,6 +2048,65 @@ p.community-cta-lede {
   .resource-largefile-hint {
     padding: 0.3rem 0.6rem;
   }
+
+  /* Capital stack: at desktop the meta column is a fixed 160px next to
+     content. Collapsed to a single column on mobile, the 2.4rem serif
+     numeral above a one-word label ("Amtrak", "Formula", "Naming")
+     reads as oversized — it competes with the actual <h3> below it.
+     Trim the meta block back to a kicker-sized treatment so the row
+     content (the h3 + paragraph) leads the eye. */
+  .capital-row {
+    padding: 1rem 1.1rem;
+    gap: 0.4rem;
+  }
+  .capital-amount {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+  }
+  .capital-source {
+    margin-bottom: 0.15rem;
+    font-size: 0.7rem;
+  }
+  .capital-detail h3 {
+    font-size: 1rem;
+  }
+
+  /* Trio of weather-card visuals: tighten the inner spacing on phones
+     so each card occupies less screen real estate without losing the
+     visualization. Bump the compound-scene height so the rail-corridor
+     cross-section reads as a chart, not a strip. */
+  .weather-card {
+    padding: 1rem 1rem 0.95rem;
+    gap: 0.6rem;
+  }
+  .compound-scene {
+    min-height: 180px;
+  }
+  /* Thermometers on the heat card are 18×72 at desktop, which reads
+     as a thin line at phone scale. Beefing the body + bulb gives the
+     compare-pair a recognizable thermometer silhouette on mobile. */
+  .thermo {
+    width: 22px;
+    height: 96px;
+  }
+  .thermo-bulb {
+    width: 32px;
+    height: 32px;
+  }
+  .wc-thermo-compare {
+    gap: 2.5rem;
+  }
+
+  /* Read-next cards collapse to a single column at this width (above);
+     trim padding so the two stacked cards don't add a screenful of
+     padding to the end-of-page rail. */
+  .read-next-card {
+    padding: 1rem 1.15rem;
+  }
 }
 
 @media (max-width: 600px) {
@@ -2082,6 +2154,69 @@ p.community-cta-lede {
 
   .skim-band {
     margin: 0.85rem 0 0;
+  }
+
+  /* The compound-scene badges ("Storms: +55% more intense", "Sea
+     level rising — Wilmington stretch identified by Amtrak") have
+     `white-space: nowrap` so they read as single-line annotation pills
+     on desktop. On narrow phones the second one is wider than the
+     card itself — let it wrap into two lines instead of forcing a
+     horizontal scroll on the page. The clip on the cs-zone already
+     hides any tail; this just allows the badge to size to the card. */
+  .cs-badge {
+    white-space: normal;
+    font-size: 0.7rem;
+    line-height: 1.25;
+  }
+
+  /* Reclaim a little width for content on narrow phones: panels are
+     positioned with a 1rem horizontal margin, the page-shell already
+     reserves 0.5rem on each side via `min(100vw - 1rem, 100%)`. At
+     ≤600px that totals 1.5rem (24px) of gutter on each side, which
+     leaves stat cards and capital rows visibly cramped. Drop the panel
+     margin to 0.5rem so the cards get ~16px more horizontal room. */
+  .panel,
+  .photo-section {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .page-intro {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  .skim-band {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  /* Topbar pill: at very narrow phones the four section links can run
+     tight against the brandmark; the topbar already stacks them into
+     a second row at ≤720px. Trim the topbar's outer margin to match
+     the new panel gutter so the sticky pill aligns with content edges
+     instead of floating in from further in. */
+  .topbar {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+}
+
+/* ─── EXTRA-NARROW PHONES (≤390px, iPhone Mini/SE class) ─── */
+@media (max-width: 390px) {
+  /* Section H2 stays at clamp(1.9rem, 3.8vw, 3.1rem) which floors at
+     1.9rem (30.4px). At iPhone SE width that wraps to 4–5 lines for
+     long headlines like "Amtrak has documented the cost of doing
+     nothing." Drop the floor so it stays 2–3 lines. */
+  .panel h2,
+  .photo-header h2 {
+    font-size: 1.55rem;
+    line-height: 1.1;
+  }
+
+  /* The Stats H1 "Climate risk, ridership…" runs long; tighten its
+     intro padding so the headline still has breathing room without
+     cropping. */
+  .page-intro {
+    padding: 1.1rem 0.95rem;
   }
 }
 
