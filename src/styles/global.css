@@ -1567,7 +1567,8 @@ p.resource-largefile-hint {
   display: grid;
   justify-items: center;
   gap: 0.6rem;
-  margin: 1.5rem 0 1.75rem;
+  max-width: 880px;
+  margin: 1.5rem auto 1.75rem;
   padding: clamp(2rem, 4.5vw, 3rem) 1.5rem;
   border-radius: 1.5rem;
   background:
@@ -1581,16 +1582,17 @@ p.resource-largefile-hint {
 /* The 250-sturgeon backdrop. Absolute-positioned to fill the entire
    feature-stat including its padding zone, then pushed to the back
    of the stacking order so text layers cleanly on top. Opacity is
-   tuned low (~0.14) so 25×10 = 250 fish read as ambient texture,
-   not foreground content — leaving the < 250 numeral and caption
-   fully legible. `pointer-events: none` lets clicks pass through. */
+   tuned to ~0.28 so 25×10 = 250 fish read as legible silhouettes —
+   the visual proof of "250 sturgeon left" — without competing with
+   the < 250 numeral or caption that sit on top. `pointer-events:
+   none` lets clicks pass through. */
 .feature-stat-bg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   color: var(--brand);
-  opacity: 0.16;
+  opacity: 0.28;
   pointer-events: none;
   z-index: 0;
 }
@@ -1609,10 +1611,9 @@ p.feature-stat-kicker {
   z-index: 1;
   margin: 0;
   display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
   max-width: 36ch;
   color: var(--brand);
   font-size: clamp(0.78rem, 1.1vw, 0.88rem);
@@ -1631,6 +1632,18 @@ p.feature-stat-kicker {
   color: #fffaf1;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
+}
+
+/* The two-sentence headline below the date pill. Each sentence
+   gets its own line so the parallel "250 years / 250 sturgeon"
+   structure reads as parallel at every viewport — never wraps
+   mid-sentence. Tight intra-line gap keeps the two sentences
+   visually bound as one statement, distinct from the pill above. */
+.feature-stat-kicker-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.12rem;
 }
 
 /* Scoped to win specificity against `.lede, .panel p, ...` which
