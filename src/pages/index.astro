@@ -403,15 +403,41 @@ const subnavSections = [
       // The canonical label is read from the data-share-label attr —
       // NOT from textContent at click time — so rapid double-clicks
       // can't capture the transient "Link copied ✓" state as the
-      // "original" to restore. Each button also tracks an in-flight
-      // copy via a WeakSet so overlapping resets don't fight.
+      // "original" to restore. Each button's pending restore timer is
+      // tracked in a WeakMap (so a detached button gets GC'd) AND a
+      // separate Set of timer IDs is cleared on init so a stale
+      // pre-navigation timer can't fire restoreLabel on a button
+      // belonging to an older page-load.
       let shareAbortController: AbortController | null = null;
       const restoreTimers = new WeakMap<HTMLButtonElement, number>();
+      const pendingTimerIds = new Set<number>();
+
+      // Narrow an unknown rejection value to the "user aborted the
+      // share sheet" case without a misleading `as DOMException`
+      // assertion. Both DOMException and any browser-thrown Error
+      // expose a string `name`, so structural check is enough.
+      function isAbortError(err: unknown): boolean {
+        return (
+          typeof err === 'object' &&
+          err !== null &&
+          'name' in err &&
+          (err as { name: unknown }).name === 'AbortError'
+        );
+      }
 
       function initShareButtons() {
         shareAbortController?.abort();
         shareAbortController = new AbortController();
         const { signal } = shareAbortController;
+
+        // Cancel every pending restore timer scheduled before this
+        // init. The previous page-load's "Link copied ✓" timers
+        // would otherwise fire restoreLabel on detached buttons —
+        // harmless visually, but it keeps each button reference
+        // alive for up to 2.4s after navigation. Clearing the Set
+        // releases them immediately.
+        pendingTimerIds.forEach((id) => window.clearTimeout(id));
+        pendingTimerIds.clear();
 
         const buttons = document.querySelectorAll<HTMLButtonElement>('[data-share-brief]');
 
@@ -435,7 +461,7 @@ const subnavSections = [
                 return;
               }
             } catch (err) {
-              if ((err as DOMException)?.name === 'AbortError') return;
+              if (isAbortError(err)) return;
               // Otherwise fall through to clipboard fallback.
             }
 
@@ -446,12 +472,17 @@ const subnavSections = [
               // Cancel any pending restore from a previous click so the
               // newest click owns the next restoration window.
               const pending = restoreTimers.get(btn);
-              if (pending) window.clearTimeout(pending);
+              if (pending !== undefined) {
+                window.clearTimeout(pending);
+                pendingTimerIds.delete(pending);
+              }
               const timer = window.setTimeout(() => {
                 restoreLabel(btn);
                 restoreTimers.delete(btn);
+                pendingTimerIds.delete(timer);
               }, 2400);
               restoreTimers.set(btn, timer);
+              pendingTimerIds.add(timer);
               return;
             } catch {
               // 3) Final fallback — mailto. Some browsers gate

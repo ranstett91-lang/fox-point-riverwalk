@@ -69,7 +69,22 @@ export const champions: Record<string, Champion> = {
 };
 
 export function getChampions(ids: string[]): Champion[] {
-  return ids
-    .map((id) => champions[id])
+  const missing: string[] = [];
+  const found = ids
+    .map((id) => {
+      const c = champions[id];
+      if (!c) missing.push(id);
+      return c;
+    })
     .filter((c): c is Champion => c !== undefined);
+  // Surface unknown ids at build time so a misspelled id ('mcbridee')
+  // doesn't silently render one fewer card with no signal. Astro
+  // frontmatter runs at build, so console.warn lands in the build log.
+  if (missing.length > 0) {
+    console.warn(
+      `[champions] Unknown id(s) requested: ${missing.join(', ')}. ` +
+        `Available: ${Object.keys(champions).join(', ')}.`,
+    );
+  }
+  return found;
 }

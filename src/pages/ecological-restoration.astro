@@ -24,9 +24,9 @@ const subnavSections = [
 // That means the tile count is fixed at COLS × ROWS regardless of how
 // big the .feature-stat block is rendered at any breakpoint. Exactly
 // 250 fish, always.
-const STURGEON_COUNT = 250;
 const STURGEON_COLS = 25;
-const STURGEON_ROWS = STURGEON_COUNT / STURGEON_COLS;
+const STURGEON_ROWS = 10;
+const STURGEON_COUNT = STURGEON_COLS * STURGEON_ROWS;
 const STURGEON_TILE_WIDTH_PCT = 1 / STURGEON_COLS; // → 0.04
 const STURGEON_TILE_HEIGHT_PCT = 1 / STURGEON_ROWS; // → 0.1
 ---
@@ -61,7 +61,7 @@ const STURGEON_TILE_HEIGHT_PCT = 1 / STURGEON_ROWS; // → 0.1
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
           role="img"
-          aria-label={`Background pattern of exactly ${STURGEON_COUNT} sturgeon silhouettes filling the entire block — one for each remaining spawning adult in the Delaware River population`}
+          aria-label={`Background pattern of ${STURGEON_COLS} × ${STURGEON_ROWS} = ${STURGEON_COUNT} sturgeon silhouettes filling the entire block — one for each remaining spawning adult in the Delaware River population`}
         >
           <!-- Pattern tile = 1/25 wide × 1/10 tall of the filled rect
                (objectBoundingBox). Tiling across the full rect yields

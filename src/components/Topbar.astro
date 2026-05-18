@@ -6,13 +6,19 @@ const links = [
   { href: '/rail-corridor/', label: 'Rail' },
 ];
 
-const pathname = Astro.url.pathname;
+// Lowercase the pathname once so a user typing /RAIL-CORRIDOR/ in the
+// address bar still marks the Rail link as current. URL paths are
+// case-sensitive in the spec but Vercel typically lowercases at the
+// edge; normalize defensively so direct-typed mixed-case URLs still
+// resolve their topbar state.
+const pathname = Astro.url.pathname.toLowerCase();
 
 const isCurrent = (href: string) => {
-  if (href === '/') {
+  const target = href.toLowerCase();
+  if (target === '/') {
     return pathname === '/' || pathname === '';
   }
-  return pathname === href || pathname === href.replace(/\/$/, '');
+  return pathname === target || pathname === target.replace(/\/$/, '');
 };
 ---
 
