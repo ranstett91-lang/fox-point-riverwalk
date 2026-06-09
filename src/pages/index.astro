@@ -2,11 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SubNav from '../components/SubNav.astro';
 import ResourceLibrary from '../components/ResourceLibrary.astro';
+import Callout from '../components/Callout.astro';
 
 const subnavSections = [
   { id: 'site', label: 'Site' },
   { id: 'funding', label: 'Funding' },
   { id: 'stakes', label: 'Stakes' },
+  { id: 'printz', label: 'Printz corridor' },
   { id: 'library', label: 'Sources' },
 ];
 ---
@@ -31,18 +33,30 @@ const subnavSections = [
       <div class="hero-fb-overlay"></div>
       <div class="hero-fb-content">
         <section class="hero-copy hero-copy-light">
-          <p class="kicker kicker-light">Project Brief</p>
-          <h1>Help reconnect Claymont to a cleaner, safer shoreline.</h1>
+          <p class="kicker kicker-light">FY27 Community Project Funding · House Approps</p>
+          <span class="hero-deadline-badge">House Approps markup window — 6–8 weeks · CDS submissions open now</span>
+          <h1>Fox Point is a shovel-ready CDS line for McBride's FY27 submission.</h1>
           <p class="lede lede-light">
-            The first phase — restoring Fox Point Cove — already has $5M in pledges and a state plan.
-            What is still needed is the early work that turns that plan into permits and shovels.
-            Long-term, the vision continues the shoreline north to the Claymont Transit Center.
+            2.7 acres of wetland restoration along the Northeast Corridor at Edgemoor, with $5.03M already linked
+            to the site, a state plan adopted January 2025, and a federal Categorical Exclusion path. The remaining
+            gap is design and permits — exactly what a CDS earmark funds.
           </p>
           <div class="hero-points hero-points-light">
-            <span>$5M pledged</span>
-            <span>State plan</span>
-            <span>203 river acres</span>
-            <span>Early work is the gap</span>
+            <span>$5.03M linked</span>
+            <span>State plan adopted</span>
+            <span>CDS-eligible</span>
+            <span>NEC-adjacent</span>
+          </div>
+          <div class="hero-cta-row">
+            <a class="hero-cta-primary" href="#funding">
+              Download the one-page CDS request →
+            </a>
+            <a
+              class="hero-cta-secondary"
+              href="mailto:?subject=Fox%20Point%20CDS%20FY27%20%E2%80%94%20staff%20brief%20request&body=Hi%20%E2%80%94%20requesting%20a%2015-minute%20brief%20on%20the%20Fox%20Point%20Cove%20Community%20Project%20Funding%20request%20for%20Rep.%20McBride%27s%20FY27%20House%20Approps%20submission.%20Site%20brief%3A%20https%3A%2F%2Ffox-point-riverwalk.vercel.app%2F"
+            >
+              Brief McBride's office — 15-min call →
+            </a>
           </div>
         </section>
       </div>
@@ -54,22 +68,22 @@ const subnavSections = [
       </div>
     </div>
 
-    <section class="skim-band" aria-label="Executive skim">
+    <section class="skim-band" aria-label="Why now">
       <article class="skim-card">
-        <h2 class="skim-title">What is this?</h2>
-        <p class="skim-copy">A 2.7-acre wetland restoration at Fox Point Cove, with a long-term vision continuing the shoreline north to the Claymont Transit Center.</p>
+        <h2 class="skim-title">FY27 House Approps markup</h2>
+        <p class="skim-copy">Submissions land this summer. CDS lines are member-by-member; Fox Point fits McBride's district and committee posture.</p>
       </article>
       <article class="skim-card">
-        <h2 class="skim-title">Has anyone committed money?</h2>
-        <p class="skim-copy">$5.03M is already linked to the site across three funding sources — a state bond pledge, a DNREC restoration line, and a NOAA settlement.</p>
+        <h2 class="skim-title">IIJA cliff: Sep 30, 2026</h2>
+        <p class="skim-copy">Authorizations for Amtrak, NEC Federal-State Partnership, and CRISI expire. Fox Point sits on the Northeast Corridor's most exposed Wilmington stretch.</p>
       </article>
       <article class="skim-card">
-        <h2 class="skim-title">Is there a plan?</h2>
-        <p class="skim-copy">DNREC named the site in a January 2025 plan. The state has outlined the work and the next steps.</p>
+        <h2 class="skim-title">The ask</h2>
+        <p class="skim-copy">One CDS line, FY27 House Approps, in the $1.5–3M range, for design and permits at Fox Point Cove.</p>
       </article>
       <article class="skim-card">
-        <h2 class="skim-title">What is missing?</h2>
-        <p class="skim-copy">Design, permits, and the coordination to turn pledges into construction.</p>
+        <h2 class="skim-title">The packet</h2>
+        <p class="skim-copy">One-pager, DNREC state plan, funding letters, and a NEPA path memo — all linked below.</p>
       </article>
     </section>
   </Fragment>
@@ -317,7 +331,7 @@ const subnavSections = [
 
     <section class="panel stakes-strip" id="stakes">
       <p class="section-label">Why Now</p>
-      <h2 class="stakes-strip-headline">Amtrak has already priced the cost of doing nothing on this stretch.</h2>
+      <h2 class="stakes-strip-headline">September 30, 2026: IIJA authorizations expire on the line Fox Point sits beside.</h2>
       <div class="stakes-strip-row">
         <div class="stakes-strip-item">
           <p class="stakes-strip-num">$127M</p>
@@ -332,7 +346,43 @@ const subnavSections = [
           <p class="stakes-strip-label">Possible future losses if nothing changes</p>
         </div>
       </div>
-      <a class="stakes-strip-link" href="/rail-corridor/#climate-risk">See the full climate risk picture →</a>
+      <Callout label="McBride's record">
+        <p>Co-led the March 2026 Moulton–McBride bipartisan letter pressing House leadership for full FY27 Amtrak and Federal-State Partnership funding — one of the few tools a freshman in the minority has to keep a deadline visible.</p>
+      </Callout>
+      <a class="stakes-strip-link" href="/rail-corridor/#fy27">Full FY27 case + climate risk →</a>
+    </section>
+
+    <section class="panel" id="printz">
+      <div class="section-header">
+        <div>
+          <p class="section-label">The Connecting Corridor</p>
+          <h2>The Gov. Printz corridor links Fox Point to McBride's Claymont Transit Center.</h2>
+        </div>
+        <p class="section-copy">WILMAPCO's Governor Printz Boulevard Corridor Study — adopted by the WILMAPCO Council on January 14, 2021, with FHWA and FTA financing — lays out a 6.2-mile multimodal connection: Fox Point State Park → Bellevue State Park → Claymont Regional Transportation Center. The Locally Preferred Alternative is Alternative 3: shared-use paths on both sides, a modest lane reduction, and the lowest implementation difficulty of any option the study evaluated. Five years later, the study's own implementation table ends on a single open line — <em>"incorporate the project in the DelDOT Capital Transportation Program, subject to availability of funding."</em> That's the line item Congress can move.</p>
+      </div>
+
+      <div class="skim-band printz-band" aria-label="Printz corridor at a glance">
+        <article class="skim-card">
+          <h3 class="skim-title">Federal eligibility, simplest path</h3>
+          <p class="skim-copy">Planning already federally financed (FHWA + FTA). The study's Planning &amp; Environmental Linkages finding says the LPA is likely to qualify for a NEPA <strong>Categorical Exclusion</strong> — the simplest environmental document tier — if federal money is used to build it. Eligible for IIJA, Community Project Funding (CDS), and FRA Federal-State Partnership grants.</p>
+        </article>
+        <article class="skim-card">
+          <h3 class="skim-title">Lowest-effort option on the menu</h3>
+          <p class="skim-copy">The study compared five alternatives. The LPA (Alternative 3) is the only one rated <strong>Low difficulty</strong> to implement, at a moderate capital cost, and the only one besides 2A where the study says <strong>interim implementation is possible</strong> — i.e., a striping-and-signage pilot can land before any full reconstruction.</p>
+        </article>
+        <article class="skim-card">
+          <h3 class="skim-title">Stress level today</h3>
+          <p class="skim-copy">Rated <strong>LTS 4</strong> — the worst Level of Traffic Stress — for the entire 6.2 miles. There is no safe walking or biking access from Claymont to Fox Point State Park right now.</p>
+        </article>
+        <article class="skim-card">
+          <h3 class="skim-title">Closes an East Coast Greenway gap</h3>
+          <p class="skim-copy">The Northern Delaware Greenway Trail currently dead-ends 1,200 ft northwest of Gov. Printz at Cauffiel Parkway. This corridor is the planned East Coast Greenway route between there and Claymont Regional Transportation Center — a multi-state network gap, not just a Delaware project.</p>
+        </article>
+      </div>
+
+      <Callout label="Gulftainer window">
+        <p>The Lighthouse Road path to Fox Point only works if the easement is accommodated through the Gulftainer Port redevelopment. Once Gulftainer breaks ground without it, that connection is permanently lost. The Edgemoor Road alignment is the preferred Fox Point tie-in; Stoney Creek is the fallback. The decision window is the port's, not ours — federal pressure to preserve the easement is a McBride-sized lever.</p>
+      </Callout>
     </section>
 
     <section class="panel read-next" aria-label="Read next">
@@ -352,22 +402,32 @@ const subnavSections = [
     </section>
 
     <section class="panel community-cta" aria-labelledby="cta-heading">
-      <p class="section-label">What you can do</p>
-      <h2 id="cta-heading">Tell the people who can move this.</h2>
+      <p class="section-label">For McBride's office</p>
+      <h2 id="cta-heading">Three things that move this onto the FY27 list.</h2>
       <p class="community-cta-lede">
-        Funding is already on the table. What is still needed is the early work
-        that turns pledges into permits and shovels. Constituent letters to
-        Delaware's federal delegation are the most direct lever — they tell
-        committees and agencies that Fox Point is a priority back home.
+        Funding is linked, the plan is adopted, the corridor is federally eligible.
+        What's needed now is a CDS line in the FY27 House Approps submission,
+        a Fox Point site visit, and a 15-minute brief with the LD handling
+        Approps and T&amp;I.
       </p>
       <div class="community-cta-actions">
         <a
           class="community-cta-btn community-cta-btn-primary"
-          href="https://mcbride.house.gov/contact"
-          target="_blank"
-          rel="noopener"
+          href="#funding"
         >
-          Contact your representative →
+          Download the CDS request packet →
+        </a>
+        <a
+          class="community-cta-btn community-cta-btn-secondary"
+          href="mailto:?subject=Fox%20Point%20site%20visit%20%E2%80%94%20McBride%20office&body=Hi%20%E2%80%94%20requesting%20a%20Fox%20Point%20Cove%20site%20visit%20with%20Rep.%20McBride%27s%20team%20to%20walk%20the%20Edgemoor%20alignment%20and%20the%20Northeast%20Corridor%20edge.%20Site%20brief%3A%20https%3A%2F%2Ffox-point-riverwalk.vercel.app%2F"
+        >
+          Schedule a site visit →
+        </a>
+        <a
+          class="community-cta-btn community-cta-btn-secondary"
+          href="mailto:?subject=Fox%20Point%20CDS%20FY27%20%E2%80%94%2015-min%20office%20brief&body=Hi%20%E2%80%94%20requesting%2015%20minutes%20to%20brief%20the%20LD%20handling%20Approps%20and%20T%26I%20on%20the%20Fox%20Point%20Cove%20CDS%20request%20for%20FY27.%20Site%20brief%3A%20https%3A%2F%2Ffox-point-riverwalk.vercel.app%2F"
+        >
+          Brief the office — 15 min →
         </a>
         <button
           class="community-cta-btn community-cta-btn-secondary"
@@ -379,15 +439,6 @@ const subnavSections = [
           Share this brief
         </button>
       </div>
-      <p class="community-cta-fineprint">
-        Not a Delaware constituent? You can still write to the
-        <a
-          href="https://www.epa.gov/aboutepa/regional-and-geographic-offices"
-          target="_blank"
-          rel="noopener"
-        >EPA's regional office</a> about the Delaware River water-quality
-        standard, or share this page with someone who is.
-      </p>
     </section>
 
     <section class="library panel" id="library">
