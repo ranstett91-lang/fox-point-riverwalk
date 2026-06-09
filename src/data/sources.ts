@@ -42,6 +42,16 @@ export const resources: Resource[] = [
     source: 'Amtrak example for the Wilmington area',
   },
   {
+    title: 'NEC FUTURE Purpose and Need (FRA Tier 1 Draft EIS)',
+    file: 'https://www.fra.dot.gov/necfuture/tier1_eis/deis/chapter_03.aspx',
+    type: 'web',
+    label: 'Web',
+    size: '2015 · Federal Railroad Administration',
+    description:
+      "The federal review of the corridor's future. It finds that 100% of Delaware's NEC sits inside a coastal zone and lists \"Lack of Resiliency\" as a corridor-wide need.",
+    source: 'FRA source on corridor vulnerability',
+  },
+  {
     title: 'Final DARP Public Notice for Fox Point State Park',
     file: 'https://dnrec.delaware.gov/public-notices/whs20250010/',
     type: 'web',
