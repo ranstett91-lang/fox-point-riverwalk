@@ -15,5 +15,12 @@ const prefix = sources.length > 1 ? 'Sources: ' : 'Source: ';
 // separators. (Newlines + indentation inside a JSX expression become
 // preserved text nodes — that produced "Source:  <link>" with a
 // double space and trailing whitespace in an earlier version.)
+//
+// Render nothing for an empty sources array — an orphan "Source: "
+// label with no links would surface as a small piece of visual debris
+// at the bottom of a section, mislead screen readers, and pollute the
+// rendered HTML for callers who pass an empty/conditional list.
 ---
+{sources.length > 0 && (
 <p class="source-note section-source">{prefix}{sources.map((source, index) => (<Fragment>{index > 0 ? '; ' : ''}<a class="precedent-link" href={source.href} target="_blank" rel="noopener" aria-label={`${source.label} (opens in new tab)`}>{source.label}</a></Fragment>))}</p>
+)}

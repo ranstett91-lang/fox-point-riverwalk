@@ -16,7 +16,7 @@ const pathname = Astro.url.pathname.toLowerCase();
 const isCurrent = (href: string) => {
   const target = href.toLowerCase();
   if (target === '/') {
-    return pathname === '/' || pathname === '';
+    return pathname === '/';
   }
   return pathname === target || pathname === target.replace(/\/$/, '');
 };

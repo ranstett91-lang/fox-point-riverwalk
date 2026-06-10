@@ -21,6 +21,29 @@
   box-sizing: border-box;
 }
 
+/* ─── VISUALLY HIDDEN ─── */
+/* Standard "screen-reader only" recipe: removes the element from the
+   visual flow while keeping it in the accessibility tree. Used by
+   ARIA live status regions (e.g., the share button's "Link copied"
+   announcement) so the message is announced without producing a
+   visible empty box.
+
+   Avoids `display: none` (which also hides from screen readers) and
+   avoids the older `clip` property alone (which has cross-browser
+   inconsistencies); the combined absolute-positioned 1px clipped box
+   pattern works reliably across NVDA, VoiceOver, and JAWS. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* ─── SKIP NAVIGATION ─── */
 .skip-link {
   position: absolute;

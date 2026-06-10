@@ -357,7 +357,7 @@ const subnavSections = [
       <p class="community-cta-lede">
         Funding is already on the table. What is still needed is the early work
         that turns pledges into permits and shovels. Constituent letters to
-        Delaware's federal delegation are the most direct lever — they tell
+        Delaware’s federal delegation are the most direct lever — they tell
         committees and agencies that Fox Point is a priority back home.
       </p>
       <div class="community-cta-actions">
@@ -374,10 +374,11 @@ const subnavSections = [
           type="button"
           data-share-brief
           data-share-label="Share this brief"
-          aria-live="polite"
+          aria-label="Share this brief"
         >
           Share this brief
         </button>
+        <span class="sr-only" role="status" aria-live="polite" data-share-status></span>
       </div>
       <p class="community-cta-fineprint">
         Not a Delaware constituent? You can still write to the
@@ -385,7 +386,7 @@ const subnavSections = [
           href="https://www.epa.gov/aboutepa/regional-and-geographic-offices"
           target="_blank"
           rel="noopener"
-        >EPA's regional office</a> about the Delaware River water-quality
+        >EPA’s regional office</a> about the Delaware River water-quality
         standard, or share this page with someone who is.
       </p>
     </section>
@@ -400,6 +401,14 @@ const subnavSections = [
       // [data-share-brief] button on each astro:page-load, scoped via
       // AbortController so view-transitions don't leak listeners.
       //
+      // The button's accessible name is held stable via aria-label so
+      // when textContent flips to "Link copied ✓" for sighted users,
+      // screen readers don't re-announce the button's name. The live
+      // announcement is delivered through a separate visually-hidden
+      // status region ([data-share-status] with role="status"), which
+      // is the canonical ARIA pattern for transient feedback on an
+      // interactive control.
+      //
       // The canonical label is read from the data-share-label attr —
       // NOT from textContent at click time — so rapid double-clicks
       // can't capture the transient "Link copied ✓" state as the
@@ -410,6 +419,7 @@ const subnavSections = [
       // belonging to an older page-load.
       let shareAbortController: AbortController | null = null;
       const restoreTimers = new WeakMap<HTMLButtonElement, number>();
+      const announceTimers = new WeakMap<HTMLElement, number>();
       const pendingTimerIds = new Set<number>();
 
       // Narrow an unknown rejection value to the "user aborted the
@@ -425,21 +435,47 @@ const subnavSections = [
         );
       }
 
+      // Announce a status message through a visually-hidden aria-live
+      // region. Clear-then-set with a short async gap forces a fresh
+      // announcement on repeat clicks: writing the same textContent
+      // value over an unchanged region is a no-op for screen readers,
+      // so clearing first guarantees the next set is heard as a new
+      // event.
+      function announceShareStatus(status: HTMLElement | null, message: string) {
+        if (!status) return;
+        // Cancel any pending re-announce so a rapid second click owns
+        // the next announcement window cleanly.
+        const pending = announceTimers.get(status);
+        if (pending !== undefined) {
+          window.clearTimeout(pending);
+          pendingTimerIds.delete(pending);
+        }
+        status.textContent = '';
+        const timer = window.setTimeout(() => {
+          status.textContent = message;
+          announceTimers.delete(status);
+          pendingTimerIds.delete(timer);
+        }, 50);
+        announceTimers.set(status, timer);
+        pendingTimerIds.add(timer);
+      }
+
       function initShareButtons() {
         shareAbortController?.abort();
         shareAbortController = new AbortController();
         const { signal } = shareAbortController;
 
-        // Cancel every pending restore timer scheduled before this
-        // init. The previous page-load's "Link copied ✓" timers
-        // would otherwise fire restoreLabel on detached buttons —
-        // harmless visually, but it keeps each button reference
+        // Cancel every pending restore / announce timer scheduled
+        // before this init. The previous page-load's timers would
+        // otherwise fire callbacks on detached buttons or status
+        // regions — harmless visually, but it keeps each reference
         // alive for up to 2.4s after navigation. Clearing the Set
         // releases them immediately.
         pendingTimerIds.forEach((id) => window.clearTimeout(id));
         pendingTimerIds.clear();
 
         const buttons = document.querySelectorAll<HTMLButtonElement>('[data-share-brief]');
+        const status = document.querySelector<HTMLElement>('[data-share-status]');
 
         const restoreLabel = (btn: HTMLButtonElement) => {
           const label = btn.dataset.shareLabel ?? 'Share';
@@ -469,6 +505,7 @@ const subnavSections = [
             try {
               await navigator.clipboard.writeText(shareData.url);
               btn.textContent = 'Link copied ✓';
+              announceShareStatus(status, 'Link copied');
               // Cancel any pending restore from a previous click so the
               // newest click owns the next restoration window.
               const pending = restoreTimers.get(btn);

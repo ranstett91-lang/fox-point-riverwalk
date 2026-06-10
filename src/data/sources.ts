@@ -48,7 +48,7 @@ export const resources: Resource[] = [
     label: 'Web',
     size: '2015 · Federal Railroad Administration',
     description:
-      "The federal review of the corridor's future. It finds that 100% of Delaware's NEC sits inside a coastal zone and lists \"Lack of Resiliency\" as a corridor-wide need.",
+      "The federal review of the corridor’s future. It finds that 100% of Delaware’s NEC sits inside a coastal zone and lists “Lack of Resiliency” as a corridor-wide need.",
     source: 'FRA source on corridor vulnerability',
   },
   {
