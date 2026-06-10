@@ -22,5 +22,5 @@ const prefix = sources.length > 1 ? 'Sources: ' : 'Source: ';
 // rendered HTML for callers who pass an empty/conditional list.
 ---
 {sources.length > 0 && (
-<p class="source-note section-source">{prefix}{sources.map((source, index) => (<Fragment>{index > 0 ? '; ' : ''}<a class="precedent-link" href={source.href} target="_blank" rel="noopener" aria-label={`${source.label} (opens in new tab)`}>{source.label}</a></Fragment>))}</p>
+<p class="source-note section-source">{prefix}{sources.map((source, index) => (<Fragment>{index > 0 ? '; ' : ''}<a class="precedent-link" href={source.href} target="_blank" rel="noopener noreferrer" aria-label={`${source.label} (opens in new tab)`}>{source.label}</a></Fragment>))}</p>
 )}

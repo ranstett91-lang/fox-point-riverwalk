@@ -10,6 +10,10 @@
   --brand-soft: #d8e7d7;
   --accent: #c87442;
   --accent-soft: #f0ddcf;
+  /* Loss/risk red used by the "hot" stat treatments (risk cards,
+     2050 thermometer, stakes strip). One token so the five usages
+     can't drift apart. */
+  --hot: #b03b3b;
   --shadow: 0 24px 60px rgba(18, 54, 42, 0.12);
   /* Approximate fallback for scroll-padding before BaseLayout's <script>
      publishes the real measured height of the sticky .page-header
@@ -615,6 +619,7 @@ main section[id] {
 
 .resource-grid {
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -766,10 +771,6 @@ main section[id] {
 
 .filter-chip-reset:hover {
   color: var(--brand);
-}
-
-.resource-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
 .resource-card {
@@ -1033,6 +1034,10 @@ p.resource-largefile-hint {
   border-top: 2.5px solid #3a6e96;
 }
 
+.wc-rain {
+  background: linear-gradient(145deg, rgba(203, 223, 232, 0.45), rgba(255, 251, 245, 0.85));
+}
+
 .wc-intensity {
   background: linear-gradient(145deg, rgba(216, 231, 245, 0.4), rgba(255, 251, 245, 0.85));
 }
@@ -1080,7 +1085,7 @@ p.resource-largefile-hint {
 }
 
 .tf-now  { height: 50%; background: linear-gradient(0deg, #c87442, #da965b); }
-.tf-2050 { height: 80%; background: linear-gradient(0deg, #b03b3b, #d06060); }
+.tf-2050 { height: 80%; background: linear-gradient(0deg, var(--hot), #d06060); }
 
 .thermo-bulb {
   width: 26px;
@@ -1091,7 +1096,7 @@ p.resource-largefile-hint {
 }
 
 .tb-now  { background: #c87442; }
-.tb-2050 { background: #b03b3b; }
+.tb-2050 { background: var(--hot); }
 
 /* ─── RISK DASHBOARD ─── */
 
@@ -1119,7 +1124,7 @@ p.resource-largefile-hint {
 }
 
 .risk-hot-card .risk-number {
-  color: #b03b3b;
+  color: var(--hot);
 }
 
 .risk-label {
@@ -1154,7 +1159,7 @@ p.resource-largefile-hint {
 .risk-gradient-bar {
   height: 0.6rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, #dbe7d8 0%, #c87442 55%, #b03b3b 100%);
+  background: linear-gradient(90deg, #dbe7d8 0%, var(--accent) 55%, var(--hot) 100%);
 }
 
 /* ─── PHOTO SECTION ─── */
@@ -1259,6 +1264,15 @@ p.resource-largefile-hint {
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-top: 1.5rem;
+}
+
+/* For sections whose card count isn't a multiple of 3: a 2-card or
+   4-card set in the 3-column grid leaves an empty column or an
+   orphaned fourth card at desktop. Two columns keeps those sets
+   balanced; the max-980px media query still collapses to 1 column
+   (same specificity, later in source). */
+.corridor-brief-grid--two-col {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .corridor-brief-card {
@@ -1886,6 +1900,13 @@ p.community-cta-lede {
   background: rgba(255, 255, 255, 0.72);
 }
 
+/* The card's DOM puts the <h3> name first so screen readers hear
+   "who" before "what office"; the eyebrow role label stays visually
+   on top via flex order. */
+.champion-card .champion-role {
+  order: -1;
+}
+
 .champion-name {
   margin: 0;
   font-size: 1.05rem;
@@ -1908,6 +1929,31 @@ p.community-cta-lede {
   color: var(--muted);
   font-size: 0.92rem;
   line-height: 1.6;
+}
+
+/* ─── BACKDROP-FILTER FALLBACK ─── */
+/* Browsers without backdrop-filter (older Firefox/Android WebView)
+   would render the translucent cream surfaces directly over page
+   content with no blur — text floating on text. Swap those surfaces
+   to near-opaque. The two hero chip treatments are excluded: they
+   sit over the hero photo's dark overlay, where blur is decorative
+   and the translucent look stays legible without it.
+   Placed after every base surface rule it overrides — these
+   selectors tie on specificity, so source order decides. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .page-header,
+  .subnav,
+  .skim-card {
+    background: rgba(255, 250, 242, 0.985);
+  }
+
+  .topbar {
+    background: rgba(255, 250, 242, 0.96);
+  }
+
+  .panel {
+    background: var(--surface-strong);
+  }
 }
 
 /* ─── RESPONSIVE ─── */
@@ -2140,7 +2186,7 @@ p.community-cta-lede {
 }
 
 .stakes-strip-item:last-child .stakes-strip-num {
-  color: #b03b3b;
+  color: var(--hot);
 }
 
 .stakes-strip-label {
