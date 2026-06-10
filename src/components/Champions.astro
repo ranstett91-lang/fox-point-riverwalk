@@ -7,13 +7,16 @@ interface Props {
 
 const { ids } = Astro.props;
 const cards = getChampions(ids);
+// Card DOM puts the <h3> name first so screen readers announce who
+// before what office; .champion-role keeps its visual spot above the
+// name via flex order in global.css.
 ---
 
 <div class="champions-grid">
   {cards.map((champion) => (
     <article class="champion-card">
-      <p class="champion-role">{champion.role}</p>
       <h3 class="champion-name">{champion.name}</h3>
+      <p class="champion-role">{champion.role}</p>
       <p class="champion-blurb">{champion.blurb}</p>
     </article>
   ))}

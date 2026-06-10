@@ -4,9 +4,14 @@ interface Props {
 }
 
 const { label } = Astro.props;
+// The aside is a "complementary" landmark. Pages can render several
+// callouts (rail-corridor has three), and unnamed same-type landmarks
+// are indistinguishable in a screen reader's region list. Reuse the
+// visible label as the landmark's accessible name; when no label is
+// passed, Astro drops the undefined attribute entirely.
 ---
 
-<aside class="callout">
+<aside class="callout" aria-label={label}>
   {label && <p class="callout-label">{label}</p>}
   <slot />
 </aside>

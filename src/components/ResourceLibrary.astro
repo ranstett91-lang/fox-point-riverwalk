@@ -18,6 +18,18 @@ function parseSizeMb(size: string): number | null {
   return Number.isFinite(value) ? value : null;
 }
 
+/**
+ * Fold typographic punctuation to ASCII and lowercase, for search
+ * comparison only. Display strings keep their curly quotes; the
+ * haystack and the user's query are both folded so a keyboard-typed
+ * straight apostrophe ("amtrak's") matches the curly one in the
+ * description ("Amtrak’s"). The same regexes appear in the client
+ * script below — keep the two in sync.
+ */
+function toSearchText(s: string): string {
+  return s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').toLowerCase();
+}
+
 interface CardProps extends Resource {
   isLargeFile: boolean;
   actionLabel: string;
@@ -48,7 +60,7 @@ const cards: CardProps[] = resources.map((r) => {
     isLargeFile,
     actionLabel,
     ariaLabel: `${actionLabel}: ${r.title} ${ariaSuffix}`,
-    searchHaystack: `${r.title} ${r.description} ${r.label} ${r.source}`.toLowerCase(),
+    searchHaystack: toSearchText(`${r.title} ${r.description} ${r.label} ${r.source}`),
   };
 });
 ---
@@ -66,7 +78,7 @@ const cards: CardProps[] = resources.map((r) => {
         <circle cx="9" cy="9" r="6"/>
         <line x1="13.5" y1="13.5" x2="17.5" y2="17.5"/>
       </svg>
-      <input id="resourceSearch" name="q" type="search" placeholder="Try Amtrak, marsh, permits, NOAA..." data-library-search>
+      <input id="resourceSearch" name="q" type="search" placeholder="Try Amtrak, marsh, permits, NOAA…" data-library-search>
     </span>
   </label>
 </div>
@@ -99,7 +111,7 @@ const cards: CardProps[] = resources.map((r) => {
         class="resource-link"
         href={card.file}
         target="_blank"
-        rel="noopener"
+        rel="noopener noreferrer"
         aria-label={card.ariaLabel}
       >
         {card.actionLabel}
@@ -115,7 +127,22 @@ const cards: CardProps[] = resources.map((r) => {
   // only toggles a .is-hidden class on cards based on the active
   // filter chip and search query. No DOM cloning; cards are visible
   // without JS by design.
+  //
+  // Listeners are scoped to an AbortController so view-transition
+  // re-init cleanly tears down the previous page's library handlers
+  // (matches the SubNav and BaseLayout scripts). The library only
+  // renders on the home page today, so in practice the prior DOM is
+  // destroyed on navigation away and the GC handles cleanup — but
+  // future reuse on other pages would re-init `initLibrary` against
+  // a live grid, and without the abort step the prior page's
+  // handlers would still be alive on detached nodes.
+  let libraryAbortController: AbortController | null = null;
+
   function initLibrary() {
+    libraryAbortController?.abort();
+    libraryAbortController = new AbortController();
+    const { signal } = libraryAbortController;
+
     const grid = document.querySelector<HTMLElement>('[data-library-grid]');
     const search = document.querySelector<HTMLInputElement>('[data-library-search]');
     const filterRow = document.querySelector<HTMLElement>('[data-library-filters]');
@@ -128,7 +155,15 @@ const cards: CardProps[] = resources.map((r) => {
     const cards = Array.from(grid.querySelectorAll<HTMLElement>('.resource-card'));
 
     const render = () => {
-      const query = search.value.trim().toLowerCase();
+      // Fold curly quotes/apostrophes to ASCII before comparing —
+      // mirrors the toSearchText() fold applied to the haystack in
+      // the frontmatter, so pasted curly text and typed straight
+      // text both match.
+      const query = search.value
+        .trim()
+        .replace(/[‘’]/g, "'")
+        .replace(/[“”]/g, '"')
+        .toLowerCase();
       let visibleCount = 0;
       cards.forEach((card) => {
         const cardType = card.dataset.resourceType;
@@ -156,9 +191,9 @@ const cards: CardProps[] = resources.map((r) => {
         chip.setAttribute('aria-pressed', String(isActive));
       });
       render();
-    });
+    }, { signal });
 
-    search.addEventListener('input', render);
+    search.addEventListener('input', render, { signal });
 
     reset?.addEventListener('click', () => {
       activeFilter = 'all';
@@ -170,7 +205,7 @@ const cards: CardProps[] = resources.map((r) => {
       });
       render();
       search.focus();
-    });
+    }, { signal });
 
     render();
   }
