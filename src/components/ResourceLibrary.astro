@@ -16,6 +16,18 @@ function parseSizeMb(size: string): number | null {
   return Number.isFinite(value) ? value : null;
 }
 
+/**
+ * Fold typographic punctuation to ASCII and lowercase, for search
+ * comparison only. Display strings keep their curly quotes; the
+ * haystack and the user's query are both folded so a keyboard-typed
+ * straight apostrophe ("amtrak's") matches the curly one in the
+ * description ("Amtrak’s"). The same regexes appear in the client
+ * script below — keep the two in sync.
+ */
+function toSearchText(s: string): string {
+  return s.replace(/[‘’]/g, "'").replace(/[“”]/g, '"').toLowerCase();
+}
+
 interface CardProps extends Resource {
   isLargeFile: boolean;
   actionLabel: string;
@@ -46,7 +58,7 @@ const cards: CardProps[] = resources.map((r) => {
     isLargeFile,
     actionLabel,
     ariaLabel: `${actionLabel}: ${r.title} ${ariaSuffix}`,
-    searchHaystack: `${r.title} ${r.description} ${r.label} ${r.source}`.toLowerCase(),
+    searchHaystack: toSearchText(`${r.title} ${r.description} ${r.label} ${r.source}`),
   };
 });
 ---
@@ -64,7 +76,7 @@ const cards: CardProps[] = resources.map((r) => {
         <circle cx="9" cy="9" r="6"/>
         <line x1="13.5" y1="13.5" x2="17.5" y2="17.5"/>
       </svg>
-      <input id="resourceSearch" name="q" type="search" placeholder="Try Amtrak, marsh, permits, NOAA..." data-library-search>
+      <input id="resourceSearch" name="q" type="search" placeholder="Try Amtrak, marsh, permits, NOAA…" data-library-search>
     </span>
   </label>
 </div>
@@ -141,7 +153,15 @@ const cards: CardProps[] = resources.map((r) => {
     const cards = Array.from(grid.querySelectorAll<HTMLElement>('.resource-card'));
 
     const render = () => {
-      const query = search.value.trim().toLowerCase();
+      // Fold curly quotes/apostrophes to ASCII before comparing —
+      // mirrors the toSearchText() fold applied to the haystack in
+      // the frontmatter, so pasted curly text and typed straight
+      // text both match.
+      const query = search.value
+        .trim()
+        .replace(/[‘’]/g, "'")
+        .replace(/[“”]/g, '"')
+        .toLowerCase();
       let visibleCount = 0;
       cards.forEach((card) => {
         const cardType = card.dataset.resourceType;

@@ -451,11 +451,14 @@ const subnavSections = [
           pendingTimerIds.delete(pending);
         }
         status.textContent = '';
+        // 100ms clears typical AT mutation-batching windows; shorter
+        // gaps risk the clear and the set collapsing into one tree
+        // update, which would swallow the re-announcement.
         const timer = window.setTimeout(() => {
           status.textContent = message;
           announceTimers.delete(status);
           pendingTimerIds.delete(timer);
-        }, 50);
+        }, 100);
         announceTimers.set(status, timer);
         pendingTimerIds.add(timer);
       }
@@ -515,6 +518,15 @@ const subnavSections = [
               }
               const timer = window.setTimeout(() => {
                 restoreLabel(btn);
+                // Clear the residual status text when the visual
+                // state reverts, so the accessibility tree doesn't
+                // retain an orphaned "Link copied" that a virtual-
+                // cursor user would later stumble on out of context.
+                // Clearing never retracts an announcement already
+                // made, and a pending announce timer from a rapid
+                // re-click simply repopulates the region when it
+                // fires.
+                if (status) status.textContent = '';
                 restoreTimers.delete(btn);
                 pendingTimerIds.delete(timer);
               }, 2400);
