@@ -7,10 +7,12 @@ const LARGE_FILE_THRESHOLD_MB = 10;
  * Extract a megabyte count from a size string like "60.1 MB".
  * Returns null when the string has no parseable "<number> MB" pair,
  * or when parsing produces NaN / Infinity from malformed input like
- * ". MB" or "abc MB".
+ * ". MB" or "abc MB". Anchored to the full string so a future entry
+ * like "Jan 2025 · 14 MB report" can't accidentally extract "14" and
+ * trigger the large-file warning on a non-PDF resource.
  */
 function parseSizeMb(size: string): number | null {
-  const match = size.match(/([\d.]+)\s*MB/i);
+  const match = size.match(/^([\d.]+)\s*MB$/i);
   if (!match) return null;
   const value = parseFloat(match[1]);
   return Number.isFinite(value) ? value : null;
