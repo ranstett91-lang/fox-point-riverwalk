@@ -4,6 +4,7 @@ import SubNav from '../components/SubNav.astro';
 import ResourceLibrary from '../components/ResourceLibrary.astro';
 
 const subnavSections = [
+  { id: 'anniversary', label: '75 Years' },
   { id: 'site', label: 'Site' },
   { id: 'funding', label: 'Funding' },
   { id: 'stakes', label: 'Stakes' },
@@ -77,6 +78,32 @@ const subnavSections = [
   <SubNav slot="subnav" sections={subnavSections} />
 
   <main id="main-content" tabindex="-1">
+    <section class="panel anniversary-band" id="anniversary" aria-labelledby="anniversary-heading">
+      <div class="anniversary-band-mark" aria-hidden="true">
+        <span class="anniversary-band-num">75</span>
+        <span class="anniversary-band-unit">years</span>
+      </div>
+      <div class="anniversary-band-body">
+        <p class="anniversary-band-eyebrow">Delaware State Parks · 1951–2026</p>
+        <h2 id="anniversary-heading">Fox Point belongs to a state park system turning 75 this year.</h2>
+        <p class="anniversary-band-copy">
+          2026 marks the 75th anniversary of Delaware State Parks — and June is the
+          anniversary month. The system began in 1951 with three parks; today it
+          protects 17 parks and more than 27,000 acres, Fox Point State Park among
+          them. Restoring Fox Point Cove is a fitting way to mark the milestone: it
+          hands one of those parks a cleaner, safer shoreline for the next 75 years.
+        </p>
+        <a
+          class="anniversary-band-link"
+          href="https://www.destateparks.com/75-years/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          See the 75th anniversary celebration →
+        </a>
+      </div>
+    </section>
+
     <section class="photo-section" id="site">
       <div class="photo-header">
         <p class="section-label">Site Readiness</p>
