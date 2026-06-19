@@ -1,6 +1,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import Topbar from '../components/Topbar.astro';
+import AnnouncementBanner from '../components/AnnouncementBanner.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -78,6 +79,7 @@ const {
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
+    <AnnouncementBanner />
     <div class="page-shell" id="top">
       <div class="page-header" data-page-header>
         <Topbar />
