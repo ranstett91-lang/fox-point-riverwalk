@@ -2720,8 +2720,13 @@ p.community-cta-lede {
   height: 1.7rem;
   padding: 0 0.45rem;
   border-radius: 999px;
-  background: var(--accent);
-  color: #fffaf2;
+  /* Cream chip with brand-green numerals: ~14:1 contrast, clearing
+     WCAG AA for this 14.7px bold text. Cream-on-accent (the earlier
+     pairing) measured only ~3.4:1 and failed AA. The banner's left
+     gradient still carries the accent so the orange brand cue is not
+     lost. */
+  background: #fffaf2;
+  color: var(--brand);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 0.92rem;
   font-weight: 700;
