@@ -10,6 +10,13 @@
   --brand-soft: #d8e7d7;
   --accent: #c87442;
   --accent-soft: #f0ddcf;
+  /* Darkened accent for small text on the cream surfaces. --accent
+     (#c87442) measures ~3.3:1 there — fine for large numerals and
+     non-text UI, a WCAG AA fail below ~24px. Every eyebrow/kicker-
+     sized use of the accent hue points here instead; keep the two
+     in the same family so chips and eyebrows still read as one
+     accent system. ~6.8:1 on --surface-strong. */
+  --accent-text: #8a4520;
   /* Loss/risk red used by the "hot" stat treatments (risk cards,
      2050 thermometer, stakes strip). One token so the five usages
      can't drift apart. */
@@ -537,6 +544,26 @@ main section[id] {
   padding: clamp(1.5rem, 4vw, 3rem);
 }
 
+/* Muted body-copy default for panel paragraphs. `:where(p)` keeps
+   this at class specificity (0,1,0) instead of (0,1,1): the old
+   `.panel p` silently out-ranked every single-class color like
+   .kicker, .capital-amount, .stakes-strip-num, and .read-next-eyebrow
+   — the "cascade trap" patched piecemeal at .feature-stat-num,
+   .community-cta-lede, and .resource-largefile-hint. At equal
+   specificity, the display classes below this rule win by source
+   order, so their declared colors actually render. Keep this rule
+   above the display-class styles. */
+.lede,
+.panel :where(p),
+.section-copy,
+.resource-description,
+.resource-source,
+.empty-state,
+.search-field span {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .kicker,
 .section-label,
 .resource-type,
@@ -548,7 +575,7 @@ main section[id] {
 }
 
 .kicker {
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -557,6 +584,11 @@ main section[id] {
 .resource-type {
   color: var(--brand);
   font-size: 0.7rem;
+  /* Explicit weight: the read-next "Read Next" label is an <h2>
+     (heading hierarchy for its h3 cards) and would otherwise pick
+     up the UA's bold heading default, drifting from the identical
+     <p> labels elsewhere. */
+  font-weight: 400;
 }
 
 .hero-copy h1 {
@@ -565,17 +597,6 @@ main section[id] {
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(2.9rem, 6vw, 5.4rem);
   line-height: 0.94;
-}
-
-.lede,
-.panel p,
-.section-copy,
-.resource-description,
-.resource-source,
-.empty-state,
-.search-field span {
-  color: var(--muted);
-  line-height: 1.7;
 }
 
 .panel > p,
@@ -639,14 +660,18 @@ main section[id] {
   border-radius: 2rem;
 }
 
-.panel h2 {
+/* :not(.section-label) — the read-next "Read Next" label is an <h2>
+   for heading hierarchy (its cards are <h3>s) but keeps the eyebrow
+   treatment; without the exclusion this rule (0,1,1) beats
+   .section-label (0,1,0) and repaints it as a 3rem serif headline. */
+.panel h2:not(.section-label) {
   margin: 0.35rem 0 1rem;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(1.9rem, 3.8vw, 3.1rem);
   line-height: 1.02;
 }
 
-.panel h3:not(.skim-title):not(.risk-label):not(.corridor-brief-eyebrow),
+.panel h3:not(.skim-title):not(.risk-label):not(.corridor-brief-eyebrow):not(.wc-title),
 .resource-title {
   margin: 0;
   font-size: 1.15rem;
@@ -836,7 +861,10 @@ p.resource-largefile-hint {
 }
 
 .resource-largefile-hint::before {
-  content: "↓";
+  /* Alternative-text syntax with an empty string keeps the arrow
+     purely visual — without it, screen readers announce the ↓
+     character ("down arrow") before the hint text. */
+  content: "↓" / "";
   font-weight: 800;
 }
 
@@ -917,7 +945,10 @@ p.resource-largefile-hint {
   letter-spacing: 0.02em;
 }
 
-.wc-year-now {
+/* Emphasized year label on a weather-card comparison (e.g. the
+   "2050" side of the thermometer pair) — brand-colored to mark the
+   row the card is arguing about, whichever year that is. */
+.wc-year-emphasis {
   color: var(--brand);
 }
 
@@ -1305,7 +1336,7 @@ p.resource-largefile-hint {
 
 .corridor-brief-eyebrow {
   margin: 0 0 0.75rem;
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1967,7 +1998,7 @@ p.community-cta-lede {
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .champion-blurb {
@@ -2133,7 +2164,7 @@ p.community-cta-lede {
   .capital-amount {
     font-size: 1rem;
     font-weight: 800;
-    color: var(--accent);
+    color: var(--accent-text);
     letter-spacing: 0.04em;
     text-transform: uppercase;
     font-family: "Avenir Next", "Segoe UI", sans-serif;
@@ -2211,7 +2242,7 @@ p.community-cta-lede {
     line-height: 1.08;
     letter-spacing: -0.01em;
   }
-  .panel h2,
+  .panel h2:not(.section-label),
   .photo-header h2 {
     line-height: 1.08;
   }
@@ -2277,7 +2308,7 @@ p.community-cta-lede {
      1.9rem (30.4px). At iPhone SE width that wraps to 4–5 lines for
      long headlines like "Amtrak has documented the cost of doing
      nothing." Drop the floor so it stays 2–3 lines. */
-  .panel h2,
+  .panel h2:not(.section-label),
   .photo-header h2 {
     font-size: 1.55rem;
     line-height: 1.1;
@@ -2430,7 +2461,7 @@ p.community-cta-lede {
 
 .read-next-eyebrow {
   margin: 0;
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -2516,12 +2547,18 @@ p.community-cta-lede {
 }
 
 .policy-row summary:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: -2px;
+  /* .policy-row clips with overflow:hidden, so an outline drawn at
+     (or negatively offset just inside) the summary edge can be
+     clipped on iOS Safari. An inset box-shadow paints inside the
+     element's own box and never clips; the transparent outline
+     stays for Windows High Contrast Mode, which force-paints
+     outlines but drops box-shadows. */
+  outline: 2px solid transparent;
+  box-shadow: inset 0 0 0 2px var(--accent-text);
 }
 
 .policy-eyebrow {
-  color: var(--accent);
+  color: var(--accent-text);
   font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.08em;
