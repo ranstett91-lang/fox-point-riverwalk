@@ -52,6 +52,36 @@ export const resources: Resource[] = [
     source: 'FRA source on corridor vulnerability',
   },
   {
+    title: 'FY25–26 CRISI Notice of Funding Opportunity',
+    file: 'https://www.federalregister.gov/documents/2026/04/22/2026-07823/notice-of-funding-opportunity-for-the-fiscal-year-2025-and-2026-consolidated-rail-infrastructure-and',
+    type: 'web',
+    label: 'Web',
+    size: 'Apr 2026 · Federal Railroad Administration',
+    description:
+      'The roughly $2 billion rail-improvement round. It names stabilizing track against sea-level rise and erosion as an eligible activity. The window closed June 25, 2026, after a short extension.',
+    source: 'FRA program the shoreline work could align with next cycle',
+  },
+  {
+    title: 'FY25–26 Railroad Crossing Elimination NOFO',
+    file: 'https://railroads.dot.gov/elibrary/fy25-26-NOFO-RCE-crossing-safety',
+    type: 'web',
+    label: 'Web',
+    size: 'Apr 2026 · Federal Railroad Administration',
+    description:
+      'The roughly $1.15 billion crossing-safety round. It covers pathway-rail crossings — pedestrian bridges over active track, not just roads. The window closed June 8, 2026.',
+    source: 'FRA program a trail crossing could align with',
+  },
+  {
+    title: 'FY22 Railroad Crossing Elimination Selections',
+    file: 'https://railroads.dot.gov/sites/fra.dot.gov/files/2023-06/FY22-RCE-Selections_PDFa.pdf',
+    type: 'pdf',
+    label: 'Report',
+    size: 'Jun 2023 · Federal Railroad Administration',
+    description:
+      'The program’s first award list. It includes up to $3.2 million for Bluffdale, Utah to build an ADA pedestrian overpass — the closest analog to a Fox Point trail crossing.',
+    source: 'Precedent for pedestrian projects winning RCE money',
+  },
+  {
     title: 'Final DARP Public Notice for Fox Point State Park',
     file: 'https://dnrec.delaware.gov/public-notices/whs20250010/',
     type: 'web',

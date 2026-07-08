@@ -9,6 +9,7 @@ const subnavSections = [
   { id: 'climate-risk', label: 'Climate risk' },
   { id: 'nec-visibility', label: 'NEC visibility' },
   { id: 'federal-investment', label: 'Federal investment' },
+  { id: 'fra-alignment', label: 'Where Fox Point fits' },
   { id: 'fy27', label: 'FY27 deadline' },
   { id: 'mcbride-advocacy', label: "McBride’s advocacy" },
   { id: 'champions', label: 'Champions' },
@@ -194,19 +195,82 @@ const subnavSections = [
         </article>
         <article class="corridor-brief-card">
           <h3 class="corridor-brief-eyebrow">FRA Federal-State Partnership grants</h3>
-          <p>$36 billion total, of which $24 billion is dedicated to the Northeast Corridor — bridges, tunnels, capital renewal, stations.</p>
+          <p>$36 billion total, of which $24 billion is dedicated to the Northeast Corridor (the FSP-NEC program) — bridges, tunnels, capital renewal, stations.</p>
         </article>
         <article class="corridor-brief-card">
           <h3 class="corridor-brief-eyebrow">Safety and grade crossings</h3>
-          <p>$5 billion for CRISI safety grants; $3 billion for the Railroad Crossing Elimination Program.</p>
+          <p>$5 billion for CRISI safety grants; $3 billion for the Railroad Crossing Elimination Program (RCE).</p>
         </article>
       </div>
 
-      <p class="section-copy">Specific Northeast Corridor projects announced under this funding include the Hudson Tunnel, the Frederick Douglass Tunnel, the Susquehanna River Bridge, and other capital-renewal work along the line.</p>
+      <p class="section-copy">Specific Northeast Corridor projects announced under this funding include the Hudson Tunnel, the Frederick Douglass Tunnel, the Susquehanna River Bridge, and other capital-renewal work along the line. In April 2026, FRA opened a combined FY25–26 funding round of roughly $7.9 billion across these three grant programs.</p>
 
       <SourcesNote sources={[
         { label: 'Amtrak — New Era of Rail', href: 'https://www.amtrak.com/about-amtrak/new-era.html' },
         { label: 'FRA — IIJA programs', href: 'https://railroads.dot.gov/IIJA' },
+        { label: 'FRA — grant programs', href: 'https://railroads.dot.gov/grants' },
+      ]} />
+    </section>
+
+    <section class="panel" id="fra-alignment">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Where Fox Point Fits</p>
+          <h2>The living shoreline and the trail each map onto a federal rail program.</h2>
+        </div>
+        <p class="section-copy">The April 2026 round put real numbers behind that $66 billion. The CRISI and RCE windows closed in June 2026 with no Fox Point application in them — the Federal-State Partnership has later rounds still to be announced. What follows is where each concept fits, and what it would honestly take.</p>
+      </div>
+
+      <div class="capital-stack">
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">$2.04B</p>
+            <p class="capital-source">CRISI · FY25–26 round</p>
+            <span class="status-chip status-identified">Strongest fit</span>
+          </div>
+          <div class="capital-detail">
+            <h3>The living shoreline, framed as rail resilience.</h3>
+            <p>CRISI’s eligible activities include stabilizing track against the effects of sea-level rise and erosion — nearly word-for-word the job the living shoreline would do for the rail embankment at Fox Point. Local governments and public agencies can apply, and projects offering more than the required 20% non-federal share score better; the $5 million in state and settlement money already linked to the site positions a future application to bring a strong non-federal share, if those dollars can legally cover the same scope.</p>
+            <p>The honest caveat: no FRA award has yet funded nature-based shoreline work. The case has to be made as protection for the Northeast Corridor, not as habitat restoration that happens to sit beside it.</p>
+          </div>
+        </article>
+
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">$1.15B</p>
+            <p class="capital-source">Crossing Elimination · FY25–26</p>
+            <span class="status-chip status-identified">Most accessible</span>
+          </div>
+          <div class="capital-detail">
+            <h3>A safe trail crossing of the corridor.</h3>
+            <p>The Railroad Crossing Elimination Program covers pathway-rail crossings, not just roads — grade separations, closures, and pedestrian bridges over active track. In the program’s first round, the city of Bluffdale, Utah won up to $3.2 million to close a private at-grade crossing and build an ADA-compliant pedestrian overpass. Awards start at $1 million, the federal share tops out at 80%, and DelDOT, DTC, WILMAPCO, or New Castle County could each apply.</p>
+          </div>
+        </article>
+
+        <article class="capital-row">
+          <div class="capital-meta">
+            <p class="capital-amount">$4.75B</p>
+            <p class="capital-source">Federal-State Partnership (NEC)</p>
+            <span class="status-chip status-future">Longest path</span>
+          </div>
+          <div class="capital-detail">
+            <h3>Embankment protection as state of good repair.</h3>
+            <p>FSP-NEC funds the capital work that keeps the corridor in a state of good repair, and its later FY25–26 rounds are still to be announced. But eligible projects must sit on the NEC Project Inventory, and applicants are states, Amtrak, and public agencies. This path runs through Amtrak and DelDOT, not the park.</p>
+          </div>
+        </article>
+      </div>
+
+      <p class="section-copy">None of these programs take applications from a state park or a nonprofit — every path requires a public agency to lead. The region has one with a record: the Delaware Transit Corporation and DelDOT built the Harris B. McDowell III Transportation Center just up this corridor with a $10 million federal TIGER grant. The agency holds the pen on any application; the community holds the pen on what gets asked for.</p>
+
+      <Callout label="Honest framing">
+        <p>Nothing here is applied for or awarded. FRA has yet to fund a living shoreline anywhere — its resilience money has gone to hard infrastructure, like Connecticut’s bridge replacements. NOAA and NFWF remain the natural lead funders for the nature-based work. The FRA case is narrower and real: federal rail programs can co-fund the parts of this project that demonstrably protect the Northeast Corridor.</p>
+      </Callout>
+
+      <SourcesNote sources={[
+        { label: 'FY25–26 CRISI NOFO (Federal Register)', href: 'https://www.federalregister.gov/documents/2026/04/22/2026-07823/notice-of-funding-opportunity-for-the-fiscal-year-2025-and-2026-consolidated-rail-infrastructure-and' },
+        { label: 'FY25–26 Partnership-NEC NOFO', href: 'https://railroads.dot.gov/elibrary/fy-2025-2026-nofo-nec-partnership' },
+        { label: 'FY25–26 Crossing Elimination NOFO', href: 'https://railroads.dot.gov/elibrary/fy25-26-NOFO-RCE-crossing-safety' },
+        { label: 'FY22 RCE selections — Bluffdale precedent', href: 'https://railroads.dot.gov/sites/fra.dot.gov/files/2023-06/FY22-RCE-Selections_PDFa.pdf' },
       ]} />
     </section>
 
@@ -216,7 +280,7 @@ const subnavSections = [
           <p class="section-label">What’s At Stake In FY27</p>
           <h2>Key IIJA authorizations expire September 30, 2026.</h2>
         </div>
-        <p class="section-copy">The Bipartisan Infrastructure Law is a five-year authorization. Without action by Congress, the authorized funding levels for Amtrak, the Federal-State Partnership grants that fund Northeast Corridor capital renewal, and the CRISI safety program revert at the end of FY26.</p>
+        <p class="section-copy">The Bipartisan Infrastructure Law is a five-year authorization. Without action by Congress, the authorized funding levels for Amtrak, the Federal-State Partnership grants that fund Northeast Corridor capital renewal, and the CRISI safety program revert at the end of FY26. For CRISI and the Crossing Elimination Program, the stakes are sharper still: the FY25–26 round was the last one backed by the law’s advance appropriations. Whether a next round exists at all now depends on what Congress appropriates each year.</p>
       </div>
 
       <Callout label="The deadline">
