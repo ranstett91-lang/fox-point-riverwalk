@@ -717,6 +717,21 @@ main section[id] {
   color: #2b3f56;
 }
 
+/* Fit-strength chips (rail-corridor FRA alignment cards). Same visual
+   system as the funding-status chips above, separate namespace: these
+   rank how well a program fits, not whether money is secured — so a
+   restyle of the funding chips must not silently rewrite fit rankings,
+   and vice versa. */
+.fit-strong {
+  background: rgba(216, 231, 215, 0.95);
+  color: var(--brand);
+}
+
+.fit-far {
+  background: rgba(220, 226, 235, 0.95);
+  color: #2b3f56;
+}
+
 .section-source {
   margin-top: 1rem;
 }

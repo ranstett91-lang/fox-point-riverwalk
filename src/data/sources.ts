@@ -59,7 +59,7 @@ export const resources: Resource[] = [
     size: 'Apr 2026 · Federal Railroad Administration',
     description:
       'The roughly $2 billion rail-improvement round. It names stabilizing track against sea-level rise and erosion as an eligible activity. The window closed June 25, 2026, after a short extension.',
-    source: 'FRA program the shoreline work could align with next cycle',
+    source: 'FRA program the shoreline work could align with',
   },
   {
     title: 'FY25–26 Railroad Crossing Elimination NOFO',
@@ -78,7 +78,7 @@ export const resources: Resource[] = [
     label: 'Report',
     size: 'Jun 2023 · Federal Railroad Administration',
     description:
-      'The program’s first award list. It includes up to $3.2 million for Bluffdale, Utah to build an ADA pedestrian overpass — the closest analog to a Fox Point trail crossing.',
+      'The program’s first award list. It includes up to $3.2 million for Bluffdale, Utah, to build an ADA pedestrian overpass.',
     source: 'Precedent for pedestrian projects winning RCE money',
   },
   {
