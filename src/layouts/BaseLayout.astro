@@ -78,16 +78,16 @@ const {
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to main content</a>
-    <div class="page-shell" id="top">
-      <div class="page-header" data-page-header>
+    <div class="page-shell" id="top" tabindex="-1">
+      <header class="page-header" data-page-header>
         <Topbar />
         <slot name="subnav" />
-      </div>
+      </header>
 
       {Astro.slots.has('hero') && (
-        <header class="hero">
+        <div class="hero">
           <slot name="hero" />
-        </header>
+        </div>
       )}
 
       <slot />

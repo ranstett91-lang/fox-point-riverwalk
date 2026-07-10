@@ -1797,6 +1797,12 @@ p.feature-stat-num {
 .feature-stat-source {
   position: relative;
   z-index: 1;
+  /* Rendered last in the grid via `order`, while the <figcaption> is
+     kept as the final DOM child of the <figure> to satisfy the HTML
+     content model (figcaption must be the first or last child). The
+     grid otherwise follows source order, which would float this
+     citation above the caption. */
+  order: 1;
   margin: 0.35rem 0 0;
   max-width: 42ch;
   color: var(--muted);
