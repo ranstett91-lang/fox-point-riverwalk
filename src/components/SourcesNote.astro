@@ -10,6 +10,12 @@ interface Props {
 
 const { sources } = Astro.props;
 const prefix = sources.length > 1 ? 'Sources: ' : 'Source: ';
+// A link whose href ends in .pdf opens a document, not a page. Tag it
+// "(PDF)" in the visible text and keep that tag inside the accessible
+// name (WCAG label-in-name), matching the announcement contract
+// ResourceLibrary gives the same documents. Detection is by href, so
+// callers never hand-annotate labels.
+const pdfTag = (href: string) => (/\.pdf(?:[?#]|$)/i.test(href) ? ' (PDF)' : '');
 // All JSX inside the <p> is kept on one line so Astro does not emit
 // whitespace text nodes between the prefix, the links, and the "; "
 // separators. (Newlines + indentation inside a JSX expression become
@@ -22,5 +28,5 @@ const prefix = sources.length > 1 ? 'Sources: ' : 'Source: ';
 // rendered HTML for callers who pass an empty/conditional list.
 ---
 {sources.length > 0 && (
-<p class="source-note section-source">{prefix}{sources.map((source, index) => (<Fragment>{index > 0 ? '; ' : ''}<a class="precedent-link" href={source.href} target="_blank" rel="noopener noreferrer" aria-label={`${source.label} (opens in new tab)`}>{source.label}</a></Fragment>))}</p>
+<p class="source-note section-source">{prefix}{sources.map((source, index) => (<Fragment>{index > 0 ? '; ' : ''}<a class="precedent-link" href={source.href} target="_blank" rel="noopener noreferrer" aria-label={`${source.label}${pdfTag(source.href)} (opens in new tab)`}>{source.label}{pdfTag(source.href)}</a></Fragment>))}</p>
 )}
